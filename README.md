@@ -9,11 +9,14 @@
 <h2>MVP 🎊</h2>
 <ul>
   <li>User Account with Google Login Authentication</li>
-  <li>Page which displays all your plants and their general information</li>
- <ul>
-  <li>such as image, plant, nickname, water preferences, light preferences, etc (Discuss what should be here)</li>
+  <ul>
+  <li>store user location so we can find local markets</li>
  </ul>
-  <li>Ability to add and delete plants from your page</li>
+  <li>Search Page for viewing local markets</li>
+ <ul>
+  <li>such as market goods type, distance from user, market name, etc</li>
+ </ul>
+  <li>Ability to select market and view its general information and view their products</li>
   <li>Connects with Perenual or other API to pull information about the plants</li>
   <li>Creates a watering schedule based on information pulled from the API and implements with Google Calendar</li>
 </ul>
