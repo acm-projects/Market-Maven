@@ -1,5 +1,5 @@
 <p align="center">
-  <img align="center" src="./README-GIFS/watering plant.gif">
+  <img align="center" src="./README-GIFS/farmers market gif.gif">
 </p>
 
 <h1 align="center"> Market Maven </h1>
