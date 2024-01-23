@@ -17,55 +17,55 @@
   <li>such as market goods type, distance from user, market name, etc</li>
  </ul>
   <li>Ability to select market and view its general information and view their products</li>
-  <li>Connects with Perenual or other API to pull information about the plants</li>
-  <li>Creates a watering schedule based on information pulled from the API and implements with Google Calendar</li>
+  <li>Ability to select a market and open a chat room with them </li>
+  <li>Ability to 'like' markets and products</li>
+  <li>Ability to create your own market</li>
 </ul>
-<p>Backend will be using the Perenual API to gather information about an uploaded plant. Backend will also be maintaining a mySQL database and create an API to query information from it.</p>
-<p>Frontend be using Figma to prototype the application. Frontend will be using Android Studio to create the application pages and display information to the user.</p>
 
 
 
-<h2>Stretch Goals 🌿</h2>
+
+<h2>Stretch Goals 🎊</h2>
 <ul>
-  <li>Add fertilization Schedule</li>
-  <li>In case the user doesn't know the plant name, have a quiz that will allow the app to guess its watering preferences</li>
- <ul>
-  <li> example: hard, stiff, and bulbous leaves -> is a succulent -> requires water once every two weeks and direct sunlight</li>
- </ul>
-  <li>Add 'growth tracker' which would notify the user to take a picture every month in order to track the plants growth</li>
-  <li>Sunlight sensor which would sense how bright an area is (bright direct/bright indirect/medium/dark)</li>
-  <li>Add social aspect</li>
-  <li>Adjust based on local weather conditions</li>
+  <li>Include Google Maps Integration</li>
+  <li>QR Code to share products/shops</li>
+  <li>Shop notepad to keep track of sales and commissions</li>
+  <li>Purchase/Sale Tracker</li>
 </ul>
 
-<h2>Tech Stack 🌿</h2>
+<h2>Tech Stack 🎊</h2>
 <ul>
-  <li>Frontend: Android Studio</li>
-  <li>Backend: Java</li>
-  <li>Database: SQL</li>
+  <li>Frontend: ReactJS </li>
+  <li>Backend: NodeJS/Express  </li>
+  <li>Database: MongoDB</li>
 </ul>
 
-<h2>Milestones 🌿</h2>
+<h2>Milestones 🎊</h2>
 
 <table>
   <tr>
     <th>Week</th>
-    <th>Topic</th>
-    <th>
-      Tasks
-    </th>
+    <th>Frontend Tasks</th>
+    <th>Backend Tasks</th>
+    <th>Links</th>
   </tr>
   <tr>
     <td>Week 1</td>
-    <td>Meeting the team!! <br/> Setting up Git and develop environment</td>
     <td>
        <ul>
+        <li>Meet the team! Set up environment.</li>
         <li>Git and IDEs should be set up, teach basic git commands</li>
         <li>Split team into Frontend/Backend</li>
-        <li>Get a Figma set up</li>
         <li>Frontend: Start working on Figma and have draft done by next meeting</li>
-        <li>Backend: Start setting up the database and connecting with API by next meeting</li>
         <li>Homework: Tech Stack tutorials</li>
+      </ul>
+    </td>
+     <td>
+       <ul>
+        <li>Meet the team! Set up environment.</li>
+        <li>Git and IDEs should be set up, teach basic git commands</li>
+        <li>Split team into Frontend/Backend</li>
+        <li>Backend: Have database and Express set up by next meeting. Show progress with User Authentication by next meeting.</li>
         <li><b>Linh: Be nice to my participants  </b></li>
       </ul>
     </td>
