@@ -1,14 +1,12 @@
-
-
-<h1 align="center"> Market Maven </h1>
-
-<p align="center"> Have too many plants and a busy schedule, or is that just me? Plant owners know the struggle of balancing a buzzing lifestyle and still taking care of the plants they love, especially when they all have such different needs! Plant Planner takes away the stress by automatically creating watering and fertilizing schedules based off of a plant’s need. Simply type in the name of your plant and Plant Planner will automatically add its watering schedule to your Google Calendar. </p>
-
 <p align="center">
-  <img align="center" src="farmers market gif.gif">
+  <img align="center" src="marketgif2.gif">
 </p>
 
-<h2>MVP 🌿</h2>
+<h1 align="center">🎊 Market Maven 🎊 </h1>
+
+<p align="center"> Your virtual farmers market! Discover local farmers, artisans, and artists within your local community. Connect with sellers to purchase fresh foods, personalized gifts, and support a local small market. Or, easily create your own market and begin selling your own goods! Rediscover the joy of locally sourced and crafted goods with Market Maven! </p>
+
+<h2>MVP 🎊</h2>
 <ul>
   <li>User Account with Google Login Authentication</li>
   <li>Page which displays all your plants and their general information</li>
