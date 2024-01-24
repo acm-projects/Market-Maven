@@ -300,4 +300,8 @@
 </p>
 
 <h1>❤️🎊🎉Thanks for checking out Market Maven! 🎉🎊❤️</h1>
+
+<p align="center">
+  <img align="center" src="potatogif.gif">
+</p>
 </div>
