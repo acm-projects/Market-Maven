@@ -2,7 +2,7 @@
   <img align="center" src="marketgif2.gif">
 </p>
 
-<h1 align="center">🎊 Market Maven 🎊 </h1>
+<h1 align="center">🎉 Market Maven 🎉</h1>
 
 <p align="center"> Your virtual farmers market! Discover local farmers, artisans, and artists within your local community. Connect with sellers to purchase fresh foods, personalized gifts, and support a local small market. Or, easily create your own market and begin selling your own goods! Rediscover the joy of locally sourced and crafted goods with Market Maven! </p>
 
@@ -66,102 +66,145 @@
         <li>Git and IDEs should be set up, teach basic git commands</li>
         <li>Split team into Frontend/Backend</li>
         <li>Backend: Have database and Express set up by next meeting. Show progress with User Authentication by next meeting.</li>
-        <li><b>Linh: Be nice to my participants  </b></li>
+      </ul>
+    </td>
+    <td>
+       <ul>
+        <li>Figma Link: </li>
+        <li>MERN Stack Intro: </li>
+        <li>Express and NodeJS: </li>
+        <li>React: </li>
+        <li>MongoDB:</li>
+        <li>MongoDB Set Up:</li>
       </ul>
     </td>
   </tr>
   <tr>
     <td>Week 2/3</td>
-    <td>Prototyping/Early Development</td>
     <td>
       <ul>
         <li><i>Deliverable: Figma draft should be completed</i></li>
-        <li>Frontend: Begin coding pages, starting with login/registration with a Google account</li>
-        <li>Backend: Begin learning how to store login information and authentication (with google auth)</li>
-        <li>Backend: Start setting up the database and connecting with API</li>
-        <li>Backend: Start saving information from the API into the database</li>
-        <li>Homework: Tech Stack tutorials</li>
-        <li><b>Linh: Give feedback on Figma wireframe</b></li>
-        <li><b>Linh: Be nice to my participants</b></li>
+        <li><i>Deliverable: Tutorial should be completed</i></li>
+        <li>Frontend: Recieve Feedback on Figma</li>
+        <li>Frontend: Begin coding pages, starting with login/registration. Include Logging in with Google</li>
+        <li>Frontend: Work on the navigation bar for the app</li>
+        <li>Homework: Finish coding Login/Registration Pages, Navigation bar, and begin other pages</li>
+      </ul>  
+    </td>
+    <td>
+      <ul>
+        <li><i>Deliverable: NodeJS/Express should be set up</i></li>
+        <li><i>Deliverable: MongoDB should be set up</i></li>
+        <li><i>Deliverable: Tutorials should be completed</i></li>
+        <li>Backend: Implement login functionality, including with Google Auth</li>
+        <li>Backend: Continue setting up the database for future</li>
+        <li>Homework: Finish login functionality</li>
+      </ul>  
+    </td>
+    <td>
+      <ul>
+        <li>React Login Page Tutorial</li>
+        <li>React Routing</li>
+        <li>Google Auth in MERN</li>
       </ul>  
     </td>
   </tr>
   <tr>
     <td>Week 4/5</td>
-    <td>Getting Work Done!!<br/>Do as much as you can! You got this!</td>
     <td>
       <ul>
-        <li>Frontend: 75% of pages should be done</li>
-        <li>Frontend: Make sure to finish User and Plant Upload pages and Calendar</li>
-        <li>Backend: Login authentication should be finished</li>
-        <li>Backend: Finish plant search function and storing information into the database</li>
-        <li>Backend: Start figuring out how to create a watering schedule based on API information</li>
-        <li><i>Backend/Frontend: Integrate login/registration with each other! Logging in should be all finished!</i></li>
-        <li><b>Linh: Be nice to my participants  </b></li>
+        <li><i> Deliverable: Login and Registration Pages done </i></li>
+        <li>Frontend: Finishing 75% of Frontend</li>
+        <li>Frontend: Profile Page, Search Page, Market Page, Product Page, etc</li>
+        <li>Homework: Have 75% of the Frontend finished (Can be rough, we can make perfect later)</li>
+      </ul> 
+    </td>
+    <td>
+      <ul>
+        <li><i>Deliverable: Login functionality should be complete</i></li>
+        <li><i>Deliverable: MongoDB should be set up</i></li>
+        <li>Backend: Integrate Login functionality with Frontend pages</li>
+        <li>Backend: Integrate Google Maps Matrix API for finding distance to shops</li>
+        <li>Backend: Learn how to filter data from the database for use on the Search Page</li>
+        <li>Homework: Integrate Login functionality, Integrate Google Maps Matrix API, Learn to filter data from database</li>
+      </ul>   
+    </td>
+    <td>
+      <ul>
+        <li>Google Maps Matrix API Tutorial</li>
+        <li>Filter DB Information</li>
       </ul>   
     </td>
   </tr>
    <tr>
     <td>Week 6/7</td>
-    <td>Finish the MVP!!<br/>Fun Stretch Goals come next!</td>
     <td>
       <ul>
-        <li>Frontend: 100% of MVP pages should be done!!!</li>
-        <li>Backend: Watering Upload should be complete and should upload to Google Calendar</li>
-        <li>Backend: Set Reminders for watering</li>
-        <li>Backend: Integration of MVP should be completed</li>
-        <li>Everyone: Start thinking about stretch goals!</li>
-        <li><b>Linh: Be nice to my participants  </b></li>
+        <li><i>Deliverable: Almost all of Frontend should be done</i></li>
+        <li>Frontend: Finish Frontend fully and clean up all pages</li>
+        <li>Frontend: Help Backend with integration</li>
+        <li>Frontend: Begin Stretch Goal implementation</li>
+        <li>Homework: Frontend will be 100% complete</li>
+      </ul> 
+    </td>
+     <td>
+      <ul>
+        <li><i>Deliverable: Login functionality fully integrated</i></li>
+        <li><i>Deliverable: Google Maps Matrix API Learned</i></li>
+        <li>Backend: Fully integrate Google Maps Matrix API and Search functionality with Frontend</li>
+        <li>Backend: Begin implementing chosen Stretch Goal</li>
+        <li>Homework: MVP will be 100% complete</li>
+      </ul> 
+    </td>
+     <td>
+      <ul>
+        <li>Links TBD</li>
       </ul> 
     </td>
   </tr>
   <tr>
     <td>Week 8/9</td>
-    <td>MVP Done, fun Stretch Goals!<br/>Start thinking about presentations</td>
     <td>
       <ul>
-        <li>Frontend: Create design for presentation slides</li>
-        <li>Backend: Think about content for presentation</li>
-        <li>Everyone: Start working on presentation script</li>
-        <li>Everyone: Decide on which stretch goals to implement, and start!</li>
-        <li>Everyone: Set presentation practice dates and times</li>
-        <li><i>Demo should be decided on by the end of this sprint</i></li>
-        <li><b>Linh: Be nice to my participants  </b></li>
+        <li>Frontend: Clean up Frontend and finish implementing stretch Goal</li>
+        <li>Frontend: Begin working on Presentation Slides</li>
+        <li>Homework: Finish a demo video</li>
+      </ul> 
+    </td>
+    <td>
+      <ul>
+        <li>Backend: Complete integration of backend and frontend and Stretch Goal</li>
+        <li>Backend: Begin working on Presentation Script</li>
+        <li>Homework: Finish presentation script</li>
+      </ul> 
+    </td>
+    <td>
+      <ul>
+        <li>Past Presentation Night</li>
+        <li>Past Presentation Slides</li>
+        <li>Presentation Drive</li>
       </ul> 
     </td>
   </tr>
   <tr>
     <td>Week 10</td>
     <td>Presentation Practice!</td>
-    <td>Everyone better have their lines memorized (or else)<br/>THERE SHOULD BE NO MORE CODING</td>
+    <td>Presentation Practice!</td>
+    <td>Slay</td>
   </tr>
    <tr>
     <td>Week 11</td>
     <td>Presentation Night!!</td>
     <td>Y'all got this!!</td>
+    <td>Wooo lets gooo!!</td>
   </tr>
 </table>
 
-<h1>Resources🌿</h1>
+<h1>Resources🎊</h1>
 <ul>
-  <li><a href="https://www.figma.com/files/team/1286199881861285197">Figma Page</a></li>
-  <li><a href="https://developer.android.com/studio">Download Android Studio</a></li>
-  <li><a href="https://git-scm.com/downloads">Download Git</a></li>
-  <li><a href="https://www.youtube.com/watch?v=GiqqopBSoHw">Tutorial: Setting up SQL locally</li>
-  <li><a href="https://www.microsoft.com/en-us/sql-server/sql-server-downloads">Download SQL</a></li>
-  <li><a href="https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16">SQL Manager</a></li>
-  <li><a href="https://www.youtube.com/watch?v=dYt763QgaTg">Setting up SQL with Android Studio</a></li>
-  <li><a href="https://www.youtube.com/watch?v=fis26HvvDII">Android Studio Tutorial</a> - Listen I know its long just view the sections you feel like you need</li>
-  <li><a href="https://learn.microsoft.com/en-us/sql/sql-server/?view=sql-server-ver16">SQL Documentation</li>
-  <li><a href="https://perenual.com/docs/api">Perenual API Documentation</a></li>
-  <li><a href="https://www.youtube.com/watch?v=fis26HvvDII">API Tutorial:</li>
-  <li>Git Tutorial:</li>
-  <li>Google Calendar Integration Tutorial:</li>
-  <li>Android Studio Image Upload Tutorial:</li>
-  <li>Google Calendar Integration Tutorial:</li>
 </ul> 
 
-<h1>Git Cheat Sheet🌿</h1>
+<h1>Git Cheat Sheet🎊</h1>
 
 
 <table>
@@ -206,7 +249,7 @@
   </tr>
   <tr>
     <td>Step 4</td>
-    <td>"git push origin -your-branch-" -> or replace main with another branch if needed</td>
+    <td>"git push origin -your-branch-"</td>
   </tr>
   <tr>
     <td>Step 5</td>
@@ -238,23 +281,23 @@
 </table>
 
 <div align="center">
-<h1>Team Plant Planner 🪴</h1>
+<h1>Team Market Maven 🎉</h1>
 
-<h2>🌿Developers🌿</h2>
-<h3>Aidan Loran</h3><br/>
-<h3>Micah Warner</h3><br/>
-<h3>Sarah Jacob</h3><br/>
-<h3>Uma Uppuloori</h3><br/>
+<h2>🎊Developers🎊</h2>
+<h3>Name</h3><br/>
+<h3>Name</h3><br/>
+<h3>Name</h3><br/>
+<h3>Name</h3><br/>
 
-<h2>🌿Project Manager🌿</h2>
+<h2>🎊Project Manager🎊</h2>
 <h3>Clara Conner</h3><br/>
 
-<h2>🌿Industry Mentor🌿</h2>
-<h3>Linh Ly</h3><br/><br/>
+<h2>🎊Industry Mentor🎊</h2>
+<h3>Name</h3><br/><br/>
 
 <p align="center">
   <img align="center" src="./README-GIFS/plantspoppinggif.gif">
 </p>
 
-<h1>💚🌿🪴Thanks for checking out Plant Planner! 🪴🌿💚</h1>
+<h1>❤️🎊🎉Thanks for checking out Market Maven! 🎉🎊❤️</h1>
 </div>
