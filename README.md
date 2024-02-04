@@ -293,7 +293,7 @@
 <h3>Clara Conner</h3><br/>
 
 <h2>🎊Industry Mentor🎊</h2>
-<h3>Name</h3><br/><br/>
+<h3>Linh Ly</h3><br/><br/>
 
 <p align="center">
   <img align="center" src="./README-GIFS/plantspoppinggif.gif">
