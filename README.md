@@ -17,6 +17,9 @@
   <li>such as market goods type, distance from user, market name, etc</li>
  </ul>
   <li>Ability to select market and view its general information and view their products</li>
+  <ul>
+  <li>"Linh's Furry Art" <---- MUST HAVE</li>
+ </ul>
   <li>Ability to select a market and open a chat room with them </li>
   <li>Ability to 'like' markets and products</li>
   <li>Ability to create your own market</li>
@@ -27,6 +30,7 @@
 
 <h2>Stretch Goals 🎊</h2>
 <ul>
+  <li>Bank Account/PayPal/Venmo integration</li>
   <li>Include Google Maps Integration</li>
   <li>QR Code to share products/shops</li>
   <li>Shop notepad to keep track of sales and commissions</li>
