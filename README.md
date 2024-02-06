@@ -232,6 +232,10 @@
     <td>Step 4</td>
     <td>"git pull origin main" -> or replace main with another branch if needed</td>
   </tr>
+  <tr>
+    <td>Step 5</td>
+    <td>"npm install" <- for any added packages!</td>
+  </tr>
 </table>
 
 <table>
