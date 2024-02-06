@@ -292,10 +292,10 @@
 <h1>Team Market Maven 🎉</h1>
 
 <h2>🎊Developers🎊</h2>
-<h3>Name</h3><br/>
-<h3>Name</h3><br/>
-<h3>Name</h3><br/>
-<h3>Name</h3><br/>
+<h3>Alveena Rehman</h3><br/>
+<h3>Lerich Osay</h3><br/>
+<h3>Sachi Hansalia</h3><br/>
+<h3>Vishal Manjunath</h3><br/>
 
 <h2>🎊Project Manager🎊</h2>
 <h3>Clara Conner</h3><br/>
