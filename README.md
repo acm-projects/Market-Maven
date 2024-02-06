@@ -75,10 +75,10 @@
     <td>
        <ul>
         <li>Figma Link: </li>
-        <li>MERN Stack Intro: </li>
-        <li>Express and NodeJS: </li>
-        <li>React: </li>
-        <li>MongoDB:</li>
+        <li><a href='https://youtu.be/98BzS5Oz5E4?si=w82okSQB9PuTrCSF'>MERN Stack Tutorials </a></li>
+        <li><a href='https://youtu.be/8DploTqLstE?si=s4-miNRl-xt5szPc'>Express and NodeJS</a> </li>
+        <li><a href='https://www.youtube.com/watch?v=s0anSjEeua8&list=PL4cUxeGkcC9iJ_KkrkBZWZRHVwnzLIoUE&index=5'>React </a></li>
+        <li><a href='https://www.youtube.com/watch?v=s0anSjEeua8&list=PL4cUxeGkcC9iJ_KkrkBZWZRHVwnzLIoUE&index=5'>MongoDB </a></li>
         <li>MongoDB Set Up:</li>
       </ul>
     </td>
