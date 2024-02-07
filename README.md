@@ -74,12 +74,12 @@
     </td>
     <td>
        <ul>
-        <li>Figma Link: </li>
+        <li><a href='https://www.figma.com/file/ADCz2qZ2EujBW6aC5mMmBp/Untitled?type=design&node-id=0%3A1&mode=design&t=68qVwEpqQKLaTWFe-1'>Figma Link </a></li>
         <li><a href='https://youtu.be/98BzS5Oz5E4?si=w82okSQB9PuTrCSF'>MERN Stack Tutorials </a></li>
         <li><a href='https://youtu.be/8DploTqLstE?si=s4-miNRl-xt5szPc'>Express and NodeJS</a> </li>
+         <li><a href='https://www.youtube.com/watch?v=Ll6knx7sFis&list=PL4cUxeGkcC9iJ_KkrkBZWZRHVwnzLIoUE&index=3'>Express API Endpoints </a></li>
         <li><a href='https://www.youtube.com/watch?v=s0anSjEeua8&list=PL4cUxeGkcC9iJ_KkrkBZWZRHVwnzLIoUE&index=5'>React </a></li>
         <li><a href='https://www.youtube.com/watch?v=s0anSjEeua8&list=PL4cUxeGkcC9iJ_KkrkBZWZRHVwnzLIoUE&index=5'>MongoDB </a></li>
-        <li>MongoDB Set Up:</li>
       </ul>
     </td>
   </tr>
