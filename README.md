@@ -44,6 +44,13 @@
   <li>Database: MongoDB</li>
 </ul>
 
+<h2>Resources 🎊</h2>
+<ul>
+  <li><a href='https://getbootstrap.com/'>Bootstrap (Frontend) </a></li>
+  <li><a href='https://materializecss.com/'>Materialize (Frontend) </a></li>
+  <li><a href='https://docs.google.com/presentation/d/1qC-lcSdHgElZez-JydHI4oYIP2Lrm51GbZgfwoG99eo/edit?usp=sharing'>Resources Slides </a></li>
+</ul>
+
 <h2>Milestones 🎊</h2>
 
 <table>
