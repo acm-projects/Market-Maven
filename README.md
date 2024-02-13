@@ -42,6 +42,7 @@
   <li>Frontend: ReactJS </li>
   <li>Backend: NodeJS/Express  </li>
   <li>Database: MongoDB</li>
+  <li><a href='https://www.mongodb.com/mern-stack'>About MERN Stack </a></li>
 </ul>
 
 <h2>Resources 🎊</h2>
@@ -49,6 +50,8 @@
   <li><a href='https://getbootstrap.com/'>Bootstrap (Frontend) </a></li>
   <li><a href='https://materializecss.com/'>Materialize (Frontend) </a></li>
   <li><a href='https://docs.google.com/presentation/d/1qC-lcSdHgElZez-JydHI4oYIP2Lrm51GbZgfwoG99eo/edit?usp=sharing'>Resources Slides </a></li>
+  <li><a href='https://www.hpc.iastate.edu/guides/introduction-to-hpc-clusters/list-of-cli-commands'>CLI Commands </a></li>
+  <li><a href='https://www.mongodb.com/mern-stack'>MERN Stack Info </a></li>
 </ul>
 
 <h2>Milestones 🎊</h2>
@@ -211,9 +214,6 @@
   </tr>
 </table>
 
-<h1>Resources🎊</h1>
-<ul>
-</ul> 
 
 <h1>Git Cheat Sheet🎊</h1>
 
