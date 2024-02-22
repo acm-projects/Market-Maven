@@ -35,6 +35,7 @@
   <li>QR Code to share products/shops</li>
   <li>Shop notepad to keep track of sales and commissions</li>
   <li>Purchase/Sale Tracker</li>
+  <li>Add 'Artist Events' Calendar to see any upcoming events (Google Cal integration!?!?!)</li>
 </ul>
 
 <h2>Tech Stack 🎊</h2>
