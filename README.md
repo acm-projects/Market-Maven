@@ -120,6 +120,7 @@
       <ul>
         <li><a href="https://www.youtube.com/watch?v=ZVyIIyZJutM&t=383s"> React Login Page Tutorial</a></li>
         <li><a href="https://www.youtube.com/watch?v=aZGzwEjZrXc&t=267s"> React Routing</a></li>
+        <li><a href="https://www.youtube.com/watch?v=SLfhMt5OUPI"> React Navigation Bar</a></li>
         <li>Google Auth in MERN</li>
       </ul>  
     </td>
