@@ -117,8 +117,8 @@
     </td>
     <td>
       <ul>
-        <li>React Login Page Tutorial</li>
-        <li>React Routing</li>
+        <li><a href="https://www.youtube.com/watch?v=ZVyIIyZJutM&t=383s"> React Login Page Tutorial</a></li>
+        <li><a href="https://www.youtube.com/watch?v=aZGzwEjZrXc&t=267s"> React Routing</a></li>
         <li>Google Auth in MERN</li>
       </ul>  
     </td>
