@@ -35,6 +35,7 @@
   <li>QR Code to share products/shops</li>
   <li>Shop notepad to keep track of sales and commissions</li>
   <li>Purchase/Sale Tracker</li>
+  <li>Add 'Artist Events' Calendar to see any upcoming events (Google Cal integration!?!?!)</li>
 </ul>
 
 <h2>Tech Stack 🎊</h2>
@@ -117,8 +118,9 @@
     </td>
     <td>
       <ul>
-        <li>React Login Page Tutorial</li>
-        <li>React Routing</li>
+        <li><a href="https://www.youtube.com/watch?v=ZVyIIyZJutM&t=383s"> React Login Page Tutorial</a></li>
+        <li><a href="https://www.youtube.com/watch?v=aZGzwEjZrXc&t=267s"> React Routing</a></li>
+        <li><a href="https://www.youtube.com/watch?v=SLfhMt5OUPI"> React Navigation Bar</a></li>
         <li>Google Auth in MERN</li>
       </ul>  
     </td>
