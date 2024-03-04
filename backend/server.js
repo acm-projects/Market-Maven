@@ -1,7 +1,12 @@
+
+// environment variables for implementing MongoDB, APIs, private variables/keys, etc.
 require('dotenv').config()
 
+// require modules
 const express = require('express')
 const mongoose = require('mongoose')
+
+// require routes
 const categoryRoutes = require('./routes/categories.route')
 const orderRoutes = require('./routes/orders.routes')
 const productRoutes = require('./routes/products.routes')
