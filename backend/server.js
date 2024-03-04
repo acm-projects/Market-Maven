@@ -1,40 +1,39 @@
-// import modules
-import express from "express";
-import cors from "cors";
-import mongoose from "mongoose";
-import { Router } from "express";
+require('dotenv').config()
 
-// import routes
-import userRoutes from "./routes/users";
-import vendorRoutes from "./routes/vendors";
-import productRoutes from "./routes/product";
+const express = require('express')
+const mongoose = require('mongoose')
+const categoryRoutes = require('./routes/categories.route')
+const orderRoutes = require('./routes/orders.routes')
+const productRoutes = require('./routes/products.routes')
+const reviewRoutes = require('./routes/reviews.routes')
+const userRoutes = require('./routes/users.routes')
+const vendorRoutes = require('./routes/vendors.routes')
 
-// environment variables for implementing MongoDB, APIs, private variables/keys, etc.
-require('dotenv').config();
+// express app
+const app = express()
 
-// define port from environment variables
-const port = process.env.PORT;
+// middleware  
+app.use(express.json())
 
-// create express server
-var app = express();
+// routes
+app.use('/api/categories', categoryRoutes)
+app.use('/api/orders', orderRoutes)
+app.use('/api/products', productRoutes)
+app.use('/api/reviews', reviewRoutes)
+app.use('/api/users', userRoutes)
+app.use('/api/vendors', vendorRoutes)
 
-// use middleware
-app.use(cors());
+// connect to db
+mongoose.connect(process.env.MONGO_URI)
+    .then(() => {
+        // listen for requests
+        app.listen(process.env.PORT, () => {
+            console.log('connected to db & listening on port', process.env.PORT)
+        })
+    })
+    .catch((error) => { // catches any error
+        console.log(error)
+    })
 
-// connect to MongoDB db
-const uri = process.env.ATLAS_URI
-mongoose.connect(uri);
-const connection = mongoose.connection;
-connection.once('open', () => {
-    console.log("MongoDB Atlas database connection establish essucessfully!");
-})
 
-// use routes
-app.use("/api/users", userRoutes);
-app.use("/api/vendors", vendorRoutes);
-app.use("/api/products", productRoutes);
-
-// start express server
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`)
-})  
+process.env

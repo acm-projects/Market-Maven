@@ -1,21 +1,16 @@
-
-//require mongoose and schema modelling
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-//define schema for products
 const productSchema = new Schema({
-    name: {
-        type: String,
-        required: true,
-        minlength: 3
-    },
-    description: { type: String },
+    productTitle: { type: String, required: true, minlength: 3},
     vendor: { type: Schema.Types.ObjectId, ref: 'Vendor', required: true },
+    productReviews: {type: mongoose.Schema.Types.ObjectId, ref: 'Review', },
+    category: {type: mongoose.Schema.Types.ObjectId, ref: 'Category', },
+    description: { type: String },
     price: { type: Number, required: true },
+    stock: {type: Number, requiered: true, min: 0, },
     zip: { type: Number },
-    reviews: [{ type: Schema.Types.ObjectId, ref: 'Review' }],
-})
+}, {timestamps: true})
 
 //export Product
 module.exports = mongoose.model('Product', productSchema);
