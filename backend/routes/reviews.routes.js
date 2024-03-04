@@ -1,15 +1,19 @@
 const express = require('express')
+const {
+    getReviews,
+    getReview,
+    //createUser,
+    deleteReview,
+    updateReview
+} = require('../controllers/review.controller')
+
 const router = express.Router()
 
 // GET all products
-router.get('/', (req, res) => {
-    res.json({mssg: 'GET all products'})
-})
+router.get('/', getReviews)
 
 // GET a single product
-router.get('/:id', (req, res) => {
-    res.json({mssg: 'GET a single product'})
-})
+router.get('/:id', getReview)
 
 // POST a new product
 router.post('/', (req, res) => {
@@ -17,13 +21,9 @@ router.post('/', (req, res) => {
 })
 
 // DELETE a product
-router.delete('/:id', (req, res) => {
-    res.json({mssg: 'DELETE a product'})
-})
+router.delete('/:id', deleteReview)
 
 // UPDATE a product
-router.patch('/:id', (req, res) => {
-    res.json({mssg: 'UPDATE a product'})
-})
+router.patch('/:id', updateReview)
 
 module.exports = router // export router

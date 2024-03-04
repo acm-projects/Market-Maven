@@ -9,9 +9,9 @@ const productSchema = new Schema({
     description: {type: String, required: true, },
     price: { type: Number, required: true, min: 0,},
     stock: {type: Number, requiered: true, min: 0, },
-    createdAt: {type: Date, default: Date.now, },
+    //createdAt: {type: Date, default: Date.now, },
     // images
 
-})
+}, {timestamps: true})
 
 module.exports = mongoose.model('product', productSchema)

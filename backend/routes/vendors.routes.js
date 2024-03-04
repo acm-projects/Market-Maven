@@ -1,15 +1,19 @@
 const express = require('express')
+const {
+    getVendors,
+    getVendor,
+    //createVendor,
+    deleteVendor,
+    updateVendor
+} = require('../controllers/vendor.controller')
+
 const router = express.Router()
 
 // GET all vendors
-router.get('/', (req, res) => {
-    res.json({mssg: 'GET all vendors'})
-})
+router.get('/', getVendors)
 
 // GET a single vendor
-router.get('/:id', (req, res) => {
-    res.json({mssg: 'GET a single vendor'})
-})
+router.get('/:id', getVendor)
 
 // POST a new vendor
 router.post('/', (req, res) => {
@@ -17,13 +21,9 @@ router.post('/', (req, res) => {
 })
 
 // DELETE a vendor
-router.delete('/:id', (req, res) => {
-    res.json({mssg: 'DELETE a vendor'})
-})
+router.delete('/:id', deleteVendor)
 
 // UPDATE a vendor
-router.patch('/:id', (req, res) => {
-    res.json({mssg: 'UPDATE a vendor'})
-})
+router.patch('/:id', updateVendor)
 
 module.exports = router // export router

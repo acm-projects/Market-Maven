@@ -1,20 +1,19 @@
 const express = require('express')
 const {
-    createCategory //,
-    // other functions to import
+    getCategories,
+    getCategory,
+    //createCategory,
+    deleteCategory,
+    updateCategory
 } = require('../controllers/category.controller')
 
 const router = express.Router()
 
 // GET all categories
-router.get('/', (req, res) => {
-    res.json({mssg: 'GET all categories'})
-})
+router.get('/', getCategories)
 
 // GET a single category
-router.get('/:id', (req, res) => {
-    res.json({mssg: 'GET a single category'})
-})
+router.get('/:id', getCategory)
 
 // POST a new category
 //router.post('/', createCategory)
@@ -23,13 +22,9 @@ router.post('/', (req, res) => {
 })
 
 // DELETE a category
-router.delete('/:id', (req, res) => {
-    res.json({mssg: 'DELETE a category'})
-})
+router.delete('/:id', deleteCategory)
 
 // UPDATE a category
-router.patch('/:id', (req, res) => {
-    res.json({mssg: 'UPDATE a category'})
-})
+router.patch('/:id', updateCategory)
 
 module.exports = router // export router
