@@ -1,40 +1,44 @@
-// import modules
-import express from "express";
-import cors from "cors";
-import mongoose from "mongoose";
-import { Router } from "express";
-
-// import routes
-import userRoutes from "./routes/user.route";
-import vendorRoutes from "./routes/vendor.route";
-import productRoutes from "./routes/product";
 
 // environment variables for implementing MongoDB, APIs, private variables/keys, etc.
-require('dotenv').config();
+require('dotenv').config()
 
-// define port from environment variables
-const port = process.env.PORT;
+// require modules
+const express = require('express')
+const mongoose = require('mongoose')
 
-// create express server
-var app = express();
+// require routes
+const categoryRoutes = require('./routes/categories.route')
+const orderRoutes = require('./routes/orders.routes')
+const productRoutes = require('./routes/products.routes')
+const reviewRoutes = require('./routes/reviews.routes')
+const userRoutes = require('./routes/users.routes')
+const vendorRoutes = require('./routes/vendors.routes')
 
-// use middleware
-app.use(cors());
+// express app
+const app = express()
 
-// connect to MongoDB db
-const uri = process.env.ATLAS_URI
-mongoose.connect(uri);
-const connection = mongoose.connection;
-connection.once('open', () => {
-    console.log("MongoDB Atlas database connection establish essucessfully!");
-})
+// middleware  
+app.use(express.json())
 
-// use routes
-app.use("/api/users", userRoutes);
-app.use("/api/vendors", vendorRoutes);
-app.use("/api/products", productRoutes);
+// routes
+app.use('/api/categories', categoryRoutes)
+app.use('/api/orders', orderRoutes)
+app.use('/api/products', productRoutes)
+app.use('/api/reviews', reviewRoutes)
+app.use('/api/users', userRoutes)
+app.use('/api/vendors', vendorRoutes)
 
-// start express server
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`)
-})  
+// connect to db
+mongoose.connect(process.env.MONGO_URI)
+    .then(() => {
+        // listen for requests
+        app.listen(process.env.PORT, () => {
+            console.log('connected to db & listening on port', process.env.PORT)
+        })
+    })
+    .catch((error) => { // catches any error
+        console.log(error)
+    })
+
+
+process.env
