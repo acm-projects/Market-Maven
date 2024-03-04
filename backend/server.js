@@ -5,8 +5,8 @@ import mongoose from "mongoose";
 import { Router } from "express";
 
 // import routes
-import userRoutes from "./routes/users";
-import vendorRoutes from "./routes/vendors";
+import userRoutes from "./routes/user.route";
+import vendorRoutes from "./routes/vendor.route";
 import productRoutes from "./routes/product";
 
 // environment variables for implementing MongoDB, APIs, private variables/keys, etc.
