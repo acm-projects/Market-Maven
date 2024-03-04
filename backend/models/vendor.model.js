@@ -1,10 +1,27 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
 
+//require mongoose and schema modelling
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+//define schema for vendors
 const vendorSchema = new Schema({
-    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true, },
-    products: { type: Schema.Types.ObjectId, ref: 'Product' },
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+        trim: true,
+        minlength: 3
+    },
+    password: {
+        type: String,
+        required: true,
+        trim: true,
+        minlength: 3
+    },
     zip: { type: Number },
-}, {timestamps: true})
+    productList: [{ type: Schema.Types.ObjectId, ref: 'Product' }]
 
-module.exports = mongoose.model('vendor', vendorSchema)
+})
+
+//export Vendor
+module.exports = mongoose.model('Vendor', vendorSchema);
