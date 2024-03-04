@@ -1,0 +1,77 @@
+*{
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background-color: rgb(146, 120, 120);
+}
+.container {
+    margin: 1rem;
+    text-align: center;
+}
+.Landing {
+    margin: 1rem;
+    background-color: none;
+    
+}
+.Landing-Page{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) ,url("C:\Users\jdhan\Documents\MarketMaven\Market-Maven\pexels-min-an-1093837.jpg");
+    height: 100vp;
+    background-size: cover;
+    margin: 100px;
+    margin-top: 200px;
+}
+
+h1 {
+    text-align: left;
+    font-weight: 500;
+    font-size: 8.5rem;
+    color: white;
+}
+
+.NavBar {
+    background-color: white;
+    color:rgb(67,42,54);
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 1.5rem;
+    padding: 2rem;
+
+    font-family: "Archivo", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-variation-settings:
+    "wdth" 100;
+}
+.site-title{
+    font-size: 1.5rem;
+}
+.NavBar ul {
+    padding: 3px;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+}
+.NavBar li.active{
+    background-color: rgb(176, 249, 176);
+    border-radius: 10px;
+    padding: 3px;
+}
+.NavBar li:hover{
+    background-color: rgb(42, 172, 135);
+    border-radius: 10px;
+    padding: 3px;
+}
+
+.NavBar a {
+    color: inherit;
+    text-decoration: none;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: .25rem;
+}
