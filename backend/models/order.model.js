@@ -15,9 +15,7 @@ const orderSchema = new Schema({
     isPaid: { type: Boolean, default: false, },
     paidAt: { type: Date, },
     isDelivered: { type: Boolean, default: false, },
-    deliveredAt: { type: Date, },
-    //createdAt: { type: Date, default: Date.now, },
-    
+    deliveredAt: { type: Date, },    
 }, {timestamps: true})
 
 module.exports = mongoose.model('order', orderSchema)
