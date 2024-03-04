@@ -16,10 +16,10 @@ body {
     
 }
 .Landing-Page{
-    background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) ,url("C:\Users\jdhan\Documents\MarketMaven\Market-Maven\pexels-min-an-1093837.jpg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) ,url("C:\Users\jdhan\Documents\MarketMaven\Market-Maven\frontend\market-maven\public\pexels-min-an-1093837.jpg");
     height: 100vp;
     background-size: cover;
-    margin: 100px;
+    margin: 50px;
     margin-top: 200px;
 }
 
