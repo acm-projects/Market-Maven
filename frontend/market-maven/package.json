@@ -14,7 +14,13 @@
     "bootstrap": "^5.3.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+<<<<<<< HEAD
     "react-router-dom": "^6.22.1"
+=======
+    "react-router-dom": "^6.22.2",
+    "react-scripts": "^5.0.1",
+    "web-vitals": "^2.1.4"
+>>>>>>> 8980021f344317722583de300dcecd0f8312d6b9
   },
   "devDependencies": {
     "@types/react": "^18.2.56",
