@@ -5,29 +5,31 @@
 body {
     margin: 0;
     background-color: rgb(146, 120, 120);
+    align-items: center;
+    justify-content: center;
 }
 .container {
-    margin: 1rem;
     text-align: center;
 }
-.Landing {
-    margin: 1rem;
-    background-color: none;
-    
-}
+
 .Landing-Page{
-    background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) ,url("C:\Users\jdhan\Documents\MarketMaven\Market-Maven\frontend\market-maven\public\pexels-min-an-1093837.jpg");
-    height: 100vp;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) ,url("C:\Users\jdhan\Documents\MarketMaven\Market-Maven\frontend\market-maven\public\anastasia-saldatava-5feMqpVOc-s-unsplash.jpg");
     background-size: cover;
-    margin: 50px;
-    margin-top: 200px;
+    background-position: center;
+    padding-left: 1rem;
+    height: 100vh;
+    display: flex;
 }
 
 h1 {
     text-align: left;
-    font-weight: 500;
-    font-size: 8.5rem;
+    vertical-align: center;
+    font-weight: 200;
+    font-size: 5rem;
     color: white;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
 }
 
 .NavBar {
@@ -56,8 +58,12 @@ h1 {
     display: flex;
     gap: 1rem;
 }
+.NavBar li {
+    padding: 3px;
+}
 .NavBar li.active{
-    background-color: rgb(176, 249, 176);
+    background-color: rgb(146, 120, 120);
+    color: white;
     border-radius: 10px;
     padding: 3px;
 }
