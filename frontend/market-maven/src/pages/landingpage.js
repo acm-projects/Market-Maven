@@ -1,7 +1,7 @@
 export default function Landing(){
     return(
         <div className="Landing-Page" >
-            <h1>Market Maven</h1>
+            <h1>Crafted with skill, grown with dedication</h1>
         </div>
     )
 }
