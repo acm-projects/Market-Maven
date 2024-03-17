@@ -1,5 +1,4 @@
 const express = require('express')
-const router = express.Router()
 
 const {
     login,
@@ -7,6 +6,8 @@ const {
     refresh,
     logout
 } = require('../../controllers/stored-auth.controller')
+
+const router = express.Router()
 
 // login request
 router.post('/login', login)

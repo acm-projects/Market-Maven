@@ -1,4 +1,4 @@
-const user = require('../models/user.model')
+const User = require('../models/user.model')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
@@ -6,106 +6,186 @@ const jwt = require('jsonwebtoken')
 const asyncHandler = require('express-async-handler')
 
 /**
- * As of 3/10, most if not all of this logic will be based on the
- * Dave Gray tutorial 'MERN Stack Authentication with JWT Access,
- * Refresh Tokens, Cookies'. Will look into how to refactor this
- * into using the Passort.js strategies in tandem w/ Google OAuth
+ * As of 3/10, most of this logic will be based on the Dave Gray 
+ * tutorial 'MERN Stack Authentication with JWT Access, Refresh Tokens,
+ * Cookies'. Will also be incorporating other references going forward
  */
 
 /**
  * 
- * @description This method will be used to log in users and provide 
- * them with a JWT upon authentication for access to authorized routes
+ * @description log in and provide users access and refresh tokens
  * @route POST /api/auth/stored-auth
- * @access Public - user is to be logged in
+ * @access Public
  */
 const login = asyncHandler(async (req, res) => {
 
     const { username, password } = req.body
 
-    const foundUser = await user.findOne({ username }).exec()
-    if (!foundUser) {
-        return res.status(401).json({ message: 'Invalid credentials' })
-    }
+    try {
+        // user not found
+        const foundUser = await User.findOne({ username }).exec()
+        if (!foundUser) {
+            return res.status(401).json({ message: 'Invalid credentials' })
+        }
 
-    // remember to look into bcrypt more, and make sure password
-    // hash/handling aligns between this and the client
-    const match = await bcrypt.compare(password, foudnUser.password)
-    if (!match) return res.status(401).json({message: 'Invalid credentials' })
+        // password is invalid
+        // TO DO: hash and salt password - have salt stored in the db ?
+        // look into bcrypt more
+        const match = await bcrypt.compare(password, foudnUser.password)
+        if (!match) return res.status(401).json({ message: 'Invalid credentials' })
 
-    // generate access token
-    const accessToken = jwt.sign(
-        {
-            "user": {
-                "username" : foundUser.username,
-                "role" : "user" // implement roles, likely just user and vendor
-            }
-        },
-        process.env.ACCESS_TOKEN_SECRET,
-        { expriesIn: '1hr' }
-    )
+        // generate access token
+        const accessToken = jwt.sign(
+            {
+                "user": {
+                    "username": foundUser.username,
 
-    // generate refresh token
-    const refreshToken = jwt.sign(
-        { "username": foundUser.username},
-        process.env.REFRESH_TOKEN_SECRET,
-        { expiresIn: '1d'}
-    )
+                    // TO DO: implement roles, likely just user and vendor
+                    "role": "user"
+                }
+            },
+            process.env.ACCESS_TOKEN_SECRET,
+            { expriesIn: '1hr' }
+        )
 
-    // generate secure cookie
-    res.cookie('jwt', refreshToken, 
-        {
+        // generate refresh token
+        const refreshToken = jwt.sign(
+            { "username": foundUser.username },
+            process.env.REFRESH_TOKEN_SECRET,
+            { expiresIn: '1d' }
+        )
+
+        // generate secure cookie
+        res.cookie('jwt', refreshToken, {
             httpOnly: true,     // only accessible by web-server
             secure: true,       // use HTTPS protocol
-            sameSite: 'strict',
+            sameSite: 'strict', // only communicable to the server that generated the token
             maxAge: 1000 * 60 * 60 * 24 * 7     // lifetime measured in ms
-        }
-    )
+        })
 
-    // send access token 
-    res.json({ accessToken })
+        // send access token 
+        res.json({ accessToken })
 
+    } catch (err) {
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
 })
 
 /**
  * 
- * @description {*} req 
- * @route {*} res 
+ * @description refresh user access token using refresh token
+ * @route GET /api/auth/stored-auth/refresh
+ * @access Public
  */
-const refreshUser = (req, res) => {
+const refresh = (req, res) => {
 
     // extract JWT from cookie
     const cookies = req.cookies;
-    if(!cookies?.jwt) return res.status(401).json({ message: 'Unauthorized'})
-    const refreshToken = cookies.jwt;
 
-    // verify JWT
-    // work on filling out these parameters properly
-    jwt.verify()
+    try {
+        if (!cookies?.jwt) return res.status(401).json({ message: 'Unauthorized' })
+        const refreshToken = cookies.jwt;
+
+        // verify JWT
+        jwt.verify( refreshToken, process.env.REFRESH_TOKEN_SECRET, 
+            asyncHandler(async (err, decoded) => {
+
+                // if error caught, return forbidden error message
+                if (err) return res.status(403).json({ message: 'Forbidden' })
+
+                // find user, catch if user does not exists
+                const foundUser = await User.findOne({ username: decoded.username })
+                if(!foundUser) return rse.status(401).json({ message: 'Unauthorized' })
+
+                // generate access token
+                const accessToken = jwt.sign(
+                    {
+                        "user": {
+                            "username": foundUser.username,
+
+                            // TO DO: implement roles, likely just user and vendor
+                            "role": "user"
+                        }
+                    },
+                    process.env.ACCESS_TOKEN_SECRET,
+                    { expriesIn: '1hr' }
+                )
+
+                res.json({ accessToken })
+            })
+        )
+
+    } catch (err) {
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
 }
+
+/**
+ * 
+ * @description sign up users and add them into the db 
+ * @route POST /api/auth/stored-auth/signup 
+ * @access Public
+*/
 
 const signup = asyncHandler(async (req, res) => {
 
-    const { username, password } = req.body
+    // may need to destructure out email as well if including email in signup
+    const { username, email, password } = req.body
+    try {
 
-    const foundUser = await user.findOne({ username }).exec()
-    if (foundUser) {
-        return res.status(401).json({ message: 'User already exists' })
+        // user already exists in the database
+        const foundUser = await User.findOne({ username }).exec()
+        const foundEmail = await User.findOne({ email }).exec()
+        if (foundUser || foundEmail) {
+            return res.status(401).json({ message: 'User already exists' })
+        }
+
+        // create new user in the db
+        // TO DO: hash and salt password - have salt stored in the db ?
+        const newUser = new User({ username, email, password});
+        const savedUser = await newUser.save();
+        res.status(200).json({ message: 'Succesful sign up'})
+
+        // TO DO: immediately log user in ?
+
+    } catch (err) {
+        res.status(500).json({ message: 'Internal Server Error' });
     }
-
 })
 
-const refresh = (req, res) => {
-
-}
+/**
+ * 
+ * @description log out users and invalidate their tokens 
+ * @route POST /api/auth/stored-auth/logout
+ * @access Public
+ */
 
 const logout = (req, res) => {
 
+    // extract JWT from cookies
+    const cookies = req.cookies
+
+    try {
+
+        // log out request has no JWT
+        if (!cookies?.jwt) return res.sendStatus(204)
+
+        // succesfully log out
+        res.clearCookie('jwt', {
+            httpOnly: true,     // only accessible by web-server
+            secure: true,       // use HTTPS protocol
+            sameSite: 'strict'  // only communicable to the server that generated the token
+        })
+        res.json({ message: 'User has been succesfully logged out'})
+
+    } catch (err) {
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
 }
 
 module.exports = {
     login,
-    signup, 
+    signup,
     refresh,
     logout
 
