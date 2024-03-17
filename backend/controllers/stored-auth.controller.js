@@ -14,64 +14,64 @@ const asyncHandler = require('express-async-handler')
 /**
  * 
  * @description log in and provide users access and refresh tokens
- * @route POST /api/auth/stored-auth
+ * @route POST /api/auth/stored-auth/login
  * @access Public
  */
 const login = asyncHandler(async (req, res) => {
 
     const { username, password } = req.body
 
-    try {
-        // user not found
-        const foundUser = await User.findOne({ username }).exec()
-        if (!foundUser) {
-            return res.status(401).json({ message: 'Invalid credentials' })
-        }
+    // wrap in a try catch when finished
+    // need to keep open for debuggin sake lol
 
-        // password is invalid
-        // TO DO: hash and salt password - have salt stored in the db ?
-        // look into bcrypt more
-        const match = await bcrypt.compare(password, foudnUser.password)
-        if (!match) return res.status(401).json({ message: 'Invalid credentials' })
-
-        // generate access token
-        const accessToken = jwt.sign(
-            {
-                "user": {
-                    "username": foundUser.username,
-
-                    // TO DO: implement roles, likely just user and vendor
-                    "role": "user"
-                }
-            },
-            process.env.ACCESS_TOKEN_SECRET,
-            { expriesIn: '1hr' }
-        )
-
-        // generate refresh token
-        const refreshToken = jwt.sign(
-            { "username": foundUser.username },
-            process.env.REFRESH_TOKEN_SECRET,
-            { expiresIn: '1d' }
-        )
-
-        // generate secure cookie
-        res.cookie('jwt', refreshToken, {
-            httpOnly: true,     // only accessible by web-server
-            secure: true,       // use HTTPS protocol
-            sameSite: 'strict', // only communicable to the server that generated the token
-            maxAge: 1000 * 60 * 60 * 24 * 7     // lifetime measured in ms
-        })
-
-        // send access token 
-        res.json({ accessToken })
-
-    } catch (err) {
-        res.status(500).json({ message: 'Internal Server Error' });
+    // user not found
+    const foundUser = await User.findOne({ username }).exec()
+    if (!foundUser) {
+        return res.status(401).json({ message: 'Invalid credentials' })
     }
+
+    // password is invalid
+    // TO DO: hash and salt password - have salt stored in the db ?
+    // look into bcrypt more
+    // const match = await bcrypt.compare(password, foundUser.password)
+    const match = password === foundUser.password;
+    if (!match) return res.status(401).json({ message: 'Invalid credentials' })
+
+    // generate access token
+    const accessToken = jwt.sign(
+        {
+            "user": {
+                "username": foundUser.username,
+
+                // TO DO: implement roles, likely just user and vendor
+                "role": "user"
+            }
+        },
+        process.env.ACCESS_TOKEN_SECRET,
+        { expiresIn: '1hr' }
+    )
+
+    // generate refresh token
+    const refreshToken = jwt.sign(
+        { "username": foundUser.username },
+        process.env.REFRESH_TOKEN_SECRET,
+        { expiresIn: '1d' }
+    )
+
+    // generate secure cookie
+    res.cookie('jwt', refreshToken, {
+        httpOnly: true,     // only accessible by web-server
+        secure: true,       // use HTTPS protocol
+        sameSite: 'strict', // only communicable to the server that generated the token
+        maxAge: 1000 * 60 * 60 * 24 * 7     // lifetime measured in ms
+    })
+
+    // send access token 
+    res.json({ accessToken })
+    
 })
 
-/**
+/** === STILL NEEDS TO BE TESTED ===
  * 
  * @description refresh user access token using refresh token
  * @route GET /api/auth/stored-auth/refresh
@@ -116,7 +116,7 @@ const refresh = (req, res) => {
         )
 
     } catch (err) {
-        res.status(500).json({ message: 'Internal Server Error' });
+        res.status(500).json({ message: 'Internal Server Error', error: err});
     }
 }
 
@@ -149,7 +149,7 @@ const signup = asyncHandler(async (req, res) => {
         // TO DO: immediately log user in ?
 
     } catch (err) {
-        res.status(500).json({ message: 'Internal Server Error' });
+        res.status(500).json({ message: 'Internal Server Error', error: err});
     }
 })
 
@@ -179,7 +179,7 @@ const logout = (req, res) => {
         res.json({ message: 'User has been succesfully logged out'})
 
     } catch (err) {
-        res.status(500).json({ message: 'Internal Server Error' });
+        res.status(500).json({ message: 'Internal Server Error', error: err});
     }
 }
 

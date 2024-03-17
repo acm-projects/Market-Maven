@@ -1,0 +1,64 @@
+const User = require('../models/user.model')
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+
+// sync handling middleware
+const asyncHandler = require('express-async-handler')
+
+/**
+ * Will most likely share / call on code from the stored-auth controller
+ */
+
+/**
+ * 
+ * @description log in and provide users access and refresh tokens
+ * @route POST /api/auth/stored-auth
+ * @access Public
+ */
+const login = asyncHandler(async (req, res) => {
+
+    
+})
+
+/**
+ * 
+ * @description refresh user access token using refresh token
+ * @route GET /api/auth/stored-auth/refresh
+ * @access Public
+ */
+const refresh = (req, res) => {
+
+
+}
+
+/**
+ * 
+ * @description sign up users and add them into the db 
+ * @route POST /api/auth/stored-auth/signup 
+ * @access Public
+*/
+
+const signup = asyncHandler(async (req, res) => {
+
+    
+})
+
+/**
+ * 
+ * @description log out users and invalidate their tokens 
+ * @route POST /api/auth/stored-auth/logout
+ * @access Public
+ */
+
+const logout = (req, res) => {
+
+
+}
+
+module.exports = {
+    login,
+    signup,
+    refresh,
+    logout
+
+}
