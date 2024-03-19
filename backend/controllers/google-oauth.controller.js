@@ -1,6 +1,6 @@
 const User = require('../models/user.model')
-const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const { OAuth2Client } = require('google-auth-library')
 
 // sync handling middleware
 const asyncHandler = require('express-async-handler')
