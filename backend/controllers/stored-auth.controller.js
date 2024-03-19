@@ -31,10 +31,7 @@ const login = asyncHandler(async (req, res) => {
     }
 
     // password is invalid
-    // TO DO: hash and salt password - have salt stored in the db ?
-    // look into bcrypt more
-    // const match = await bcrypt.compare(password, foundUser.password)
-    const match = password === foundUser.password;
+    const match = await bcrypt.compare(password, foundUser.password)
     if (!match) return res.status(401).json({ message: 'Invalid credentials' })
 
     // generate access token
@@ -129,28 +126,27 @@ const refresh = (req, res) => {
 
 const signup = asyncHandler(async (req, res) => {
 
-    // may need to destructure out email as well if including email in signup
     const { username, email, password } = req.body
-    try {
 
-        // user already exists in the database
-        const foundUser = await User.findOne({ username }).exec()
-        const foundEmail = await User.findOne({ email }).exec()
-        if (foundUser || foundEmail) {
-            return res.status(401).json({ message: 'User already exists' })
-        }
-
-        // create new user in the db
-        // TO DO: hash and salt password - have salt stored in the db ?
-        const newUser = new User({ username, email, password});
-        const savedUser = await newUser.save();
-        res.status(200).json({ message: 'Succesful sign up'})
-
-        // TO DO: immediately log user in ?
-
-    } catch (err) {
-        res.status(500).json({ message: 'Internal Server Error', error: err});
+    // user already exists in the database
+    const foundUser = await User.findOne({ username }).exec()
+    const foundEmail = await User.findOne({ email }).exec()
+    if (foundUser || foundEmail) {
+        return res.status(401).json({ message: 'User already exists' })
     }
+
+    // salt and hash password
+    const salt = await bcrypt.genSalt(10)
+    const hash = await bcrypt.hash(password, salt)
+    console.log(hash);
+
+    // create new user in the db
+    const newUser = new User({ username, email, password: hash });
+    const savedUser = await newUser.save();
+    res.status(200).json({ message: 'Succesful sign up'})
+
+    // TO DO: immediately log user in ?
+
 })
 
 /**
