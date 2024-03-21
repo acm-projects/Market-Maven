@@ -12,24 +12,28 @@ body {
     text-align: center;
 }
 
-.Landing-Page{
-    background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) ,url("..\\..\\market-maven\\public\\anastasia-saldatava-5feMqpVOc-s-unsplash.jpg");
+.Landing-Page {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url("..\\..\\market-maven\\public\\anastasia-saldatava-5feMqpVOc-s-unsplash.jpg");
     background-size: cover;
     background-position: center;
     padding-left: 1rem;
     height: 100vh;
     display: flex;
+    align-items: flex-end; /* Add this line */
+    justify-content: flex-start; /* Add this line */
+    padding-bottom: 2rem; /* Add this line */
 }
 
 h1 {
     text-align: left;
     vertical-align: center;
     font-weight: 200;
-    font-size: 5rem;
+    font-size: 3rem; /* Adjust the font size as desired */
     color: white;
     font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
+    margin-bottom: 0;
 }
 
 .NavBar {
@@ -68,7 +72,7 @@ h1 {
     padding: 3px;
 }
 .NavBar li:hover{
-    background-color: rgb(42, 172, 135);
+    background-color: rgb(146, 120, 120);
     border-radius: 10px;
     padding: 3px;
 }
