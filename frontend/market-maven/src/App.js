@@ -1,4 +1,4 @@
-import Navbar from "./Navbar"
+import Header from "./Components/Header"
 import Landing from "./pages/landingpage";
 import Page1 from "./pages/page1";
 import Page2 from "./pages/page2";
@@ -9,7 +9,7 @@ function App(){
 
     return(
       <>
-      <Navbar />
+      <Header />
       <div className="container">
       <Routes>
           <Route path="/" element={ <Landing />} />
