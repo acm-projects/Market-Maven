@@ -1,6 +1,6 @@
 import { Link, useMatch, useResolvedPath } from  "react-router-dom"
-export default function Header(){
-    return(<nav className="Header">
+export default function Navbar(){
+    return(<nav className="Navbar">
         <Link to="/" className="site-title">Market Maven</Link>
         <ul >
             <CustomLink to="/page1">Page 1</CustomLink>
