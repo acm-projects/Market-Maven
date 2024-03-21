@@ -1,10 +1,17 @@
-export default function Landing(){
-    return(
-        <div className="Landing-Page" >
-            <h1>Market Maven</h1>
-        </div>
-    )
+import Navbar from "../Navbar";
+
+export default function Landing() {
+  return (
+    <div>
+      <Navbar />
+      <div className="Landing-Page" >
+        <h1>Crafted with skill, grown with dedication</h1>
+      </div>
+    </div>
+  )
 }
+
+
 
 
 {/*
