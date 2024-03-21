@@ -19,15 +19,21 @@ body {
     padding-left: 1rem;
     height: 100vh;
     display: flex;
+    align-items: flex-end; /* Add this line */
+    justify-content: flex-start; /* Add this line */
+    padding-bottom: 2rem; /* Add this line */
 }
 
 h1 {
     text-align: left;
     vertical-align: center;
     font-weight: 200;
-    font-size: 5rem;
+    font-size: 3rem; /* Adjust the font size as desired */
     color: white;
-    
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    margin-bottom: 0;
 }
 
 .Header {
@@ -65,8 +71,8 @@ h1 {
     border-radius: 10px;
     padding: 3px;
 }
-.Header li:hover{
-    background-color: rgb(42, 172, 135);
+.NavBar li:hover{
+    background-color: rgb(146, 120, 120);
     border-radius: 10px;
     padding: 3px;
 }
