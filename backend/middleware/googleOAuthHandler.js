@@ -50,9 +50,9 @@ const handleAuthCodeFlow = asyncHandler(async (req, res) => {
     )
     const userDetails = userRes.data
     console.log('User Details:', userDetails)
-
-    res.status(200).json({ message: 'Authentication w/ Google succesful'})
     
+    // return user details and access token
+    return userDetails, accessToken
 })
 
 module.exports = {
