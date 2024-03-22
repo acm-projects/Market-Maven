@@ -2,36 +2,26 @@ const Product = require('../models/product.model')
 const mongoose = require('mongoose')
 
 //GET all products
+
 const getProducts = async (req, res) => {
-    const products = await Product.find({}).sort({createdAt: -1})
+
+    try {
+        console.log(req.query);
+        let queryStr = JSON.stringify(req.query);
+        queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
+        console.log(queryStr);
+        const queryObj = JSON.parse(queryStr);
+        console.log(queryObj);
+        
+        // Execute MongoDB query to find matching products
+        const products = await Product.find(queryObj).sort({createdAt: -1})
     
-    res.status(200).json(products)
+        res.status(200).json(products)
+    } catch (error) {
+        console.error('Error fetching products', error);
+        res.status(500).json({error: 'Internal server error'});
+    } 
 }
-
-// const getProducts = async (req, res) => {
-
-//     try {
-//         // Query object to filter products
-//         let query = {};
-
-//         // filtering criteria
-//         if(req.query.category){
-//             query.category = req.query.category;
-//         }
-
-//         if (req.query.priceMin && req.query.priceMax){
-//             query.price = { $gte: parseInt(req.query.priceMin), $lte: parseInt(req.query.priceMax) };
-//         }
-
-//         // Execute MongoDB query to find matching products
-//         const products = await Product.find(query).sort({createdAt: -1})
-    
-//         res.status(200).json(products)
-//     } catch (error) {
-//         console.error('Error fetching products', error);
-//         res.status(500).json({error: 'Internal server error'});
-//     } 
-// }
 
 // GET a single product
 const getProduct = async (req, res) => {
