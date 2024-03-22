@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import Navbar from "./Navbar";
-import Header from "./Components/Navbar"
 import Landing from "./pages/landingpage";
 import Page1 from "./pages/page1";
 import Page2 from "./pages/page2";
@@ -18,7 +16,6 @@ function App() {
 
   return (
     <>
-      {/* <Navbar /> */}
       <div className="container">
         <Routes>
           <Route path="/" element={<Landing />} />

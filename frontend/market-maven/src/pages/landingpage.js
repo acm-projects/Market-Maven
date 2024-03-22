@@ -1,4 +1,4 @@
-import Navbar from "../Navbar";
+import Navbar from "../Components/Navbar"
 
 export default function Landing() {
   return (
