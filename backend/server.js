@@ -5,6 +5,7 @@ require('dotenv').config()
 // require modules
 const express = require('express')
 const mongoose = require('mongoose')
+const cors = require('cors');
 
 // require routes
 const categoryRoutes = require('./routes/categories.route')
@@ -20,6 +21,7 @@ const app = express()
 
 // middleware  
 app.use(express.json())
+app.use(cors());
 
 // routes
 app.use('/api/auth/stored-auth', storedAuthRoutes)

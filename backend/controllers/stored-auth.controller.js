@@ -19,13 +19,13 @@ const asyncHandler = require('express-async-handler')
  */
 const login = asyncHandler(async (req, res) => {
 
-    const { username, password } = req.body
+    const { email, password } = req.body
 
     // wrap in a try catch when finished
     // need to keep open for debuggin sake lol
 
     // user not found
-    const foundUser = await User.findOne({ username }).exec()
+    const foundUser = await User.findOne({ email }).exec()
     if (!foundUser) {
         return res.status(401).json({ message: 'Invalid credentials' })
     }
@@ -38,7 +38,9 @@ const login = asyncHandler(async (req, res) => {
     const accessToken = jwt.sign(
         {
             "user": {
-                "username": foundUser.username,
+
+                // changed identifier to email instead of username
+                "email": foundUser.email,
 
                 // TO DO: implement roles, likely just user and vendor
                 "role": "user"
