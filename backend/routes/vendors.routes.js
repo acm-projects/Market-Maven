@@ -2,7 +2,7 @@ const express = require('express')
 const {
     getVendors,
     getVendor,
-    //createVendor,
+    createVendor,
     deleteVendor,
     updateVendor
 } = require('../controllers/vendor.controller')
@@ -16,9 +16,7 @@ router.get('/', getVendors)
 router.get('/:id', getVendor)
 
 // POST a new vendor
-router.post('/', (req, res) => {
-    res.json({mssg: 'POST a new vendor'})
-})
+router.post('/', createVendor)
 
 // DELETE a vendor
 router.delete('/:id', deleteVendor)

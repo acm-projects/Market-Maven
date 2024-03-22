@@ -26,16 +26,16 @@ const getOrder = async (req, res) => {
 }
 
 // POST a new order
-// const createOrder = async (req, res) => {
-//     const {} = req.body
+const createOrder = async (req, res) => {
+    const {user, items, totalPrice, shippingAddress, paymentMethod, isPaid, paidAt, isDelivered, deliveredAt} = req.body
 
-//     try { // add doc to db
-//         const order = await Order.create({});
-//         res.status(200).json(order);
-//     } catch (error){
-//         res.status(400).json({error: error.message})
-//     }
-// }
+    try { // add doc to db
+        const order = await Order.create({user, items, totalPrice, shippingAddress, paymentMethod, isPaid, paidAt, isDelivered, deliveredAt});
+        res.status(200).json(order);
+    } catch (error){
+        res.status(400).json({error: error.message})
+    }
+}
 
 // DELETE a order
 const deleteOrder = async (req, res) => {
@@ -76,7 +76,7 @@ const updateOrder = async (req, res) => {
 module.exports = {
     getOrders,
     getOrder,
-    //createOrder,
+    createOrder,
     deleteOrder,
     updateOrder
 }

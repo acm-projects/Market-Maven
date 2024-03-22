@@ -26,16 +26,16 @@ const getVendor = async (req, res) => {
 }
 
 // POST a new vendor
-// const createVendor = async (req, res) => {
-//     const {} = req.body
+const createVendor = async (req, res) => {
+    const {username, email, password, zip, products} = req.body
 
-//     try { // add doc to db
-//         const vendor = await Vendor.create({});
-//         res.status(200).json(vendor);
-//     } catch (error){
-//         res.status(400).json({error: error.message})
-//     }
-// }
+    try { // add doc to db
+        const vendor = await Vendor.create({username, email, password, zip, products});
+        res.status(200).json(vendor);
+    } catch (error){
+        res.status(400).json({error: error.message})
+    }
+}
 
 // DELETE a vendor
 const deleteVendor = async (req, res) => {
@@ -76,7 +76,7 @@ const updateVendor = async (req, res) => {
 module.exports = {
     getVendors,
     getVendor,
-    //createVendor,
+    createVendor,
     deleteVendor,
     updateVendor
 }

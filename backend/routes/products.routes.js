@@ -2,7 +2,7 @@ const express = require('express')
 const {
     getProducts,
     getProduct,
-    //createUser,
+    createProduct,
     deleteProduct,
     updateProduct
 } = require('../controllers/product.controller')
@@ -16,9 +16,7 @@ router.get('/', getProducts)
 router.get('/:id', getProduct)
 
 // POST a new product
-router.post('/', (req, res) => {
-    res.json({mssg: 'POST a new product'})
-})
+router.post('/', createProduct)
 
 // DELETE a product
 router.delete('/:id', deleteProduct)

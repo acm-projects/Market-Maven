@@ -25,17 +25,17 @@ const getReview = async (req, res) => {
     res.status(200).json(review)
 }
 
-// POST a new review
-// const createReview = async (req, res) => {
-//     const {} = req.body
+//POST a new review
+const createReview = async (req, res) => {
+    const {user, product, review, starRating} = req.body
 
-//     try { // add doc to db
-//         const review = await Review.create({});
-//         res.status(200).json(review);
-//     } catch (error){
-//         res.status(400).json({error: error.message})
-//     }
-// }
+    try { // add doc to db
+        const review = await Review.create({user, product, review, starRating});
+        res.status(200).json(review);
+    } catch (error){
+        res.status(400).json({error: error.message})
+    }
+}
 
 // DELETE a review
 const deleteReview = async (req, res) => {
@@ -76,7 +76,7 @@ const updateReview = async (req, res) => {
 module.exports = {
     getReviews,
     getReview,
-    //createReview,
+    createReview,
     deleteReview,
     updateReview
 }
