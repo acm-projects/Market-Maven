@@ -1,12 +1,16 @@
 import { Link, useMatch, useResolvedPath } from  "react-router-dom"
+import "./Navbar.css"
+import Cart from "../Components/Cart"
+
 export default function Navbar(){
     return(<nav className="Navbar">
         <Link to="/" className="site-title">Market Maven</Link>
         <ul >
-            <CustomLink to="/page1">Page 1</CustomLink>
+            <CustomLink to="/Shop">Shop</CustomLink>
             <CustomLink to="/page2">Page 2</CustomLink>
             <CustomLink to="/page3">Page 3</CustomLink>
         </ul>
+        <Cart />
     </nav>
 )}
 

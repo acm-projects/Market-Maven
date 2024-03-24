@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "name": "Apples",
+    "cost": 1.99,
+    "image": "https://www.applesfromny.com/wp-content/uploads/2020/06/SnapdragonNEW.png",
+    "quantity": 10,
+    "description": "Apples are a popular fruit, containing antioxidants, vitamins, dietary fiber, and a range of other nutrients. Due to their varied nutrient content, they may help prevent several health conditions."
+  },
+  {
+    "id": 2,
+    "name": "Bananas",
+    "cost": 0.79,
+    "image": "https://images.immediate.co.uk/production/volatile/sites/30/2017/01/Bunch-of-bananas-67e91d5.jpg",
+    "quantity": 14,
+    "description": "Bananas are a popular fruit that happens to provide numerous health benefits. Among other things, they may boost digestive and heart health due to their fiber and antioxidant content."
+  },
+  {
+    "id": 3,
+    "name": "Milk",
+    "cost": 2.49,
+    "image": "https://cdn.britannica.com/77/200377-050-4326767F/milk-splashing-glass.jpg",
+    "quantity": 4,
+    "description": "Milk is a nutrient-rich liquid food produced by the mammary glands of mammals. It is the primary source of nutrition for young mammals, including breastfed human infants before they are able to digest solid food."
+  },
+  {
+    "id": 4,
+    "name": "Bread",
+    "cost": 2.99,
+    "image": "https://tastesbetterfromscratch.com/wp-content/uploads/2020/03/Bread-Recipe-5-2.jpg",
+    "quantity": 2,
+    "description": "Bread is a staple food prepared from a dough of flour and water, usually by baking. Throughout recorded history, it has been a prominent food in large parts of the world."
+  },
+  {
+    "id": 5,
+    "name": "Eggs",
+    "cost": 1.89,
+    "image": "https://cdn.britannica.com/94/151894-050-F72A5317/Brown-eggs.jpg",
+    "quantity": 12,
+    "description": "Eggs are a very good source of inexpensive, high quality protein. More than half the protein of an egg is found in the egg white, which also includes vitamin B2 and lower amounts of fat than the yolk."
+  },
+  {
+    "id": 6,
+    "name": "Chicken",
+    "cost": 5.99,
+    "image": "https://assets.epicurious.com/photos/62f16ed5fe4be95d5a460eed/3:2/w_6948,h_4632,c_limit/RoastChicken_RECIPE_080420_37993.jpg",
+    "quantity": 9,
+    "description": "Chicken is the most common type of poultry in the world. Owing to the relative ease and low cost of raising them in comparison to animals such as cattle or hogs, chickens have become prevalent throughout the cuisine of cultures around the world, and their meat has been variously adapted to regional tastes."
+  },
+  {
+    "id": 7,
+    "name": "Rice",
+    "cost": 3.49,
+    "image": "https://thewanderlustkitchen.com/wp-content/uploads/2013/12/Perfect-White-Rice-Recipe-Redo-17-2.jpg",
+    "quantity": 100,
+    "description": "Rice is the seed of the grass species Oryza sativa or less commonly Oryza glaberrima. The name wild rice is usually used for species of the genera Zizania and Porteresia, both wild and domesticated, although the term may also be used for primitive or uncultivated varieties of Oryza."
+  },
+  {
+    "id": 8,
+    "name": "Pasta",
+    "cost": 1.29,
+    "image": "https://food.fnr.sndimg.com/content/dam/images/food/fullset/2021/02/05/Baked-Feta-Pasta-4_s4x3.jpg.rend.hgtvcom.616.493.suffix/1615916524567.jpeg",
+    "quantity": 50,
+    "description": "Pasta is a type of food typically made from an unleavened dough of wheat flour mixed with water or eggs, and formed into sheets or other shapes, then cooked by boiling or baking. Rice flour, or legumes such as beans or lentils, are sometimes used in place of wheat flour to yield a different taste and texture, or as a gluten-free alternative."
+  },
+  {
+    "id": 9,
+    "name": "Tomatoes",
+    "cost": 0.99,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Tomato_je.jpg/1200px-Tomato_je.jpg",
+    "quantity": 8,
+    "description": "The tomato is the edible berry of the plant Solanum lycopersicum, commonly known as a tomato plant. The species originated in western South America and Central America. The Nahuatl word tomatl gave rise to the Spanish word tomate, from which the English word tomato derived."
+  },
+  {
+    "id": 10,
+    "name": "Potatoes",
+    "cost": 1.49,
+    "image": "https://cdn.mos.cms.futurecdn.net/iC7HBvohbJqExqvbKcV3pP.jpg",
+    "quantity": 40,
+    "description": "The potato is a root vegetable native to the Americas, a starchy tuber of the plant Solanum tuberosum, and the plant itself, a perennial in the family Solanaceae. Wild potato species, originating in modern-day Peru, can be found throughout the Americas, from the United States to southern Chile."
+  }
+]
