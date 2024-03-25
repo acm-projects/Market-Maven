@@ -1,88 +1,42 @@
 *{
-    box-sizing: border-box;
+    box-sizing: border-box !important;
 }
 
 body {
-    margin: 0;
-    background-color: rgb(146, 120, 120);
+    margin: 0 !important;
+    border: 0 !important;
+    padding: 0 !important;
+    background-color: rgb(146, 120, 120) !important;
     align-items: center;
     justify-content: center;
 }
 .container {
     text-align: center;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
-.Landing-Page{
-    background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) ,url("..\\..\\market-maven\\public\\anastasia-saldatava-5feMqpVOc-s-unsplash.jpg");
-    background-size: cover;
-    background-position: center;
+.Landing-Page.Landing-Page {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) ,url("..\\..\\market-maven\\public\\anastasia-saldatava-5feMqpVOc-s-unsplash.jpg") !important;
+    background-size: cover !important;
+    background-position: center !important;
     padding-left: 1rem;
     height: 100vh;
-    display: flex;
+    display: flex !important;
 
     align-items: flex-end; /* Add this line */
-    justify-content: flex-start; /* Add this line */
+    justify-content: flex-start !important; /* Add this line */
     padding-bottom: 2rem; /* Add this line */
 }
 
 h1 {
     text-align: left; 
-    vertical-align: center;
-    font-weight: 200;
+    vertical-align: center !important;
+    font-weight: 200 !important;
     font-size: 3rem; /* Adjust the font size as desired */
     color: white;
-    font-family: "Inter", sans-serif;
+    font-family: "Inter", sans-serif !important;
     font-optical-sizing: auto;
     font-style: normal;
     margin-bottom: 0;
-}
-
-.Navbar {
-    background-color: white;
-    color:rgb(67,42,54);
-    display: flex;
-    justify-content: space-between;
-    align-items: stretch;
-    gap: 1.5rem;
-    padding: 2rem;
-
-    font-family: "Archivo", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 600;
-    font-style: normal;
-    font-variation-settings:
-    "wdth" 100;
-}
-.site-title{
-    font-size: 1.5rem;
-}
-.Navbar ul {
-    padding: 3px;
-    margin: 0;
-    list-style: none;
-    display: flex;
-    gap: 1rem;
-}
-.Navbar li {
-    padding: 3px;
-}
-.Navbar li.active{
-    background-color: rgb(146, 120, 120);
-    color: white;
-    border-radius: 10px;
-    padding: 3px;
-}
-.Navbar li:hover{
-    background-color: rgb(146, 120, 120);
-    border-radius: 10px;
-    padding: 3px;
-}
-
-.Navbar a {
-    color: inherit;
-    text-decoration: none;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    padding: .25rem;
 }
