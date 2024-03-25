@@ -1,0 +1,51 @@
+.Navbar {
+    background-color: white;
+    color:rgb(67,42,54);
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 1.5rem;
+    padding: 2rem;
+
+    font-family: "Archivo", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-variation-settings:
+    "wdth" 100;
+}
+.site-title{
+    font-size: 1.5rem;
+}
+.Navbar ul {
+    padding: 3px;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+}
+.Navbar li {
+    padding: 3px;
+}
+.Navbar li.active{
+    background-color: rgb(146, 120, 120);
+    color: white;
+    border-radius: 10px;
+    padding: 3px;
+}
+.Navbar li:hover{
+    background-color: rgb(146, 120, 120);
+    color: white !important;
+    border-radius: 10px;
+    padding: 3px;
+    text-decoration: none !important;
+}
+
+.Navbar a {
+    color: inherit;
+    text-decoration: none !important;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: .25rem;
+}
