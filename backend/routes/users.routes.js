@@ -24,4 +24,6 @@ router.delete('/:id', deleteUser)
 // UPDATE a user
 router.patch('/:id', updateUser)
 
+// destructure update user into being able to update individual credentials
+
 module.exports = router // export router
