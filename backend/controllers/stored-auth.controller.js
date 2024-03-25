@@ -66,7 +66,7 @@ const login = asyncHandler(async (req, res) => {
     })
 
     // send access token 
-    res.json({ accessToken })
+    res.json({ accessToken, email, username: foundUser.username })
     
 })
 
@@ -110,7 +110,7 @@ const refresh = (req, res) => {
                     { expriesIn: '1hr' }
                 )
 
-                res.json({ accessToken })
+                res.json({ accessToken, email: foundUser.email, username: foundUser.username })
             })
         )
 
@@ -147,7 +147,40 @@ const signup = asyncHandler(async (req, res) => {
     const savedUser = await newUser.save();
     res.status(200).json({ message: 'Succesful sign up'})
 
-    // TO DO: immediately log user in ?
+    // generate access token
+    const accessToken = jwt.sign(
+        {
+            "user": {
+
+                // changed identifier to email instead of username
+                "email": email,
+
+                // TO DO: implement roles, likely just user and vendor
+                "role": "user"
+            }
+        },
+        process.env.ACCESS_TOKEN_SECRET,
+        { expiresIn: '1hr' }
+    )
+
+    // generate refresh token
+    const refreshToken = jwt.sign(
+        { "username": username },
+        process.env.REFRESH_TOKEN_SECRET,
+        { expiresIn: '1d' }
+    )
+
+    // generate secure cookie
+    res.cookie('jwt', refreshToken, {
+        httpOnly: true,     // only accessible by web-server
+        secure: true,       // use HTTPS protocol
+        sameSite: 'strict', // only communicable to the server that generated the token
+        maxAge: 1000 * 60 * 60 * 24 * 7     // lifetime measured in ms
+    })
+
+    // send access token 
+    res.json({ accessToken, email, username })
+    
 
 })
 
