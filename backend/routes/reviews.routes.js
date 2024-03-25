@@ -2,28 +2,26 @@ const express = require('express')
 const {
     getReviews,
     getReview,
-    //createUser,
+    createReview,
     deleteReview,
     updateReview
 } = require('../controllers/review.controller')
 
 const router = express.Router()
 
-// GET all products
+// GET all product reviews
 router.get('/', getReviews)
 
-// GET a single product
+// GET a single product review
 router.get('/:id', getReview)
 
-// POST a new product
-router.post('/', (req, res) => {
-    res.json({mssg: 'POST a new product'})
-})
+// POST a new product review
+router.post('/', createReview)
 
-// DELETE a product
+// DELETE a product review
 router.delete('/:id', deleteReview)
 
-// UPDATE a product
+// UPDATE a product review
 router.patch('/:id', updateReview)
 
 module.exports = router // export router

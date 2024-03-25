@@ -25,17 +25,17 @@ const getCategory = async (req, res) => {
     res.status(200).json(category)
 }
 
-// POST a new category
-// const createCategory = async (req, res) => {
-//     const {} = req.body
+//POST a new category
+const createCategory = async (req, res) => {
+    const {users, products, categoryName} = req.body
 
-//     try { // add doc to db
-//         const category = await Category.create({});
-//         res.status(200).json(category);
-//     } catch (error){
-//         res.status(400).json({error: error.message})
-//     }
-// }
+    try { // add doc to db
+        const category = await Category.create({users, products, categoryName});
+        res.status(200).json(category);
+    } catch (error){
+        res.status(400).json({error: error.message})
+    }
+}
 
 // DELETE a category
 const deleteCategory = async (req, res) => {
@@ -76,7 +76,7 @@ const updateCategory = async (req, res) => {
 module.exports = {
     getCategories,
     getCategory,
-    //createCategory,
+    createCategory,
     deleteCategory,
     updateCategory
 }

@@ -2,7 +2,7 @@ const express = require('express')
 const {
     getOrders,
     getOrder,
-    //createUser,
+    createOrder,
     deleteOrder,
     updateOrder
 } = require('../controllers/order.controller')
@@ -16,9 +16,7 @@ router.get('/', getOrders)
 router.get('/:id', getOrder)
 
 // POST a new order
-router.post('/', (req, res) => {
-    res.json({mssg: 'POST a new order'})
-})
+router.post('/', createOrder)
 
 // DELETE an order
 router.delete('/:id', deleteOrder)
