@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import data from './data.json'
 import Item from '../Components/Item';
 import Navbar from '../Components/Navbar';
@@ -41,8 +42,9 @@ const Shop = () => {
     <>
       <div>
         <Navbar />
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 mx-2">
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 px-2 bg-white">
         {items.map((item) => (
+          <Link key={item.id} to='/ItemDetails'>  {/*{`/item/${item.id}`}*/}
           <Item
             key={item.id}
             name={item.name}
@@ -53,12 +55,13 @@ const Shop = () => {
             addToCart={addToCart}
             items={items}
             setItems={setItems}
+            
           />
+          </Link>
         ))}
         </div>
       </div>
       <div>
-        <h1>Cart</h1>
         {cart.map((item) => (
           <div>
             <h1>{item[0]}</h1>

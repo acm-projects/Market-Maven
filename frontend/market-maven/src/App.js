@@ -6,6 +6,7 @@ import { Login } from "./pages/login";
 import { Register } from "./pages/register";
 import { Route, Routes } from "react-router-dom";
 import Shop from "./pages/Shop";
+import ItemDetails from "./Components/ItemDetails";
 
 function App() {
   const [currentForm, setCurrentForm] = useState("login");
@@ -24,6 +25,7 @@ function App() {
           <Route path="/page3" element={<Page3 />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/ItemDetails" element={<ItemDetails />} />
         </Routes>
       </div>
     </>
