@@ -6,7 +6,11 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+<<<<<<< HEAD
     "axios": "^1.6.8",
+=======
+    "axios": "^1.6.7",
+>>>>>>> 40806cc6d83f2ab5270fe83fa7aee89d153a4a10
     "autoprefixer": "^10.4.19",
     "bootstrap": "^4.6.0",
     "postcss": "^8.4.38",
