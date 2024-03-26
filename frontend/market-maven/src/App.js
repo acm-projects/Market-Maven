@@ -1,14 +1,12 @@
 import React, { useState } from "react";
-import Navbar from "./Navbar";
 import Landing from "./pages/landingpage";
-import Page1 from "./pages/page1";
 import Page2 from "./pages/page2";
 import Page3 from "./pages/page3";
-import Profile from "./pages/profile";
-import "./output.css";
 import { Login } from "./pages/login";
 import { Register } from "./pages/register";
 import { Route, Routes } from "react-router-dom";
+import Shop from "./pages/Shop";
+import ItemDetails from "./Components/ItemDetails";
 
 function App() {
   const [currentForm, setCurrentForm] = useState("login");
@@ -19,17 +17,15 @@ function App() {
 
   return (
     <>
-      {/* <Navbar /> */}
       <div className="container">
         <Routes>
           <Route path="/" element={<Landing />} />
-          <Route path="/page1" element={<Page1 />} />
+          <Route path="/Shop" element={<Shop />} />
           <Route path="/page2" element={<Page2 />} />
           <Route path="/page3" element={<Page3 />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/profile" element={<Profile />} />
-          
+          <Route path="/ItemDetails" element={<ItemDetails />} />
         </Routes>
       </div>
     </>

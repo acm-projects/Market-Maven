@@ -1,11 +1,26 @@
 const Product = require('../models/product.model')
 const mongoose = require('mongoose')
 
-// GET all products
+//GET all products
+
 const getProducts = async (req, res) => {
-    const products = await Product.find({}).sort({createdAt: -1})
+
+    try {
+        console.log(req.query);
+        let queryStr = JSON.stringify(req.query);
+        queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
+        console.log(queryStr);
+        const queryObj = JSON.parse(queryStr);
+        console.log(queryObj);
+        
+        // Execute MongoDB query to find matching products
+        const products = await Product.find(queryObj).sort({createdAt: -1})
     
-    res.status(200).json(products)
+        res.status(200).json(products)
+    } catch (error) {
+        console.error('Error fetching products', error);
+        res.status(500).json({error: 'Internal server error'});
+    } 
 }
 
 // GET a single product
@@ -25,17 +40,17 @@ const getProduct = async (req, res) => {
     res.status(200).json(product)
 }
 
-// POST a new product
-// const createProduct = async (req, res) => {
-//     const {} = req.body
+//POST a new product
+const createProduct = async (req, res) => {
+    const {productTitle, vendor, productReviews, category, description, price, stock, zip} = req.body
 
-//     try { // add doc to db
-//         const product = await Product.create({});
-//         res.status(200).json(product);
-//     } catch (error){
-//         res.status(400).json({error: error.message})
-//     }
-// }
+    try { // add doc to db
+        const product = await Product.create({productTitle, vendor, productReviews, category, description, price, stock, zip});
+        res.status(200).json(product);
+    } catch (error){
+        res.status(400).json({error: error.message})
+    }
+}
 
 // DELETE a product
 const deleteProduct = async (req, res) => {
@@ -76,7 +91,7 @@ const updateProduct = async (req, res) => {
 module.exports = {
     getProducts,
     getProduct,
-    //createproduct,
+    createProduct,
     deleteProduct,
     updateProduct
 }

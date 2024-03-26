@@ -2,7 +2,7 @@ const express = require('express')
 const {
     getCategories,
     getCategory,
-    //createCategory,
+    createCategory,
     deleteCategory,
     updateCategory
 } = require('../controllers/category.controller')
@@ -16,10 +16,7 @@ router.get('/', getCategories)
 router.get('/:id', getCategory)
 
 // POST a new category
-//router.post('/', createCategory)
-router.post('/', (req, res) => {
-    res.json({mssg: 'POST a new category'})
-})
+router.post('/', createCategory)
 
 // DELETE a category
 router.delete('/:id', deleteCategory)
