@@ -11,6 +11,8 @@ const userSchema = new Schema({
     zip: { type: Number },
     orderHistory: [{ type: Schema.Types.ObjectId, ref: 'Order' }]
 
+    // should we implement authorization roles as an attribute in the user document ?
+
 }, {timestamps: true});
 
 module.exports = mongoose.model('User', userSchema);

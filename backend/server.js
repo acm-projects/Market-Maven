@@ -13,6 +13,7 @@ const productRoutes = require('./routes/products.routes')
 const reviewRoutes = require('./routes/reviews.routes')
 const userRoutes = require('./routes/users.routes')
 const vendorRoutes = require('./routes/vendors.routes')
+const storedAuthRoutes = require('./routes/auth/stored-auth.routes')
 
 // express app
 const app = express()
@@ -21,6 +22,7 @@ const app = express()
 app.use(express.json())
 
 // routes
+app.use('/api/auth/stored-auth', storedAuthRoutes)
 app.use('/api/categories', categoryRoutes)
 app.use('/api/orders', orderRoutes)
 app.use('/api/products', productRoutes)

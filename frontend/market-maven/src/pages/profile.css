@@ -1,0 +1,5 @@
+/* REPLACE BACKGROUND: ... to the image you need */
+.bg-dhanush-image {
+   --tw-bg-opacity: 1; /* REPLACE THIS LINE */
+    background: rgb(229 231 235 / var(--tw-bg-opacity)); /* REPLACE THIS LINE */
+}
