@@ -1,4 +1,9 @@
 const { OAuth2Client } = require('google-auth-library')
+<<<<<<< HEAD
+
+// middleware to handle OAuth onSuccess response from the front end
+// handle either token or auth code, or both? 
+=======
 const asyncHandler = require('express-async-handler')
 const axios = require('axios');
 
@@ -59,3 +64,4 @@ module.exports = {
     handleImplicitFlow,
     handleAuthCodeFlow
 }
+>>>>>>> c6781eb4ffedbda194477b85942ee717a195dcfc

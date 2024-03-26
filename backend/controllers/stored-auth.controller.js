@@ -19,13 +19,21 @@ const asyncHandler = require('express-async-handler')
  */
 const login = asyncHandler(async (req, res) => {
 
+<<<<<<< HEAD
+    const { username, password } = req.body
+=======
     const { email, password } = req.body
+>>>>>>> c6781eb4ffedbda194477b85942ee717a195dcfc
 
     // wrap in a try catch when finished
     // need to keep open for debuggin sake lol
 
     // user not found
+<<<<<<< HEAD
+    const foundUser = await User.findOne({ username }).exec()
+=======
     const foundUser = await User.findOne({ email }).exec()
+>>>>>>> c6781eb4ffedbda194477b85942ee717a195dcfc
     if (!foundUser) {
         return res.status(401).json({ message: 'Invalid credentials' })
     }
@@ -38,9 +46,13 @@ const login = asyncHandler(async (req, res) => {
     const accessToken = jwt.sign(
         {
             "user": {
+<<<<<<< HEAD
+                "username": foundUser.username,
+=======
 
                 // changed identifier to email instead of username
                 "email": foundUser.email,
+>>>>>>> c6781eb4ffedbda194477b85942ee717a195dcfc
 
                 // TO DO: implement roles, likely just user and vendor
                 "role": "user"
@@ -66,7 +78,11 @@ const login = asyncHandler(async (req, res) => {
     })
 
     // send access token 
+<<<<<<< HEAD
+    res.json({ accessToken })
+=======
     res.json({ accessToken, email, username: foundUser.username })
+>>>>>>> c6781eb4ffedbda194477b85942ee717a195dcfc
     
 })
 
@@ -110,7 +126,11 @@ const refresh = (req, res) => {
                     { expriesIn: '1hr' }
                 )
 
+<<<<<<< HEAD
+                res.json({ accessToken })
+=======
                 res.json({ accessToken, email: foundUser.email, username: foundUser.username })
+>>>>>>> c6781eb4ffedbda194477b85942ee717a195dcfc
             })
         )
 
@@ -147,6 +167,9 @@ const signup = asyncHandler(async (req, res) => {
     const savedUser = await newUser.save();
     res.status(200).json({ message: 'Succesful sign up'})
 
+<<<<<<< HEAD
+    // TO DO: immediately log user in ?
+=======
     // generate access token
     const accessToken = jwt.sign(
         {
@@ -181,6 +204,7 @@ const signup = asyncHandler(async (req, res) => {
     // send access token 
     res.json({ accessToken, email, username })
     
+>>>>>>> c6781eb4ffedbda194477b85942ee717a195dcfc
 
 })
 
