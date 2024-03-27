@@ -1,13 +1,28 @@
-import React from 'react';
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import data from './data.json'
-import Item from '../Components/Item';
-import Navbar from '../Components/Navbar';
+import React from "react";
+import { useEffect, useState } from "react";
+import { Link, Route} from "react-router-dom";
+//import data from './data.json'
+import Item from "../Components/Item";
+import ItemDetails from "../Components/ItemDetails";
+import Navbar from "../Components/Navbar";
 
 const Shop = () => {
-  const [items, setItems] = useState(data);
+  const [items, setItems] = useState([]);
   const [cart, setCart] = useState([]);
+  
+  useEffect(() => {
+    const fetchItems = async () => {
+      const response = await fetch(`/api/products`);
+      //const response = await fetch('http://localhost:8080/api/products')
+      const json = await response.json(); // array of objects
+
+      if (response.ok) {
+        setItems(json);
+      }
+    };
+
+    fetchItems();
+  }, []);
 
   const addToCart = (item) => {
     if (cart.map((cartItem) => cartItem[0]).includes(item)) {
@@ -38,27 +53,37 @@ const Shop = () => {
     );
   };
 
+  const [selectedItem, setSelectedItem] = useState([]);
+  const handleItemClick = (item) => {
+    setSelectedItem(item);
+  };
+
+  // render shop items
+  const renderShopItems = () => {
+    return items.map((item) => (
+      <Link key={item._id} to={`/ItemDetails/${item._id}`} state={item} >
+        <p onClick={() => handleItemClick(item)}>{item.name}</p>
+        <Item
+          key={item._id}
+          name={item.productTitle}
+          price={item.price}
+          image={item.image}
+          description={item.description}
+          quantitiy={item.stock}
+          addToCart={addToCart}
+          items={items}
+          setItems={setItems}
+        />
+      </Link>
+    ))
+  }
+
   return (
     <>
       <div>
         <Navbar />
         <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 px-2 bg-white">
-        {items.map((item) => (
-          <Link key={item.id} to='/ItemDetails'>  {/*{`/item/${item.id}`}*/}
-          <Item
-            key={item.id}
-            name={item.name}
-            cost={item.cost}
-            pic={item.image}
-            description={item.description}
-            quantitiy={item.quantity}
-            addToCart={addToCart}
-            items={items}
-            setItems={setItems}
-            
-          />
-          </Link>
-        ))}
+          {renderShopItems()}
         </div>
       </div>
       <div>
@@ -77,13 +102,3 @@ const Shop = () => {
 };
 
 export default Shop;
-
-{/*import Navbar from "../Components/Navbar"
-export default function Page1(){
-    return(
-    <div>
-        <Navbar />
-        <h1>Page 1</h1>
-    </div>
-    )
-}*/}

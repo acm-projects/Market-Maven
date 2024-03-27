@@ -9,7 +9,8 @@ const vendorSchema = new Schema({
     email: { type: String, required: true, unique: true, trim: true, minlength: 3 },
     password: { type: String, required: true, trim: true, minlength: 3 },
     zip: { type: Number },
-    products: [{ type: Schema.Types.ObjectId, ref: 'Product' }]
+    products: [{ type: Schema.Types.ObjectId, ref: 'Product' }],
+    image: { type: String },
 
 })
 
