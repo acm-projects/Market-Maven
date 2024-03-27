@@ -2,9 +2,7 @@ const Product = require('../models/product.model')
 const mongoose = require('mongoose')
 
 //GET all products
-
 const getProducts = async (req, res) => {
-
     try {
         console.log(req.query);
         let queryStr = JSON.stringify(req.query);
@@ -42,7 +40,7 @@ const getProduct = async (req, res) => {
 
 //POST a new product
 const createProduct = async (req, res) => {
-    const {productTitle, vendor, productReviews, category, description, price, stock, zip} = req.body
+    const {productTitle, vendor, productReviews, category, description, price, stock, zip, image} = req.body
 
     try { // add doc to db
         const product = await Product.create({productTitle, vendor, productReviews, category, description, price, stock, zip});
