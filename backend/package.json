@@ -13,10 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@googlemaps/google-maps-services-js": "^3.3.42",
-<<<<<<< HEAD
-=======
     "axios": "^1.6.8",
->>>>>>> c6781eb4ffedbda194477b85942ee717a195dcfc
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.4",
