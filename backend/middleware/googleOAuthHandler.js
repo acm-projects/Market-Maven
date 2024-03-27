@@ -9,13 +9,13 @@ const axios = require('axios');
 // handle either token or auth code, or both? 
 
 // this handles access tokens already recieved by the front end w/ implicit flow
-const handleImplicitFlow = asyncHandler(async (req, res) => {
+const handleImplicitFlow = async (req, res) => {
 
     
-})
+}
 
 // this handles auth code from the front end w/ auth-code flow
-const handleAuthCodeFlow = asyncHandler(async (req, res) => {
+const handleAuthCodeFlow = async (req, res) => {
     
     // extract code from client request
     const code = req.headers.authorization;
@@ -53,7 +53,7 @@ const handleAuthCodeFlow = asyncHandler(async (req, res) => {
     
     // return user details and access token
     return userDetails, accessToken
-})
+}
 
 module.exports = {
     handleImplicitFlow,

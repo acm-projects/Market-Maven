@@ -2,9 +2,6 @@ const User = require('../models/user.model')
 const jwt = require('jsonwebtoken')
 const { OAuth2Client } = require('google-auth-library')
 
-// sync handling middleware
-const asyncHandler = require('express-async-handler')
-
 // google oauth middleware
 const googleOauthHandler = require('../middleware/googleOAuthHandler')
 
@@ -18,10 +15,10 @@ const googleOauthHandler = require('../middleware/googleOAuthHandler')
  * @route POST /api/auth/stored-auth
  * @access Public
  */
-const login = asyncHandler(async (req, res) => {
+const login = async (req, res) => {
+
     
-    
-})
+}
 
 /**
  * 
@@ -41,10 +38,10 @@ const refresh = (req, res) => {
  * @access Public
 */
 
-const signup = asyncHandler(async (req, res) => {
+const signup = async (req, res) => {
 
     
-})
+}
 
 /**
  * 

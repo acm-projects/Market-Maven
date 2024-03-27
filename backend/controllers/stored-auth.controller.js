@@ -17,7 +17,7 @@ const asyncHandler = require('express-async-handler')
  * @route POST /api/auth/stored-auth/login
  * @access Public
  */
-const login = asyncHandler(async (req, res) => {
+const login = async (req, res) => {
 
     const { email, password } = req.body
 
@@ -68,7 +68,7 @@ const login = asyncHandler(async (req, res) => {
     // send access token 
     res.json({ accessToken, email, username: foundUser.username })
     
-})
+}
 
 /** === STILL NEEDS TO BE TESTED ===
  * 
@@ -126,7 +126,7 @@ const refresh = (req, res) => {
  * @access Public
 */
 
-const signup = asyncHandler(async (req, res) => {
+const signup = async (req, res) => {
 
     const { username, email, password } = req.body
 
@@ -182,7 +182,7 @@ const signup = asyncHandler(async (req, res) => {
     res.json({ accessToken, email, username })
     
 
-})
+}
 
 /**
  * 
