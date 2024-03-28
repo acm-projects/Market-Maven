@@ -4,7 +4,24 @@ import Navbar from "./Navbar";
 import { useEffect, useState } from "react";
 //import data from "../pages/data.json";
 
-const ItemDetails = ({ item, addToCart }) => {
+const ItemDetails = ({ addToCart }) => {
+  const { id } = useParams();
+  const [item, setItem] = useState(null);
+
+  useEffect(() => {
+    const fetchItemDetails = async () => {
+      console.log(id);
+      const response = await fetch(`/api/products/${id}`)
+      const json = await response.json(); // array of objects
+      console.log(json);
+      if (response.ok) {
+        setItem(json);
+      }
+    };
+
+    fetchItemDetails();
+  }, []);
+
   const handleClick = (name, quantitiy) => {
     if (quantitiy > 0) {
       item.addToCart(name);
