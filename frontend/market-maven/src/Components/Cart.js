@@ -1,9 +1,24 @@
 import { Link, useMatch, useResolvedPath } from  "react-router-dom"
-import { Dropdown, Badge, Container, FormControl, Nav, Navbar } from "react-bootstrap";
-import { FaShoppingCart } from "react-icons/fa";
+//import { Dropdown, Badge, Container, FormControl, Nav, Navbar } from "react-bootstrap";
+import { Badge } from "@mui/material";
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 
 export default function Cart(){
     return(
+        <>
+        <Badge badgeContent={4} color="primary">
+            <ShoppingCartOutlinedIcon/>
+        </Badge>
+        </>
+
+    );
+};
+
+
+
+
+
+{/*
         <Nav>
         <Dropdown>
             <Dropdown.Toggle varient="success">
@@ -15,5 +30,4 @@ export default function Cart(){
             </Dropdown.Menu>
         </Dropdown>
         </Nav>
-    )
-}
+        */}

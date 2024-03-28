@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams , useLocation} from 'react-router-dom';
 import Navbar from './Navbar';
 import data from "../pages/data.json"
 
@@ -7,6 +7,8 @@ const ItemDetails = ({ item, addToCart }) => {
     console.log(data);
     const event = data[0];
   const { id } = useParams();
+  //const { state } = useLocation(); 
+  //const item = state.item;
   //const item = items.find((item) => item.id === parseInt(id));
   const handleClick = (name, quantitiy) => {
     if (quantitiy > 0) {
@@ -33,7 +35,7 @@ const ItemDetails = ({ item, addToCart }) => {
     <div className=''>
       <h1 className='text-center text-black'>{event.name}</h1>
       <h2>{event.cost}</h2>
-      <p className='my-4'>{event.description}</p>
+      <p className='my-4 p-10 text-left'>{event.description}</p>
       
       
       {/*<button 
@@ -42,7 +44,7 @@ const ItemDetails = ({ item, addToCart }) => {
         Add to Cart
   </button>*/}
       <button 
-        onClick={() => handleClick(event.name, event.quantitiy)}
+        onClick={() => handleClick(item.name, item.quantitiy)}
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
       >
         Add to Cart

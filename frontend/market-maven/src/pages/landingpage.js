@@ -5,7 +5,7 @@ export default function Landing() {
     <div>
       <Navbar />
       <div className="Landing-Page" >
-        <h1>Crafted with skill, grown with dedication</h1>
+        <h1 className="align-top">Crafted with skill, grown with dedication</h1>
       </div>
     </div>
   )

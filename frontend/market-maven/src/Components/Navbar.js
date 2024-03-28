@@ -10,7 +10,8 @@ export default function Navbar(){
             <CustomLink to="/page2">Page 2</CustomLink>
             <CustomLink to="/page3">Page 3</CustomLink>
         </ul>
-        {/*<Cart />*/}
+        <Link to="/CartPage"><Cart /></Link>
+
     </nav>
 )}
 
