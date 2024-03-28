@@ -62,7 +62,7 @@ const Shop = () => {
         <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 px-2 bg-white">
         {items.map((item) => (
 
-          // correct implementation of Link and the to props with its state property
+          // correct implementation of Link and the to prop with its state property
           // I have no idea why ItemDetails refuses to recieve the state as anything
           // other than "null", will keep in case we can fix later since this would be
           // better than just making a GET request for each individal item for their page
