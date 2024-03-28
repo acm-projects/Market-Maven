@@ -7,6 +7,7 @@ import { Register } from "./pages/register";
 import { Route, Routes } from "react-router-dom";
 import Shop from "./pages/Shop";
 import ItemDetails from "./Components/ItemDetails";
+import CartPage from "./Components/Cart";
 
 function App() {
   const [currentForm, setCurrentForm] = useState("login");
@@ -26,6 +27,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/ItemDetails" element={<ItemDetails />} />
+          <Route path="/ItemDetails/:id" element={<ItemDetails/>} />
+          <Route path="/CartPage" element={<CartPage />} />
         </Routes>
       </div>
     </>

@@ -44,7 +44,7 @@ const Shop = () => {
         <Navbar />
         <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 px-2 bg-white">
         {items.map((item) => (
-          <Link key={item.id} to='/ItemDetails'>  {/*{`/item/${item.id}`}*/}
+          <Link key={item.id} to={`/ItemDetails/${item.id}`}>  {/*{`/item/${item.id}`}*/}
           <Item
             key={item.id}
             name={item.name}
