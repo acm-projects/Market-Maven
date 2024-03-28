@@ -2,8 +2,6 @@ import React from 'react';
 import { useState } from 'react';
 
 const Item = (props) => {
-  
-
   return (
     <>
     <div className="p-4 my-2 rounded-lg flex flex-col items-center">
