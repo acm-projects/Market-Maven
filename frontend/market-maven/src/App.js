@@ -12,6 +12,7 @@ import CartPage from "./Components/Cart";
 function App() {
   const [currentForm, setCurrentForm] = useState("login");
 
+  // what will / is this used for?
   const toggleForm = (formName) => {
     setCurrentForm(formName);
   }

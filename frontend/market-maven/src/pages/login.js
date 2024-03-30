@@ -5,26 +5,21 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios'
 
 export const Login = () => {
-    const [email, setEmail] = useState('');
-    const [pass, setPass] = useState('');
 
-    const [data, setData] = useState({
+    const [cred, setCred] = useState({
         email: '',
         password: ''
     })
 
     const navigate = useNavigate();
 
+    // TO-DO: properly store the credentials and access token as cookie
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(data)
-        const {email, password} = data;
+        const {email, password} = cred;
 
-        console.log(typeof email)
-        console.log(typeof password)
-
-        const token = await axios.post('http://localhost:8080/api/auth/stored-auth/login', {email, password});
-        console.log(token)
+        axios.post('http://localhost:8080/api/auth/stored-auth/login', {email, password})
+            .then(response => console.log(response.data));
 
     }
 
@@ -37,11 +32,11 @@ export const Login = () => {
                     <form className="form1" onSubmit={handleSubmit}>
                         {/* <label htmlFor="email">email</label> */}
                         <div className="p-3 border border-black rounded-full mb-3">
-                            <input className="border-none w-64 text-md" type={email} value={data.email} onChange={(e) => setData({...data, email: e.target.value})} placeholder="Email" id="email" name="email" />
+                            <input className="border-none w-64 text-md" type="email" value={cred.email} onChange={(e) => setCred({...cred, email: e.target.value})} placeholder="Email" id="email" name="email" />
                         </div>
                         {/* <label htmlFor="password">password</label> */}
                         <div className="p-3 border border-black mb-3 rounded-full">
-                            <input className="border-none  w-64 text-md" type={pass} value={data.password} onChange={(e) => setData({...data, password: e.target.value})} placeholder="Password" id="password" name="password" />
+                            <input className="border-none  w-64 text-md" type="password" value={cred.password} onChange={(e) => setCred({...cred, password: e.target.value})} placeholder="Password" id="password" name="password" />
                         </div>
                         <div className="flex w-full justify-between">
                             <button className="border-none bg-none" onClick={() => navigate('/register')}>Create account</button>
