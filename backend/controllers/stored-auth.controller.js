@@ -2,8 +2,6 @@ const User = require('../models/user.model')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
-// sync handling middleware
-const asyncHandler = require('express-async-handler')
 
 /**
  * As of 3/10, most of this logic will be based on the Dave Gray 
@@ -57,16 +55,22 @@ const login = async (req, res) => {
         { expiresIn: '1d' }
     )
 
-    // generate secure cookie
-    res.cookie('jwt', refreshToken, {
-        httpOnly: true,     // only accessible by web-server
-        secure: true,       // use HTTPS protocol
-        sameSite: 'strict', // only communicable to the server that generated the token
-        maxAge: 1000 * 60 * 60 * 24 * 7     // lifetime measured in ms
-    })
+    // generate secure cookie (probably don't need refesh tokens for now)
+    // res.cookie('jwt', refreshToken, {
+    //     httpOnly: true,     // only accessible by web-server
+    //     secure: true,       // use HTTPS protocol
+    //     sameSite: 'strict', // only communicable to the server that generated the token
+    //     maxAge: 1000 * 60 * 60 * 24 * 7     // lifetime measured in ms
+    // })
 
-    // send access token 
-    res.json({ accessToken, email, username: foundUser.username })
+    // TO-DO: send access token 
+    res.cookie('jwt', { accessToken, email, username: foundUser.username }, {
+        httpOnly: true,
+        secure: true,
+        sameSite: 'strict',
+        maxAge: 1000 * 60 * 60
+    })
+    return res.send('access token sent as cookie')
     
 }
 
