@@ -24,9 +24,7 @@ const login = async (req, res) => {
 
     // user not found
     const foundUser = await User.findOne({ email }).exec()
-    if (!foundUser) {
-        return res.status(401).json({ message: 'Invalid credentials' })
-    }
+    if (!foundUser) return res.status(401).json({ message: 'Invalid credentials' })
 
     // password is invalid
     const match = await bcrypt.compare(password, foundUser.password)
@@ -55,22 +53,16 @@ const login = async (req, res) => {
         { expiresIn: '1d' }
     )
 
-    // generate secure cookie (probably don't need refesh tokens for now)
-    // res.cookie('jwt', refreshToken, {
-    //     httpOnly: true,     // only accessible by web-server
-    //     secure: true,       // use HTTPS protocol
-    //     sameSite: 'strict', // only communicable to the server that generated the token
-    //     maxAge: 1000 * 60 * 60 * 24 * 7     // lifetime measured in ms
-    // })
-
-    // TO-DO: send access token 
-    res.cookie('jwt', { accessToken, email, username: foundUser.username }, {
-        httpOnly: true,
-        secure: true,
-        sameSite: 'strict',
-        maxAge: 1000 * 60 * 60
+    // generate secure cookie (probably don't need refesh tokens ?)
+    // === set secure to true if an when deployed so it only uses https ===
+    res.cookie('jwt', refreshToken, {
+        httpOnly: true,     // only accessible by web-server
+        secure: false,      // use HTTPS protocol, *** set false for dev ***
+        sameSite: 'None', 
+        maxAge: 1000 * 60 * 60 * 24     // lifetime measured in ms
     })
-    return res.send('access token sent as cookie')
+
+    res.json({ accessToken, email, username: foundUser.username })
     
 }
 
