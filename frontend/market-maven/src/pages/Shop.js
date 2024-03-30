@@ -1,13 +1,30 @@
 import React from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import data from './data.json'
 import Item from '../Components/Item';
 import Navbar from '../Components/Navbar';
 
+import axios from 'axios';
+
 const Shop = () => {
   const [items, setItems] = useState(data);
   const [cart, setCart] = useState([]);
+
+  useEffect(() => {
+    const fetchItems = async () => {
+      // const response = await fetch(`/api/products`);
+      const response = await fetch('http://localhost:8080/api/products')
+      const json = await response.json(); // array of objects
+      console.log(json)
+
+      if (response.ok) {
+        setItems(json);
+      }
+    };
+
+    fetchItems();
+  }, []);
 
   const addToCart = (item) => {
     if (cart.map((cartItem) => cartItem[0]).includes(item)) {
@@ -44,9 +61,14 @@ const Shop = () => {
         <Navbar />
         <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 px-2 bg-white">
         {items.map((item) => (
-          <Link key={item.id} to={`/ItemDetails/${item.id}`}>  {/*{`/item/${item.id}`}*/}
+
+          // correct implementation of Link and the to prop with its state property
+          // I have no idea why ItemDetails refuses to recieve the state as anything
+          // other than "null", will keep in case we can fix later since this would be
+          // better than just making a GET request for each individal item for their page
+          <Link key={item._id} to={{pathname: `/ItemDetails/${item._id}`, state: item}}>
           <Item
-            key={item.id}
+            key={item._id}
             name={item.name}
             cost={item.cost}
             pic={item.image}
