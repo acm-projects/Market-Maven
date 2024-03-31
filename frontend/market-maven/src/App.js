@@ -19,7 +19,7 @@ function App() {
 
   return (
     <>
-      <div className="container">
+      <div className="">
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/Shop" element={<Shop />} />
