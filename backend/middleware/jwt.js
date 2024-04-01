@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const verifyJWT = (req, res, next) => {
 
     // check auth header for access token
-    const authHeader =req.headers.authorization || req.headers.Authorization
+    const authHeader = req.headers.authorization || req.headers.Authorization
     if (!authheader?.startsWith('Bearer ')) {
         return res.status(401).json({ message: 'Unauthorized'})
     }
@@ -21,6 +21,9 @@ const verifyJWT = (req, res, next) => {
         // validate user
         req.user = decoded.UserInfo.username;
         req.roles = decoded.UserInfo.roles;
+
+        // handle authorization needs from here on
+
         next();
     })
 }

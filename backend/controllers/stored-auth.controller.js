@@ -53,16 +53,17 @@ const login = async (req, res) => {
         { expiresIn: '1d' }
     )
 
-    // generate secure cookie (probably don't need refesh tokens ?)
-    // === set secure to true if an when deployed so it only uses https ===
-    res.cookie('jwt', refreshToken, {
-        httpOnly: true,     // only accessible by web-server
-        secure: false,      // use HTTPS protocol, *** set false for dev ***
-        sameSite: 'None', 
-        maxAge: 1000 * 60 * 60 * 24     // lifetime measured in ms
-    })
+    // CURRENT SOLUTION: store both tokens locally from response instead
 
-    res.json({ accessToken, email, username: foundUser.username })
+    // === set secure to true if an when deployed so it only uses https ===
+    // res.cookie('jwt', refreshToken, {
+    //     httpOnly: true,     // only accessible by web-server
+    //     secure: false,      // use HTTPS protocol, *** set false for dev ***
+    //     sameSite: 'None', 
+    //     maxAge: 1000 * 60 * 60 * 24     // lifetime measured in ms
+    // })
+
+    res.json({ accessToken, refreshToken, email, username: foundUser.username })
     
 }
 
@@ -166,17 +167,18 @@ const signup = async (req, res) => {
         { expiresIn: '1d' }
     )
 
-    // generate secure cookie
-    res.cookie('jwt', refreshToken, {
-        httpOnly: true,     // only accessible by web-server
-        secure: true,       // use HTTPS protocol
-        sameSite: 'strict', // only communicable to the server that generated the token
-        maxAge: 1000 * 60 * 60 * 24 * 7     // lifetime measured in ms
-    })
+    // CURRENT SOLUTION: store both tokens locally from response instead
+    
+    // === set secure to true if an when deployed so it only uses https ===
+    // res.cookie('jwt', refreshToken, {
+    //     httpOnly: true,     // only accessible by web-server
+    //     secure: false,      // use HTTPS protocol, *** set false for dev ***
+    //     sameSite: 'None', 
+    //     maxAge: 1000 * 60 * 60 * 24     // lifetime measured in ms
+    // })
 
     // send access token 
-    res.json({ accessToken, email, username })
-    
+    res.json({ accessToken, refreshToken, email, username: foundUser.username })
 
 }
 
@@ -190,20 +192,23 @@ const signup = async (req, res) => {
 const logout = (req, res) => {
 
     // extract JWT from cookies
-    const cookies = req.cookies
+    // const cookies = req.cookies
 
     try {
 
-        // log out request has no JWT
-        if (!cookies?.jwt) return res.sendStatus(204)
 
-        // succesfully log out
-        res.clearCookie('jwt', {
-            httpOnly: true,     // only accessible by web-server
-            secure: true,       // use HTTPS protocol
-            sameSite: 'strict'  // only communicable to the server that generated the token
-        })
-        res.json({ message: 'User has been succesfully logged out'})
+        // code below not to be used unless cookies are figured out
+
+        // log out request has no JWT
+        // if (!cookies?.jwt) return res.sendStatus(204)
+
+        // // succesfully log out
+        // res.clearCookie('jwt', {
+        //     httpOnly: true,     // only accessible by web-server
+        //     secure: true,       // use HTTPS protocol
+        //     sameSite: 'strict'  // only communicable to the server that generated the token
+        // })
+        // res.json({ message: 'User has been succesfully logged out'})
 
     } catch (err) {
         res.status(500).json({ message: 'Internal Server Error', error: err});
