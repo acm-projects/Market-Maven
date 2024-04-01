@@ -1,17 +1,25 @@
 import { Link, useMatch, useResolvedPath } from  "react-router-dom"
 import "./Navbar.css"
 import Cart from "../Components/Cart"
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 
 export default function Navbar(){
-    return(<nav className="Navbar">
+    return(<nav className="Navbar flex flex-wrap">
         <Link to="/" className="site-title">Market Maven</Link>
-        <ul >
+        <ul className="flex flex-wrap">
             <CustomLink to="/Shop">Shop</CustomLink>
             <CustomLink to="/page2">Page 2</CustomLink>
             <CustomLink to="/page3">Page 3</CustomLink>
         </ul>
-        <Link to="/CartPage"><Cart /></Link>
+        <ul className="flex flex-wrap">
+            <Link to="/CartPage"><Cart /></Link>
 
+            {/* make this conditional to user being logged in
+                logged in: shows log out profile and log out button
+                logged out: shows only the profile button
+            */}
+            <Link to="/login"><AccountCircleOutlinedIcon /></Link>
+        </ul>
     </nav>
 )}
 
