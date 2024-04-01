@@ -16,7 +16,7 @@ export const GoogleLoginButton = () => {
 
 
                 // add some control structure or state that can choose btween the login and signup routes
-                const response = axios.post("http://localhost:8080/api/auth/google-oauth/login", { token: googleAuthRes.access_token})
+                const response = axios.post("http://localhost:8080/api/auth/google-oauth/login", { googleToken: googleAuthRes.access_token})
 
                 // handle JWT access and/or refresh tokens
 
@@ -37,7 +37,7 @@ export const GoogleLoginButton = () => {
     return (
 
         // Google OAuth button
-        <button id="google-login-button" className="m-3" onClick={() => handleLogin()}><img src="/web_light_rd_ctn@4x.png" className="max-h-[50px]"/></button>
+        <button id="google-login-button" className="m-3 flex justify-center" onClick={() => handleLogin()}><img src="/web_light_rd_ctn@4x.png" className="max-w-[240px]"/></button>
     ); 
 
 }
