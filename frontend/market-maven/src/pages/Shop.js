@@ -8,7 +8,7 @@ import Navbar from '../Components/Navbar';
 import axios from 'axios';
 
 const Shop = () => {
-  const [items, setItems] = useState(data);
+  const [items, setItems] = useState([]);
   const [cart, setCart] = useState([]);
 
   useEffect(() => {
@@ -55,6 +55,31 @@ const Shop = () => {
     );
   };
 
+  const [selectedItem, setSelectedItem] = useState([]);
+  const handleItemClick = (item) => {
+    setSelectedItem(item);
+  };
+
+  // render shop items
+  const renderShopItems = () => {
+    return items.map((item) => (
+      <Link key={item._id} to={`/ItemDetails/${item._id}`} state={item} >
+        <p onClick={() => handleItemClick(item)}>{item.name}</p>
+        <Item
+          key={item._id}
+          name={item.productTitle}
+          price={item.price}
+          image={item.image}
+          description={item.description}
+          quantitiy={item.stock}
+          addToCart={addToCart}
+          items={items}
+          setItems={setItems}
+        />
+      </Link>
+    ))
+  }
+
   return (
     <>
       <div>
@@ -99,13 +124,3 @@ const Shop = () => {
 };
 
 export default Shop;
-
-{/*import Navbar from "../Components/Navbar"
-export default function Page1(){
-    return(
-    <div>
-        <Navbar />
-        <h1>Page 1</h1>
-    </div>
-    )
-}*/}
