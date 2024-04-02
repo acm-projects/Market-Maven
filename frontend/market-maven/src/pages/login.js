@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./login.css"
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'
@@ -17,6 +17,12 @@ export const Login = () => {
     })
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+
+        // logic to redirect out of page if logged in or render if not
+
+    }, [])
 
     // TO-DO: properly store the credentials and access token
     // CURRENT SOLUTION: local storage
