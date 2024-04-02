@@ -17,7 +17,7 @@ body {
 }
 
 .Landing-Page {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) ,url("..\\..\\market-maven\\public\\anastasia-saldatava-5feMqpVOc-s-unsplash.jpg")  ;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) , url("anastasia-saldatava-5feMqpVOc-s-unsplash.jpg");
     background-size: cover  ;
     background-position: center  ;
     padding-left: 1rem;
