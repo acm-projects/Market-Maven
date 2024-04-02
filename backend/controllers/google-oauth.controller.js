@@ -2,8 +2,8 @@ const User = require('../models/user.model')
 const jwt = require('jsonwebtoken')
 const { OAuth2Client } = require('google-auth-library')
 
-// sync handling middleware
-const asyncHandler = require('express-async-handler')
+// google oauth middleware
+const googleOauthHandler = require('../middleware/googleOAuthHandler')
 
 /**
  * Will most likely share / call on code from the stored-auth controller
@@ -15,10 +15,12 @@ const asyncHandler = require('express-async-handler')
  * @route POST /api/auth/stored-auth
  * @access Public
  */
-const login = asyncHandler(async (req, res) => {
+const login = async (req, res) => {
 
+    // extract userDetails from Google
+    await googleOauthHandler.handleImplicitFlow(req, res);
     
-})
+}
 
 /**
  * 
@@ -38,10 +40,13 @@ const refresh = (req, res) => {
  * @access Public
 */
 
-const signup = asyncHandler(async (req, res) => {
+const signup = async (req, res) => {
+
+    // extract userDetails from Google
+    await googleOauthHandler.handleImplicitFlow(req, res);
 
     
-})
+}
 
 /**
  * 
@@ -50,8 +55,39 @@ const signup = asyncHandler(async (req, res) => {
  * @access Public
  */
 
-const logout = (req, res) => {
+// === mostly used Google's own OAuth documentation ===
+const logout = async (req, res) => {
 
+    try {
+
+        const postData = "token=" + req.body.googleToken;
+    
+        // Options for POST request to Google's OAuth 2.0 server to revoke a token
+        const postOptions = {
+          method: 'POST',
+          url: 'https://oauth2.googleapis.com/revoke',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Length': Buffer.byteLength(postData)
+          },
+          data: postData
+        };
+    
+        // Make the POST request using Axios
+        const response = await axios(postOptions);
+    
+        // Handle response
+        console.log('Response:', response.data);
+        res.status(response.status).json(response.data);
+
+      } catch (error) {
+
+        // Handle errors
+        console.error('Error:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+      }
+
+      // need to handle Market Maven tokens as well
 
 }
 
