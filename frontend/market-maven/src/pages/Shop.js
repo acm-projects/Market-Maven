@@ -8,6 +8,8 @@ import Navbar from '../Components/Navbar';
 import axios from 'axios';
 
 const Shop = () => {
+
+  //fix
   const [items, setItems] = useState(data);
   const [cart, setCart] = useState([]);
 
