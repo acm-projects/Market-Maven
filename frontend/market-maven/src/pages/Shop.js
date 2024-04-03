@@ -21,7 +21,7 @@ const Shop = () => {
       if (response.ok) {
         setItems(json);
       }
-    };
+      };
 
     fetchItems();
   }, []);
