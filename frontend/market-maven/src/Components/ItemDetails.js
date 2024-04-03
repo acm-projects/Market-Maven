@@ -11,12 +11,12 @@ const ItemDetails = () => {
 
   // useEffect executse on component mount (no compile errors)
   useEffect(() => {
-
+    console.log('useEffect Item Details');
     // GET request to fetch the single product
     const fetchProduct = async () => {
       const res = await axios.get(`http://localhost:8080/api/products/${params.id}`);
       console.log(res.data)
-
+      
       setItem(res.data);
     };
 
@@ -34,16 +34,17 @@ const ItemDetails = () => {
       <div className="grid grid-cols-2 bg-white">
         <div className="object-left h-[600px] w-[600px] bg-white">
           {/* Render item image */}
-          <img src={item.pic} alt={item.name} />
+          <img src={item.image} alt={item.productTitle} />
         </div>
         <div className="">
-          <h1 className="text-center text-black">{item.name}</h1>
-          <h2>{item.cost}</h2>
-          <p className="my-4">{item.description}</p>
+          <h1 className="text-center text-black">{item.productTitle}</h1>
+          <h2>Price: {item.price}</h2>
+          <h2>Stock: {item.stock}</h2>
+          <p className="my-4">Description: {item.description}</p>
 
           {/* Render Add to Cart button */}
           <button
-            onClick={() => handleClick(item.name, item.quantity)}
+            onClick={() => handleClick(item.productTitle, item.stock)}
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           >
             Add to Cart
