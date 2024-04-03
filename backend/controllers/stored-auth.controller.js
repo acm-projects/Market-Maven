@@ -2,8 +2,6 @@ const User = require('../models/user.model')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
-// sync handling middleware
-const asyncHandler = require('express-async-handler')
 
 /**
  * As of 3/10, most of this logic will be based on the Dave Gray 
@@ -17,7 +15,7 @@ const asyncHandler = require('express-async-handler')
  * @route POST /api/auth/stored-auth/login
  * @access Public
  */
-const login = asyncHandler(async (req, res) => {
+const login = async (req, res) => {
 
     const { email, password } = req.body
 
@@ -26,9 +24,7 @@ const login = asyncHandler(async (req, res) => {
 
     // user not found
     const foundUser = await User.findOne({ email }).exec()
-    if (!foundUser) {
-        return res.status(401).json({ message: 'Invalid credentials' })
-    }
+    if (!foundUser) return res.status(401).json({ message: 'Invalid credentials' })
 
     // password is invalid
     const match = await bcrypt.compare(password, foundUser.password)
@@ -57,18 +53,19 @@ const login = asyncHandler(async (req, res) => {
         { expiresIn: '1d' }
     )
 
-    // generate secure cookie
-    res.cookie('jwt', refreshToken, {
-        httpOnly: true,     // only accessible by web-server
-        secure: true,       // use HTTPS protocol
-        sameSite: 'strict', // only communicable to the server that generated the token
-        maxAge: 1000 * 60 * 60 * 24 * 7     // lifetime measured in ms
-    })
+    // CURRENT SOLUTION: store both tokens locally from response instead
 
-    // send access token 
-    res.json({ accessToken, email, username: foundUser.username })
+    // === set secure to true if an when deployed so it only uses https ===
+    // res.cookie('jwt', refreshToken, {
+    //     httpOnly: true,     // only accessible by web-server
+    //     secure: false,      // use HTTPS protocol, *** set false for dev ***
+    //     sameSite: 'None', 
+    //     maxAge: 1000 * 60 * 60 * 24     // lifetime measured in ms
+    // })
+
+    res.json({ accessToken, refreshToken, email, username: foundUser.username })
     
-})
+}
 
 /** === STILL NEEDS TO BE TESTED ===
  * 
@@ -126,7 +123,7 @@ const refresh = (req, res) => {
  * @access Public
 */
 
-const signup = asyncHandler(async (req, res) => {
+const signup = async (req, res) => {
 
     const { username, email, password } = req.body
 
@@ -170,19 +167,20 @@ const signup = asyncHandler(async (req, res) => {
         { expiresIn: '1d' }
     )
 
-    // generate secure cookie
-    res.cookie('jwt', refreshToken, {
-        httpOnly: true,     // only accessible by web-server
-        secure: true,       // use HTTPS protocol
-        sameSite: 'strict', // only communicable to the server that generated the token
-        maxAge: 1000 * 60 * 60 * 24 * 7     // lifetime measured in ms
-    })
+    // CURRENT SOLUTION: store both tokens locally from response instead
+    
+    // === set secure to true if an when deployed so it only uses https ===
+    // res.cookie('jwt', refreshToken, {
+    //     httpOnly: true,     // only accessible by web-server
+    //     secure: false,      // use HTTPS protocol, *** set false for dev ***
+    //     sameSite: 'None', 
+    //     maxAge: 1000 * 60 * 60 * 24     // lifetime measured in ms
+    // })
 
     // send access token 
-    res.json({ accessToken, email, username })
-    
+    res.json({ accessToken, refreshToken, email, username: foundUser.username })
 
-})
+}
 
 /**
  * 
@@ -194,20 +192,23 @@ const signup = asyncHandler(async (req, res) => {
 const logout = (req, res) => {
 
     // extract JWT from cookies
-    const cookies = req.cookies
+    // const cookies = req.cookies
 
     try {
 
-        // log out request has no JWT
-        if (!cookies?.jwt) return res.sendStatus(204)
 
-        // succesfully log out
-        res.clearCookie('jwt', {
-            httpOnly: true,     // only accessible by web-server
-            secure: true,       // use HTTPS protocol
-            sameSite: 'strict'  // only communicable to the server that generated the token
-        })
-        res.json({ message: 'User has been succesfully logged out'})
+        // code below not to be used unless cookies are figured out
+
+        // log out request has no JWT
+        // if (!cookies?.jwt) return res.sendStatus(204)
+
+        // // succesfully log out
+        // res.clearCookie('jwt', {
+        //     httpOnly: true,     // only accessible by web-server
+        //     secure: true,       // use HTTPS protocol
+        //     sameSite: 'strict'  // only communicable to the server that generated the token
+        // })
+        // res.json({ message: 'User has been succesfully logged out'})
 
     } catch (err) {
         res.status(500).json({ message: 'Internal Server Error', error: err});

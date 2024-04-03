@@ -12,13 +12,14 @@ import CartPage from "./Components/Cart";
 function App() {
   const [currentForm, setCurrentForm] = useState("login");
 
+  // what will / is this used for?
   const toggleForm = (formName) => {
     setCurrentForm(formName);
   }
 
   return (
     <>
-      <div className="container">
+      <div className="">
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/Shop" element={<Shop />} />

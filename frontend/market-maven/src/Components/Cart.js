@@ -3,6 +3,8 @@ import { Link, useMatch, useResolvedPath } from  "react-router-dom"
 import { Badge } from "@mui/material";
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 
+
+// this could honestly just be kept within Navbar instead of as its own component
 export default function Cart(){
     return(
         <>
