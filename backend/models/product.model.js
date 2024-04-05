@@ -10,6 +10,7 @@ const productSchema = new Schema({
     price: { type: Number, required: true },
     stock: {type: Number, requiered: true, min: 0, },
     zip: { type: Number },
+    image: { type: String } 
 }, {timestamps: true})
 
 //export Product

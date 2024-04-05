@@ -8,22 +8,19 @@ import Navbar from '../Components/Navbar';
 import axios from 'axios';
 
 const Shop = () => {
-
-  //fix
-  const [items, setItems] = useState(data);
+  const [items, setItems] = useState([]);
   const [cart, setCart] = useState([]);
 
   useEffect(() => {
     const fetchItems = async () => {
-      // const response = await fetch(`/api/products`);
-      const response = await fetch('http://localhost:8080/api/products')
-      const json = await response.json(); // array of objects
-      console.log(json)
-
-      if (response.ok) {
+      try {
+        const response = await fetch(`http://localhost:8080/api/products`)
+        const json = await response.json(); // array of objects
         setItems(json);
+      } catch (error) {
+        console.error("Error fetching items:", error);
       }
-    };
+      };
 
     fetchItems();
   }, []);
@@ -57,32 +54,41 @@ const Shop = () => {
     );
   };
 
+  const [selectedItem, setSelectedItem] = useState([]);
+  const handleItemClick = (item) => {
+    setSelectedItem(item);
+  };
+
+  // render shop items
+  const renderShopItems = () => {
+    {items.map((item) => (
+      // correct implementation of Link and the to prop with its state property
+      // I have no idea why ItemDetails refuses to recieve the state as anything
+      // other than "null", will keep in case we can fix later since this would be
+      // better than just making a GET request for each individal item for their page
+      <Link key={item._id} to={{pathname: `/ItemDetails/${item._id}`, state: item}}>
+      <Item
+        key={item._id}
+        name={item.productTitle}
+        cost={item.price}
+        pic={item.image}
+        description={item.description}
+        quantitiy={item.quantity}
+        addToCart={addToCart}
+        items={items}
+        setItems={setItems}
+        
+      />
+      </Link>
+    ))}
+  }
+
   return (
     <>
       <div>
         <Navbar />
         <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 px-2 bg-white">
-        {items.map((item) => (
-
-          // correct implementation of Link and the to prop with its state property
-          // I have no idea why ItemDetails refuses to recieve the state as anything
-          // other than "null", will keep in case we can fix later since this would be
-          // better than just making a GET request for each individal item for their page
-          <Link key={item._id} to={{pathname: `/ItemDetails/${item._id}`, state: item}}>
-          <Item
-            key={item._id}
-            name={item.name}
-            cost={item.cost}
-            pic={item.image}
-            description={item.description}
-            quantitiy={item.quantity}
-            addToCart={addToCart}
-            items={items}
-            setItems={setItems}
-            
-          />
-          </Link>
-        ))}
+        {renderShopItems()}
         </div>
       </div>
       <div>
@@ -101,13 +107,3 @@ const Shop = () => {
 };
 
 export default Shop;
-
-{/*import Navbar from "../Components/Navbar"
-export default function Page1(){
-    return(
-    <div>
-        <Navbar />
-        <h1>Page 1</h1>
-    </div>
-    )
-}*/}
