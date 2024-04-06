@@ -1,16 +1,34 @@
+import { useState } from 'react'
 import { Link, useMatch, useResolvedPath } from  "react-router-dom"
 import "./Navbar.css"
 import Cart from "../Components/Cart"
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 
-export default function Navbar(){
-    return(<nav className="Navbar flex flex-wrap">
+export default function Navbar() {
+
+    const [search, setSearch] = useState("")
+    const [zip, setZip] = useState("")
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+
+        // refresh both Zip and search query?
+
+    }
+
+    return(<nav className="Navbar flex flex-row items-center sm:bg-[#000000]">
         <Link to="/" className="site-title">Market Maven</Link>
-        <ul className="flex flex-wrap">
+        <form className="flex flex-row w-1/2" onSubmit={handleSearch}>
+            <input className="ml-2 p-4 w-4/5 bg-[#f0f0f0]" type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search" id="search" name="search" />
+            <input className="ml-2 p-4 w-1/5 bg-[#f0f0f0]" type="text" value={zip} onChange={(e) => setZip(e.target.value)} placeholder="ZIP" id="zip" name="zip"/>
+            <button className="mx-4" type="submit"><SearchOutlinedIcon /></button>
+        </form>
+        {/* <ul className="flex flex-wrap">
             <CustomLink to="/Shop">Shop</CustomLink>
             <CustomLink to="/page2">Page 2</CustomLink>
             <CustomLink to="/page3">Page 3</CustomLink>
-        </ul>
+        </ul> */}
         <ul className="flex flex-wrap">
             <Link to="/CartPage"><Cart /></Link>
 
