@@ -43,7 +43,7 @@ const createProduct = async (req, res) => {
     const {productTitle, vendor, productReviews, category, description, price, stock, zip, image} = req.body
 
     try { // add doc to db
-        const product = await Product.create({productTitle, vendor, productReviews, category, description, price, stock, zip});
+        const product = await Product.create({productTitle, vendor, productReviews, category, description, price, stock, zip, image});
         res.status(200).json(product);
     } catch (error){
         res.status(400).json({error: error.message})
