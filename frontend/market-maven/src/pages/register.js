@@ -52,7 +52,7 @@ export const Register = (props) => {
                         <div className="flex w-full justify-between m-3 justify-center">
                             <button className="border-none bg-none text-center hover:underline" onClick={() => navigate('/login')}>Already have an account?</button>
                         </div>
-                        <button className="border-none bg-login-button text-white text-md font-regular w-[240px] h-[50px] rounded-full " type="submit">Sign Up</button>
+                        <button className="border-none bg-[#472836] text-white text-md font-regular w-[240px] h-[50px] rounded-full " type="submit">Sign Up</button>
                         {/* <div className="auth-form-container">
                             <form onSubmit={handleSubmit}>
                                 <label htmlFor="name">Full name</label>
