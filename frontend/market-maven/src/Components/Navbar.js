@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { Link, useMatch, useResolvedPath } from  "react-router-dom"
+import { useState } from "react";
+import { Link, useMatch, useResolvedPath, useNavigate } from "react-router-dom"
 import "./Navbar.css"
 import Cart from "../Components/Cart"
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
@@ -29,24 +29,26 @@ export default function Navbar() {
             <CustomLink to="/page2">Page 2</CustomLink>
             <CustomLink to="/page3">Page 3</CustomLink>
         </ul> */}
-        <ul className="flex flex-wrap">
-            <Link to="/CartPage"><Cart /></Link>
+            <ul className="flex flex-wrap justify-between justify-center w-full md:w-auto">
+                <Link to="/Shop">Browse</Link>
+                <Link to="/CartPage"><Cart /></Link>
 
-            {/* make this conditional to user being logged in
+                {/* make this conditional to user being logged in
                 logged in: shows log out profile and log out button
                 logged out: shows only the profile button
             */}
-            <Link to="/login"><AccountCircleOutlinedIcon /></Link>
-        </ul>
-    </nav>
-)}
+                <Link to="/login"><AccountCircleOutlinedIcon /></Link>
+            </ul>
+        </nav>
+    )
+}
 
-function CustomLink({to, children, ...props}){
+function CustomLink({ to, children, ...props }) {
     const resolvedPath = useResolvedPath(to)
     const isActive = useMatch({ path: resolvedPath.pathname, end: true })
-    return(
+    return (
         <li className={isActive ? "active" : ""}>
-            <Link to ={to} {...props}>
+            <Link to={to} {...props}>
                 {children}
             </Link>
         </li>

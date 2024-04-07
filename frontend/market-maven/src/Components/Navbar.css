@@ -5,7 +5,7 @@
     justify-content: space-between;
     align-items: stretch;
     gap: 1.5rem;
-    padding: 2rem;
+    /* padding: 2rem; */
 
     font-family: "Archivo", sans-serif;
     font-optical-sizing: auto;

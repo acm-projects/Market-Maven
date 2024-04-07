@@ -1,24 +1,31 @@
-import React from 'react';
+import React from "react";
 import { useEffect, useState } from "react";
-import { Link } from 'react-router-dom';
-import data from './data.json'
-import Item from '../Components/Item';
-import Navbar from '../Components/Navbar';
+import { Link, useLocation } from "react-router-dom";
+import data from "./data.json";
+import Item from "../Components/Item";
+import Navbar from "../Components/Navbar";
 
-import axios from 'axios';
+import axios from "axios";
 
 const Shop = () => {
+
+  const location = useLocation();
+
   const [items, setItems] = useState([]);
   const [cart, setCart] = useState([]);
 
+  const search = new URLSearchParams(location.search).get('searchQuery');
+  const zip = new URLSearchParams(location.search).get('zip');
+
   useEffect(() => {
     const fetchItems = async () => {
-      try {
-        const response = await fetch(`http://localhost:8080/api/products`)
-        const json = await response.json(); // array of objects
+      // const response = await fetch(`/api/products`);
+      const response = await fetch(`/api/products`);
+      const json = await response.json(); // array of objects
+      console.log(json);
+      
+      if (response.ok) {
         setItems(json);
-      } catch (error) {
-        console.error("Error fetching items:", error);
       }
       };
 
@@ -59,36 +66,29 @@ const Shop = () => {
     setSelectedItem(item);
   };
 
-  // render shop items
-  const renderShopItems = () => {
-    {items.map((item) => (
-      // correct implementation of Link and the to prop with its state property
-      // I have no idea why ItemDetails refuses to recieve the state as anything
-      // other than "null", will keep in case we can fix later since this would be
-      // better than just making a GET request for each individal item for their page
-      <Link key={item._id} to={{pathname: `/ItemDetails/${item._id}`, state: item}}>
-      <Item
-        key={item._id}
-        name={item.productTitle}
-        cost={item.price}
-        pic={item.image}
-        description={item.description}
-        quantitiy={item.quantity}
-        addToCart={addToCart}
-        items={items}
-        setItems={setItems}
-        
-      />
-      </Link>
-    ))}
-  }
-
   return (
     <>
       <div>
         <Navbar />
         <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 px-2 bg-white">
-        {renderShopItems()}
+          {items.map((item) => (
+            <Link
+              key={item._id}
+              to={{ pathname: `/ItemDetails/${item._id}`, state: item }}
+            >
+              <Item
+                key={item._id}
+                name={item.productTitle}
+                cost={item.price}
+                image={item.image}
+                description={item.description}
+                quantitiy={item.stock}
+                addToCart={addToCart}
+                items={items}
+                setItems={setItems}
+              />
+            </Link>
+          ))}
         </div>
       </div>
       <div>
