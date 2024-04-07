@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import data from "./data.json";
 import Item from "../Components/Item";
 import Navbar from "../Components/Navbar";
@@ -8,8 +8,14 @@ import Navbar from "../Components/Navbar";
 import axios from "axios";
 
 const Shop = () => {
+
+  const location = useLocation();
+
   const [items, setItems] = useState([]);
   const [cart, setCart] = useState([]);
+
+  const search = new URLSearchParams(location.search).get('searchQuery');
+  const zip = new URLSearchParams(location.search).get('zip');
 
   useEffect(() => {
     const fetchItems = async () => {
