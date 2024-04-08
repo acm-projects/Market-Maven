@@ -13,7 +13,12 @@
 }
 
 
-.flex {
+.bg-login-button {
+    background-color: #472836;
+}
+
+
+/* .flex {
     display: flex; 
 }
 
@@ -80,10 +85,6 @@
     background-color: rgba(0, 0, 0, 0);
 }
 
-.bg-login-button {
-    background-color: #472836;
-}
-
 .text-white {
     color: white;
 }
@@ -129,4 +130,4 @@
 }
 .items-center {
     align-items: center;
-}
+} */
