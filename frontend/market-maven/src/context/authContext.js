@@ -4,7 +4,7 @@ export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
     const [accessToken, setAccessToken] = useState(null)
-    const [refresh, setRefreshToken] = useState(null)
+    const [refreshToken, setRefreshToken] = useState(null)
     const [user, setUser] = useState(null)
 
     const [loading, setLoading] = useState(true)
