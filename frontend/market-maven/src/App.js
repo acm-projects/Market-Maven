@@ -8,6 +8,7 @@ import { Route, Routes } from "react-router-dom";
 import Shop from "./pages/Shop";
 import ItemDetails from "./Components/ItemDetails";
 import CartPage from "./Components/Cart";
+import { AuthContextProvider } from "./context/authContext";
 
 function App() {
   const [currentForm, setCurrentForm] = useState("login");
@@ -20,17 +21,19 @@ function App() {
   return (
     <>
       <div className="">
-        <Routes>
-          <Route path="/" element={<Landing />} />
-          <Route path="/Shop" element={<Shop />} />
-          <Route path="/page2" element={<Page2 />} />
-          <Route path="/page3" element={<Page3 />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/ItemDetails" element={<ItemDetails />} />
-          <Route path="/ItemDetails/:id" element={<ItemDetails/>} />
-          <Route path="/CartPage" element={<CartPage />} />
-        </Routes>
+        <AuthContextProvider>
+          <Routes>
+            <Route path="/" element={<Landing />} />
+            <Route path="/Shop" element={<Shop />} />
+            <Route path="/page2" element={<Page2 />} />
+            <Route path="/page3" element={<Page3 />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/ItemDetails" element={<ItemDetails />} />
+            <Route path="/ItemDetails/:id" element={<ItemDetails />} />
+            <Route path="/CartPage" element={<CartPage />} />
+          </Routes>
+        </AuthContextProvider>
       </div>
     </>
   );

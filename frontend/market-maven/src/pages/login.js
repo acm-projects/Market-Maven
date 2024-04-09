@@ -61,9 +61,9 @@ export const Login = () => {
                         <input className="mb-3 p-3 border border-black rounded-full w-full text-md" type="password" value={cred.password} onChange={(e) => setCred({ ...cred, password: e.target.value })} placeholder="Password" id="password" name="password" />
                         <div className="flex w-full justify-between m-3">
                             <button className="border-none bg-none hover:underline" onClick={() => navigate('/register')}>Sign Up</button>
-                            <button className="border-none bg-none hover:underline" type="submit">Forgot password?</button>
+                            <button className="border-none bg-none hover:underline" /*onClick={() => navigate('/')}*/>Forgot password?</button>
                         </div>
-                        <button className="border-none bg-login-button text-white text-md font-regular w-[240px] h-[50px] rounded-full " type="submit">Login</button>
+                        <button className="border-none bg-[#472836] text-white text-md font-regular w-[240px] h-[50px] rounded-full " type="submit">Login</button>
                     </form>
 
                     <div className="m-8 grid justify-center">
