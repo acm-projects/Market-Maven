@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./App.css"
 import Landing from "./pages/landingpage";
 import Page2 from "./pages/page2";
 import Page3 from "./pages/page3";
@@ -8,6 +9,10 @@ import { Route, Routes } from "react-router-dom";
 import Shop from "./pages/Shop";
 import ItemDetails from "./Components/ItemDetails";
 import CartPage from "./Components/Cart";
+import Profile from "./pages/profile";
+import Nav from "./Components/chatNav";
+import Chat from "./pages/chat";
+import Searchpage from "./pages/searchpage";
 
 function App() {
   const [currentForm, setCurrentForm] = useState("login");
@@ -29,6 +34,9 @@ function App() {
           <Route path="/ItemDetails" element={<ItemDetails />} />
           <Route path="/ItemDetails/:id" element={<ItemDetails/>} />
           <Route path="/CartPage" element={<CartPage />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/chat" element={<Chat />} />
+          <Route path="/searchpage" element={<Searchpage />} />
         </Routes>
       </div>
     </>
