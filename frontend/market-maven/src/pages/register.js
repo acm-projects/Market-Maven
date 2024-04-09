@@ -3,6 +3,8 @@ import "./register.css"
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+import { useAuthContext } from "../hooks/useAuthContext";
+
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { GoogleLoginButton } from "../Components/GoogleLoginButton";
 
@@ -10,6 +12,8 @@ const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID
 
 // Maybe this and the login screen could be refactored to be one page ?
 export const Register = (props) => {
+
+    const { setAccessToken, setRefreshToken, setUser } = useAuthContext();
 
     const [cred, setCred] = useState({
         email: '',
@@ -27,6 +31,10 @@ export const Register = (props) => {
         await axios.post('http://localhost:8080/api/auth/stored-auth/signup', { email, username, password })
             .then((res) =>{
                 setCred({ email: "", username: "", password: ""})
+
+                setAccessToken(res.data.accessToken)
+                setRefreshToken(res.data.refreshToken)
+                setUser(res.data.username)
 
                 localStorage.setItem("accessToken", res.data.accessToken)
                 localStorage.setItem("refreshToken", res.data.refreshToken)
