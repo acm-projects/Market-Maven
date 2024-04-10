@@ -39,7 +39,7 @@ export const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/
+        const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
         const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/
         const { email, password } = cred;
 
@@ -72,7 +72,7 @@ export const Login = () => {
     const renderErrorMessage = () => {
         if (emailError) {
             return (
-                <div className="flex flex-row mr-2">
+                <div className="flex flex-row mb-2 text-red-700 w-64">
                     <ErrorOutlinedIcon />
                     <h2>Invalid email address</h2>
                 </div>
@@ -101,7 +101,7 @@ export const Login = () => {
                     <h2 className="m-2 text-center">Log back in to continue searching for locally sourced products!</h2>
                 </div>
                 <div className="flex flex-col justify-center items-center">
-                    {renderErrorMessage}
+                    {renderErrorMessage()}
                     <form className="w-64 text-center flex flex-col items-center justify-center" onSubmit={handleSubmit}>
                         <input className="mb-3 p-3 border border-black rounded-full w-full text-md" type="email" value={cred.email} onChange={(e) => setCred({ ...cred, email: e.target.value })} placeholder="Email" id="email" name="email" />
                         <input className="mb-3 p-3 border border-black rounded-full w-full text-md" type="password" value={cred.password} onChange={(e) => setCred({ ...cred, password: e.target.value })} placeholder="Password" id="password" name="password" />

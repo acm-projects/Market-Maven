@@ -3,12 +3,17 @@ import { Link, useMatch, useResolvedPath, useNavigate } from "react-router-dom"
 import "./Navbar.css"
 // import Cart from "../Components/Cart"
 
+import { useUserContext } from "../hooks/useUserContext";
+
 import { Badge } from "@mui/material";
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 
 export default function Navbar() {
+
+    // destructure out attributes of user context
+    const {} = useUserContext();
 
     const [search, setSearch] = useState("")
     const [zip, setZip] = useState("")

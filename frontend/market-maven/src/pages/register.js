@@ -35,14 +35,16 @@ export const Register = (props) => {
 
         // regex check for valid email address
         // regex check for valid password: at least one number, at least one special char, is 8 chars long
-        const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/
+        const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
         const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/
         const { email, username, password } = cred;
 
         // credential validation
         setEmailError(!(emailRegex.test(email)))
-        setPasswordError(!(passwordRegex.test(password)))
+        setPasswordError(!(passwordRegex.test(password) & password.trim().length > 0))
         setUsernameError(username.trim().length < 3)
+
+        console.log(emailError, usernameError, passwordError)
 
         if (!(usernameError || emailError || passwordError)) {
             await axios.post('http://localhost:8080/api/auth/stored-auth/signup', { email, username, password })
@@ -67,7 +69,7 @@ export const Register = (props) => {
 
         if (usernameError) {
             return (
-                <div className="flex flex-row mr-2">
+                <div className="flex flex-row mb-2 text-red-700 w-64">
                     <ErrorOutlinedIcon />
                     <h2>Please fill out a username</h2>
                 </div>
@@ -75,7 +77,7 @@ export const Register = (props) => {
         }
         else if (emailError) {
             return (
-                <div className="flex flex-row mr-2">
+                <div className="flex flex-row mb-2 text-red-700 w-64">
                     <ErrorOutlinedIcon />
                     <h2>Invalid email address</h2>
                 </div>
@@ -83,9 +85,9 @@ export const Register = (props) => {
         }
         else if (passwordError) {
             return (
-                <div className="flex flex-row mr-2">
+                <div className="flex flex-row mb-2 text-red-700 w-64">
                     <ErrorOutlinedIcon />
-                    <h2>Password must contain one number, one special character, and must be eight characters long</h2>
+                    <h2>Password must contain one number, one special character, and be eight characters long</h2>
                 </div>
             )
         }
@@ -101,7 +103,7 @@ export const Register = (props) => {
                     <h2 className="m-2 text-center">Sign up for an account and join the community!</h2>
                 </div>
                 <div className="flex flex-col justify-center items-center">
-                    {renderErrorMessage}
+                    {renderErrorMessage()}
                     <form className="w-64 text-center flex flex-col items-center justify-center" onSubmit={handleSubmit}>
                         <input className="mb-3 p-3 border border-black rounded-full w-64 text-md" type="text" value={cred.username} onChange={(e) => setCred({ ...cred, username: e.target.value })} placeholder="Username" id="username" name="username" />
                         <input className="mb-3 p-3 border border-black rounded-full w-64 text-md" type="email" value={cred.email} onChange={(e) => setCred({ ...cred, email: e.target.value })} placeholder="Email" id="email" name="email" />
