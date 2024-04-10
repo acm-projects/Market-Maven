@@ -7,10 +7,12 @@ import { useAuthContext } from "../hooks/useAuthContext";
 
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { GoogleLoginButton } from "../Components/GoogleLoginButton";
+import ErrorOutlinedIcon from '@mui/icons-material/ErrorOutlined';
 
 const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID
 
 // Maybe this and the login screen could be refactored to be one page ?
+// TODO: test form data validation
 export const Register = (props) => {
 
     const { setAccessToken, setRefreshToken, setUser } = useAuthContext();
@@ -21,14 +23,29 @@ export const Register = (props) => {
         password: ''
     });
 
+    const [usernameError, setUsernameError] = useState(false)
+    const [emailError, setEmailError] = useState(false)
+    const [passwordError, setPasswordError] = useState(false)
+
     const navigate = useNavigate();
 
-    // TO-DO: properly store the credentials and access token
-    // CURRENT SOLUTION: local storage
+    // TO-DO: credentials validation
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // regex check for valid email address
+        // regex check for valid password: at least one number, at least one special char, is 8 chars long
+        const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/
+        const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/
         const { email, username, password } = cred;
-        await axios.post('http://localhost:8080/api/auth/stored-auth/signup', { email, username, password })
+
+        // credential validation
+        setEmailError(!(emailRegex.test(email)))
+        setPasswordError(!(passwordRegex.test(password)))
+        setUsernameError(username.trim().length < 3)
+
+        if (!(usernameError || emailError || passwordError)) {
+            await axios.post('http://localhost:8080/api/auth/stored-auth/signup', { email, username, password })
             .then((res) =>{
                 setCred({ email: "", username: "", password: ""})
 
@@ -40,9 +57,40 @@ export const Register = (props) => {
                 localStorage.setItem("refreshToken", res.data.refreshToken)
                 localStorage.setItem("username", res.data.username)
 
-                // redirect to some other page - shop, profile, etc
-            });
+                navigate("/")
+            })
+        }
 
+    }
+
+    const renderErrorMessage = () => {
+
+        if (usernameError) {
+            return (
+                <div className="flex flex-row mr-2">
+                    <ErrorOutlinedIcon />
+                    <h2>Please fill out a username</h2>
+                </div>
+            )
+        }
+        else if (emailError) {
+            return (
+                <div className="flex flex-row mr-2">
+                    <ErrorOutlinedIcon />
+                    <h2>Invalid email address</h2>
+                </div>
+            )
+        }
+        else if (passwordError) {
+            return (
+                <div className="flex flex-row mr-2">
+                    <ErrorOutlinedIcon />
+                    <h2>Password must contain one number, one special character, and must be eight characters long</h2>
+                </div>
+            )
+        }
+
+        return <></>
     }
 
     return (
@@ -53,6 +101,7 @@ export const Register = (props) => {
                     <h2 className="m-2 text-center">Sign up for an account and join the community!</h2>
                 </div>
                 <div className="flex flex-col justify-center items-center">
+                    {renderErrorMessage}
                     <form className="w-64 text-center flex flex-col items-center justify-center" onSubmit={handleSubmit}>
                         <input className="mb-3 p-3 border border-black rounded-full w-64 text-md" type="text" value={cred.username} onChange={(e) => setCred({ ...cred, username: e.target.value })} placeholder="Username" id="username" name="username" />
                         <input className="mb-3 p-3 border border-black rounded-full w-64 text-md" type="email" value={cred.email} onChange={(e) => setCred({ ...cred, email: e.target.value })} placeholder="Email" id="email" name="email" />
@@ -61,18 +110,6 @@ export const Register = (props) => {
                             <button className="border-none bg-none text-center hover:underline" onClick={() => navigate('/login')}>Already have an account?</button>
                         </div>
                         <button className="border-none bg-[#472836] text-white text-md font-regular w-[240px] h-[50px] rounded-full " type="submit">Sign Up</button>
-                        {/* <div className="auth-form-container">
-                            <form onSubmit={handleSubmit}>
-                                <label htmlFor="name">Full name</label>
-                                <input value={name} name="name" id="name" placeholder="full Name" />
-                                <label htmlFor="email">email</label>
-                                <input type={email} placeholder="youremail@gmail.com" id="email" name="email" />
-                                <label htmlFor="password">password</label>
-                                <input type={pass} placeholder="*******" id="password" name="password" />
-                                <button type="submit">Login</button>
-                                <button onClick={() => navigate('/login')}>Already have an account? Login here.</button>
-                            </form>
-                        </div> */}
                     </form>
 
                     <div className="m-8 grid justify-center">
