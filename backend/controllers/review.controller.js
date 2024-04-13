@@ -27,10 +27,10 @@ const getReview = async (req, res) => {
 
 //POST a new review
 const createReview = async (req, res) => {
-    const {user, product, review, starRating} = req.body
+    const {user, product, thereview, starRating} = req.body
 
     try { // add doc to db
-        const review = await Review.create({user, product, review, starRating});
+        const review = await Review.create({user, product, thereview, starRating});
         res.status(200).json(review);
     } catch (error){
         res.status(400).json({error: error.message})

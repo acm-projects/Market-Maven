@@ -21,7 +21,7 @@
     /* padding: 3px; */
     /* margin: 0; */
     list-style: none;
-    display: flex;
+    /* display: flex; */
     gap: 1rem;
 }
 .Navbar li {
