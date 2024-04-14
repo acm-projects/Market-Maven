@@ -26,12 +26,11 @@ export const Login = () => {
         password: ''
     })
 
-    const [emailError, setEmailError] = useState(false)
-    const [passwordError, setPasswordError] = useState(false)
+    const [resError, setResError] = useState("")
 
     useEffect(() => {
 
-        // logic to redirect out of page if logged in or render if not
+        // logic to redirect out of page if logged in
 
     }, [])
 
@@ -39,57 +38,38 @@ export const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
-        const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/
-        const { email, password } = cred;
+        try {
+            const res = await axios.post('http://localhost:8080/api/auth/stored-auth/login', { ...cred });
 
-        // login credential validation
-        setEmailError(!(emailRegex.test(email)))
-        setPasswordError(!(passwordRegex.test(password)))
+            setCred({ email: "", password: "" })
 
-        if (!(emailError || passwordError)) {
-            axios.post('http://localhost:8080/api/auth/stored-auth/login', { email, password })
-            .then((res) => {
-                setCred({ email: "", password: "" })
+            setAccessToken(res.data.accessToken);
+            setRefreshToken(res.data.refreshToken);
+            setUser(res.data.username);
 
-                console.log(res.data)
+            localStorage.setItem("accessToken", res.data.accessToken);
+            localStorage.setItem("refreshToken", res.data.refreshToken);
+            localStorage.setItem("username", res.data.username);
 
-                setAccessToken(res.data.accessToken)
-                setRefreshToken(res.data.refreshToken)
-                setUser(res.data.username)
-
-                localStorage.setItem("accessToken", res.data.accessToken)
-                localStorage.setItem("refreshToken", res.data.refreshToken)
-                localStorage.setItem("username", res.data.username)
-
-                // redirect to some other page - shop, profile, etc
-                navigate("/Shop")
-            })
+            navigate("/Shop");
+        } catch (error) {
+            console.error(error);
+            setResError(error.response.data.message);
         }
-
     }
 
+
     const renderErrorMessage = () => {
-        if (emailError) {
+        if (resError != "") {
             return (
-                <div className="flex flex-row mb-2 text-red-700 w-64">
+                <div className="flex flex-row px-2 mb-2 gap-2 text-red-700 w-64">
                     <ErrorOutlinedIcon />
-                    <h2>Invalid email address</h2>
+                    <h2>{resError}</h2>
                 </div>
             )
         }
-        /* do we need this for logins ? */
-        // else if (passwordError) {
-        //     return (
-        //         <div className="flex flex-row mr-2">
-        //             <ErrorOutlinedIcon />
-        //             <h2>Invalid email address</h2>
-        //     </div>
 
-        //     )
-        // }
-
-        return <></>
+        return null
     }
 
     return (
