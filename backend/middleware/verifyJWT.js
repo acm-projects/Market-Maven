@@ -1,1 +1,0 @@
-// to handle verification of JWTs per request to protected routes

@@ -17,13 +17,14 @@ import Searchpage from "./pages/searchpage";
 function App() {
   const [currentForm, setCurrentForm] = useState("login");
 
+  // what will / is this used for?
   const toggleForm = (formName) => {
     setCurrentForm(formName);
   }
 
   return (
     <>
-      <div className="container">
+      <div className="">
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/Shop" element={<Shop />} />
@@ -36,7 +37,6 @@ function App() {
           <Route path="/CartPage" element={<CartPage />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/chat" element={<Chat />} />
-          <Route path="/searchpage" element={<Searchpage />} />
         </Routes>
       </div>
     </>

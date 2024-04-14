@@ -3,9 +3,13 @@
 require('dotenv').config()
 
 // require modules
-const express = require('express')
-const mongoose = require('mongoose')
-const cors = require('cors');
+const express = require('express') // nodejs framework
+const mongoose = require('mongoose') // for mongodb
+const cors = require('cors'); // for accessing API in frontend
+// const multer = require('multer'); // multer and path will be for file uploading
+// const path = require('path');
+// nodemon is for refreshing our page automatically
+
 
 // require routes
 const categoryRoutes = require('./routes/categories.route')

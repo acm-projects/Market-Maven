@@ -12,14 +12,13 @@
 
 }
 
-
-.flex {
-    display: flex; 
+.bg-login-button {
+    background-color: #472836;
 }
 
 
 .side-image {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) ,url("..\\..\\market-maven\\public\\anastasia-saldatava-5feMqpVOc-s-unsplash.jpg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)), url("../anastasia-saldatava-5feMqpVOc-s-unsplash.jpg");
     background-size: cover;
     background-position: center;
     padding-left: 1rem;
@@ -27,7 +26,7 @@
     width: 50vw;
 }
 
-.border {
+/* .border {
     border: 1px solid;
 }
 
@@ -79,10 +78,6 @@
     background-color: rgba(0, 0, 0, 0);
 }
 
-.bg-login-button {
-    background-color: #472836;
-}
-
 .text-white {
     color: white;
 }
@@ -129,4 +124,4 @@
 
 .items-center {
     align-items: center;
-}
+} */
