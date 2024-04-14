@@ -18,15 +18,21 @@ const ItemDetails = () => {
     // GET request to fetch the single product
     const fetchProduct = async () => {
       try {
-        const res = await axios.get(`http://localhost:8080/api/products/${params.id}`);
+        const res = await axios.get(
+          `http://localhost:8080/api/products/${params.id}`
+        );
         console.log("Product Data:", res.data);
         setItem(res.data);
-  
-        const reviewsResponse = await axios.get(`http://localhost:8080/api/reviews?product=${params.id}`);
+
+        const reviewsResponse = await axios.get(
+          `http://localhost:8080/api/reviews?product=${params.id}`
+        );
         console.log("Reviews Data:", reviewsResponse.data);
         setReviews(reviewsResponse.data);
-  
-        const vendorResponse = await axios.get(`http://localhost:8080/api/vendors/${res.data.vendor}`);
+
+        const vendorResponse = await axios.get(
+          `http://localhost:8080/api/vendors/${res.data.vendor}`
+        );
         console.log("Vendor Data:", vendorResponse.data);
         setVendor(vendorResponse.data);
       } catch (error) {
@@ -48,37 +54,40 @@ const ItemDetails = () => {
           <div class="flex flex-col md:flex-row -mx-4">
             {/* ITEM IMAGES */}
             <div class="md:flex-1 px-4">
-              <div class="h-[460px] rounded-lg bg-gray-200 dark:bg-gray-200 mb-4">
+              <div class="h-[500px] rounded-lg bg-gray-200 dark:bg-gray-200 mb-4">
                 <img
                   class="w-full h-full object-cover"
                   src={item.image}
                   alt={item.productTitle}
                 />
               </div>
-              <div class="flex -mx-2 mb-4">
+              {/* <div class="flex -mx-2 mb-4">
                 <div class="w-full px-2">
                   <button class="w-full bg-gray-900 dark:bg-gray-500 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-500 dark:hover:bg-gray-700">
                     Add to Cart
                   </button>
                 </div>
-              </div>
+              </div> */}
             </div>
 
             {/* ITEM DETAILS */}
             <div class="md:flex-1 px-4">
               {/* Vendor Profile Image */}
-                <figcaption class="relative flex items-center justify-between mb-6">
-                  <div class="overflow-hidden rounded-full bg-slate-50">
-                    <img
-                      alt="image"
-                      class="h-14 w-14 object-cover"
-                      src={vendor.image}
-                    />
+              <figcaption class="relative flex items-center justify-between mb-6">
+                <div class="overflow-hidden rounded-full bg-slate-50">
+                  <img
+                    alt="image"
+                    class="h-14 w-14 object-cover"
+                    src={vendor.image}
+                  />
+                </div>
+                <div>
+                  <div class="font-display text-base text-slate-900">
+                    {" "}
+                    {vendor.username}{" "}
                   </div>
-                  <div>
-                    <div class="font-display text-base text-slate-900"> {vendor.username} </div>
-                  </div>
-                </figcaption>
+                </div>
+              </figcaption>
 
               {/* Product Information */}
               <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-400 mb-2">
@@ -117,6 +126,14 @@ const ItemDetails = () => {
                   {item.description}{" "}
                 </p>
               </div>
+
+              <div class="flex my-4 -mx-2 mb-4">
+                <div class="w-full px-2">
+                  <button class="w-full bg-gray-900 dark:bg-gray-500 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-500 dark:hover:bg-gray-700">
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -132,9 +149,9 @@ const ItemDetails = () => {
                   console.log("Review:", review);
                   return (
                     <li key={review._id}>
-                      <Review 
+                      <Review
                         userid={review.user}
-                        thereview={review.thereview} 
+                        thereview={review.thereview}
                       />
                     </li>
                   );
