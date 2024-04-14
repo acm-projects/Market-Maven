@@ -72,7 +72,7 @@ const ItemDetails = () => {
                     <img
                       alt="image"
                       class="h-14 w-14 object-cover"
-                      src="https://randomuser.me/api/portraits/men/15.jpg"
+                      src={vendor.image}
                     />
                   </div>
                   <div>
