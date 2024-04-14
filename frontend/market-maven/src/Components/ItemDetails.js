@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import Review from "../Components/Review";
 
 const ItemDetails = () => {
   const [item, setItem] = useState({}); // Initialize item state with an empty object
   const [reviews, setReviews] = useState([]); // Initialize reviews state with an empty array
+  const [vendor, setVendor] = useState("");
 
   // takes the product id from the Link routing as a parameter
   const params = useParams();
@@ -27,6 +29,10 @@ const ItemDetails = () => {
       );
       console.log(reviewsResponse.data);
       setReviews(reviewsResponse.data);
+
+      const vendorResponse = await axios.get(`http://localhost:8080/api/vendors?id=${item.vendor}`);
+      console.log(vendorResponse.data);
+      setVendor(vendorResponse.data.username);
     };
 
     fetchProduct();
@@ -38,7 +44,6 @@ const ItemDetails = () => {
   return (
     <>
       <Navbar />
-      {/* grid grid-cols-2 auto-rows-[300px] */}
       <div class="bg-gray-100 py-8 ">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="flex flex-col md:flex-row -mx-4">
@@ -62,38 +67,81 @@ const ItemDetails = () => {
 
             {/* ITEM DETAILS */}
             <div class="md:flex-1 px-4">
-              <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-400 mb-2"> {item.productTitle} </h2>
+              {/* Vendor Profile Image */}
+                <figcaption class="relative flex items-center justify-between mb-6">
+                  <div class="overflow-hidden rounded-full bg-slate-50">
+                    <img
+                      alt="image"
+                      class="h-14 w-14 object-cover"
+                      src="https://randomuser.me/api/portraits/men/15.jpg"
+                    />
+                  </div>
+                  <div>
+                    <div class="font-display text-base text-slate-900"> {vendor} </div>
+                  </div>
+                </figcaption>
+
+              {/* Product Information */}
+              <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-400 mb-2">
+                {" "}
+                {item.productTitle}{" "}
+              </h2>
               <div class="flex mb-4">
                 <div class="mr-4">
-                  <span class="font-bold text-gray-700 dark:text-gray-400"> Price: </span>
-                  <span class="text-gray-600 dark:text-gray-400"> {" "} ${item.price} </span>
+                  <span class="font-bold text-gray-700 dark:text-gray-400">
+                    {" "}
+                    Price:{" "}
+                  </span>
+                  <span class="text-gray-600 dark:text-gray-400">
+                    {" "}
+                    ${item.price}{" "}
+                  </span>
                 </div>
                 <div>
-                  <span class="font-bold text-gray-700 dark:text-gray-400"> Stock: </span>
-                  <span class="text-gray-600 dark:text-gray-400"> {" "} {item.stock} </span>
+                  <span class="font-bold text-gray-700 dark:text-gray-400">
+                    {" "}
+                    Stock:{" "}
+                  </span>
+                  <span class="text-gray-600 dark:text-gray-400">
+                    {" "}
+                    {item.stock}{" "}
+                  </span>
                 </div>
               </div>
               <div>
-                <span class="font-bold text-gray-700 dark:text-gray-400"> Product Description: </span>
-                <p class="text-gray-600 dark:text-gray-400 text-sm mt-2"> {item.description} </p>
+                <span class="font-bold text-gray-700 dark:text-gray-400">
+                  {" "}
+                  Product Description:{" "}
+                </span>
+                <p class="text-gray-600 dark:text-gray-400 text-sm mt-2">
+                  {" "}
+                  {item.description}{" "}
+                </p>
               </div>
             </div>
           </div>
+
           {/* REVIEWS */}
           <div>
-              <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-400 mb-2"> Reviews </h2>
-              <div>
-                <ul>
-                  {reviews.map((review) => {
-                    console.log("Review:", review);
-                    return (
-                      <li key={review._id}>
-                        <p>{review.thereview}</p>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-400 mb-2">
+              {" "}
+              Reviews{" "}
+            </h2>
+            <div>
+              <ul>
+                {reviews.map((review) => {
+                  console.log("Review:", review);
+                  return (
+                    <li key={review._id}>
+                      <Review 
+                        userid={review.user}
+                        thereview={review.thereview} 
+                      />
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
           </div>
         </div>
       </div>
