@@ -23,6 +23,7 @@
     "google-auth-library": "^9.7.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.1.2",
-    "passport-google-oauth20": "^2.0.0"
+    "passport-google-oauth20": "^2.0.0",
+    "validator": "^13.11.0"
   }
 }
