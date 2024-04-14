@@ -17,22 +17,21 @@ const ItemDetails = () => {
     console.log("useEffect Item Details");
     // GET request to fetch the single product
     const fetchProduct = async () => {
-      const res = await axios.get(
-        `http://localhost:8080/api/products/${params.id}`
-      );
-      console.log(res.data);
-      setItem(res.data);
-
-      // Fetch reviews associated with the item
-      const reviewsResponse = await axios.get(
-        `http://localhost:8080/api/reviews?product=${params.id}`
-      );
-      console.log(reviewsResponse.data);
-      setReviews(reviewsResponse.data);
-
-      const vendorResponse = await axios.get(`http://localhost:8080/api/vendors?id=${item.vendor}`);
-      console.log(vendorResponse.data);
-      setVendor(vendorResponse.data.username);
+      try {
+        const res = await axios.get(`http://localhost:8080/api/products/${params.id}`);
+        console.log("Product Data:", res.data);
+        setItem(res.data);
+  
+        const reviewsResponse = await axios.get(`http://localhost:8080/api/reviews?product=${params.id}`);
+        console.log("Reviews Data:", reviewsResponse.data);
+        setReviews(reviewsResponse.data);
+  
+        const vendorResponse = await axios.get(`http://localhost:8080/api/vendors/${res.data.vendor}`);
+        console.log("Vendor Data:", vendorResponse.data);
+        setVendor(vendorResponse.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     };
 
     fetchProduct();
@@ -77,7 +76,7 @@ const ItemDetails = () => {
                     />
                   </div>
                   <div>
-                    <div class="font-display text-base text-slate-900"> {vendor} </div>
+                    <div class="font-display text-base text-slate-900"> {vendor.username} </div>
                   </div>
                 </figcaption>
 
