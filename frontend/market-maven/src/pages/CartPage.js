@@ -72,8 +72,9 @@ const CartPage = () => {
     return(
       <div>
         <Navbar/>
-        <h1>Cart</h1>
-        <div className="place-items-center">
+        <h1 className="align-center color-black">Cart</h1>
+        <div className="flex align-center">
+        <div sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           {items.map((item) => (
               <CartItem
                 key={item._id}
@@ -89,9 +90,15 @@ const CartPage = () => {
               />
           ))}
         </div>
-        <Button>
+        <div className="bg-slate-200 p-4 ml-7">
+          <h2>Subtotal: </h2>
+          <h2>Tax: </h2>
+          <h2>Total: </h2>
+          <Button sx={{alignSelf: 'center'}}>
           Proceed to Checkout
-        </Button>
+          </Button>
+        </div>
+        </div>
       </div>
     )
 }
@@ -101,14 +108,16 @@ const CartPage = () => {
 const CartItem = (props) => {
   const event = data[0];
   return(
-    <div>
-    <Card sx={{ display: 'flex', maxWidth: 600, height: 200 }}>
-    <CardMedia
-        component="img"
-        sx={{ width: 150, height: 150, alignItems: 'center' }}
-        image={props.image}
-        alt={props.name}
-      />
+    <Card sx={{ display: 'flex', width: 600, height: 200, flexDirection: 'row'}}>
+      <div className="flex">
+    <Box sx={{ display: 'flex', alignItems: 'center', pl: 1 }}>
+      <CardMedia
+          component="img"
+          sx={{ maxWidth: 150, maxHeight: 150, alignItems: 'center', objectFit: 'cover'}}
+          image={props.image}
+          alt={props.name}
+        />
+      </Box>
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <CardContent sx={{ flex: '1 0 auto' }}>
           <Typography gutterBottom component="div" variant="h5">
@@ -120,23 +129,22 @@ const CartItem = (props) => {
         </CardContent>
         
       </Box>
-      <Box sx={{ display: 'flex', alignItems: 'right', pl: 1, pb: 1 }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1, pr:1}}>
         <p>Quantity: </p>
+        <div className="justify-items-end	">
           <ButtonGroup
             disableElevation
             variant="contained"
             aria-label="Disabled button group"
           >
-            <Button>+</Button>
-            <TextField id="outlined-basic" label="Outlined" variant="outlined" defaultValue="1"/>
             <Button>-</Button>
+            <TextField id="outlined-basic" variant="outlined" defaultValue="1" sx={{ width: 60 }}/>
+            <Button>+</Button>
           </ButtonGroup>
-        <Button size="small" color="primary">
-          Remove
-        </Button>
+        </div>
         </Box>
+        </div>
     </Card>
-    </div>
   );
 }
 
