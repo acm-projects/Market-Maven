@@ -1,6 +1,7 @@
 const User = require('../models/user.model')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const validator = require('validator')
 
 
 /**
@@ -19,14 +20,14 @@ const login = async (req, res) => {
 
     const { email, password } = req.body
 
-    // wrap in a try catch when finished
-    // need to keep open for debuggin sake lol
+    // validate form data
+    if (validator.isEmpty(email) || validator.isEmpty(password)){
+        return res.status(401).json({ message: 'Please fill out both fields' })
+    }
 
     // user not found
     const foundUser = await User.findOne({ email }).exec()
     if (!foundUser) return res.status(401).json({ message: 'Invalid credentials' })
-
-    // password is invalid
     const match = await bcrypt.compare(password, foundUser.password)
     if (!match) return res.status(401).json({ message: 'Invalid credentials' })
 
@@ -64,7 +65,7 @@ const login = async (req, res) => {
     // })
 
     res.json({ accessToken, refreshToken, email, username: foundUser.username })
-    
+
 }
 
 /** === STILL NEEDS TO BE TESTED ===
@@ -83,7 +84,7 @@ const refresh = (req, res) => {
         const refreshToken = cookies.jwt;
 
         // verify JWT
-        jwt.verify( refreshToken, process.env.REFRESH_TOKEN_SECRET, 
+        jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET,
             asyncHandler(async (err, decoded) => {
 
                 // if error caught, return forbidden error message
@@ -91,7 +92,7 @@ const refresh = (req, res) => {
 
                 // find user, catch if user does not exists
                 const foundUser = await User.findOne({ username: decoded.username })
-                if(!foundUser) return rse.status(401).json({ message: 'Unauthorized' })
+                if (!foundUser) return rse.status(401).json({ message: 'Unauthorized' })
 
                 // generate access token
                 const accessToken = jwt.sign(
@@ -112,7 +113,7 @@ const refresh = (req, res) => {
         )
 
     } catch (err) {
-        res.status(500).json({ message: 'Internal Server Error', error: err});
+        res.status(500).json({ message: 'Internal Server Error', error: err });
     }
 }
 
@@ -126,6 +127,26 @@ const refresh = (req, res) => {
 const signup = async (req, res) => {
 
     const { username, email, password } = req.body
+
+    //validate form data, not empty
+    if (validator.isEmpty(email) || validator.isEmpty(password) || validator.isEmpty(username)){
+        return res.status(401).json({ message: 'Please fill out all fields' })
+    }
+
+    // validate form data, correct format
+    switch (true) {
+        case !validator.isEmail(email):
+            return res.status(401).json({ message: 'Invalid email address' })
+            break;
+        case !validator.isStrongPassword(password):
+            return res.status(401).json({ message: 'Password not strong enough' })
+            break;
+        case !validator.isAlphanumeric(username):
+            return res.status(401).json({ message: 'Username must be alphanumeric' })
+            break;
+        default:
+            console.log("Both email and password are present");
+    }
 
     // user already exists in the database
     const foundUser = await User.findOne({ username }).exec()
@@ -142,7 +163,7 @@ const signup = async (req, res) => {
     // create new user in the db
     const newUser = new User({ username, email, password: hash });
     const savedUser = await newUser.save();
-    res.status(200).json({ message: 'Succesful sign up'})
+    res.status(200).json({ message: 'Succesful sign up' })
 
     // generate access token
     const accessToken = jwt.sign(
@@ -168,7 +189,7 @@ const signup = async (req, res) => {
     )
 
     // CURRENT SOLUTION: store both tokens locally from response instead
-    
+
     // === set secure to true if an when deployed so it only uses https ===
     // res.cookie('jwt', refreshToken, {
     //     httpOnly: true,     // only accessible by web-server
@@ -178,7 +199,7 @@ const signup = async (req, res) => {
     // })
 
     // send access token 
-    res.json({ accessToken, refreshToken, email, username: foundUser.username })
+    res.json({ accessToken, refreshToken, email, username })
 
 }
 
@@ -211,7 +232,7 @@ const logout = (req, res) => {
         // res.json({ message: 'User has been succesfully logged out'})
 
     } catch (err) {
-        res.status(500).json({ message: 'Internal Server Error', error: err});
+        res.status(500).json({ message: 'Internal Server Error', error: err });
     }
 }
 

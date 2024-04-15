@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useMatch, useResolvedPath, useNavigate } from "react-router-dom"
 import "./Navbar.css"
 // import Cart from "../Components/Cart"
 
-// import { useUserContext } from "../hooks/useUserContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 import { Badge } from "@mui/material";
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
@@ -12,8 +12,7 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 
 export default function Navbar() {
 
-    // destructure out attributes of user context
-    // const {} = useUserContext();
+    const { accessToken } = useAuthContext()
 
     const [search, setSearch] = useState("")
     const [zip, setZip] = useState("")
@@ -21,6 +20,9 @@ export default function Navbar() {
     const [cartAmount, setCartAmount] = useState(0)
 
     const navigate = useNavigate();
+
+    // useffect to get cart amount, zip, etc
+    useEffect(() => {}, [])
 
     const handleSearch = (e) => {
         e.preventDefault();
@@ -44,11 +46,32 @@ export default function Navbar() {
 
     }
 
+    const accountButton = () => {
+
+        // change to accordion with logout function and or settings
+        if ( accessToken ) return <Link className="" to="/account"><AccountCircleOutlinedIcon /></Link>
+
+        return <Link className="" to="/login"><AccountCircleOutlinedIcon /></Link>
+    }
+
 
     return (
         <nav className="Navbar p-4 flex flex-col md:flex-row items-center">
-            <Link to="/" className="px-2 py-4 h-full site-title justify-center">Market Maven</Link>
-            <form className="my-4 flex flex-row w-full max-w-[700px] md:w-1/2" onSubmit={handleSearch}>
+            <div className="w-full flex flex-row justify-between md:w-auto">
+                <Link to="/" className="px-2 py-4 h-full site-title justify-center">Market Maven</Link>
+                <ul className="m-4 flex justify-center gap-4 md:w-auto md:hidden">
+                    <Link className="" to="/Shop">Browse</Link>
+                    <Link className="" to="/CartPage">
+                        {renderCart()}
+                    </Link>
+
+                    {/* make this conditional to user being logged in
+                    logged in: shows log out profile and log out button
+                    logged out: shows only the profile button */}
+                    <Link className="" to="/login"><AccountCircleOutlinedIcon /></Link>
+                </ul>
+            </div>
+            <form className="my-4 flex flex-row w-full max-w-[800px] md:w-1/2" onSubmit={handleSearch}>
                 <input className="mx-1 p-3 w-4/5 bg-[#f0f0f0] rounded-full text-md" type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search" id="search" name="search" />
                 <input className="mx-1 p-3 w-1/5 bg-[#f0f0f0] rounded-full text-md" type="text" value={zip} onChange={(e) => setZip(e.target.value)} placeholder="ZIP" id="zip" name="zip" />
                 <button className="mx-2" type="submit"><SearchOutlinedIcon /></button>
@@ -58,7 +81,9 @@ export default function Navbar() {
             <CustomLink to="/page2">Page 2</CustomLink>
             <CustomLink to="/page3">Page 3</CustomLink>
         </ul> */}
-            <ul className="m-4 flex justify-center gap-4 w-full md:w-auto">
+
+        {/* get this to conditionally render, changes to be next to title when mobile size */}
+            <ul className="m-4 hidden justify-center gap-4 w-full md:w-auto md:flex">
                 <Link className="" to="/Shop">Browse</Link>
                 <Link className="" to="/CartPage">
                     {renderCart()}
@@ -68,7 +93,7 @@ export default function Navbar() {
                 logged in: shows log out profile and log out button
                 logged out: shows only the profile button
             */}
-                <Link className="" to="/login"><AccountCircleOutlinedIcon /></Link>
+                {accountButton()}
             </ul>
         </nav>
     )

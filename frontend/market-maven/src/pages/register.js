@@ -26,80 +26,41 @@ export const Register = (props) => {
         submitted: false
     })
 
-    // error states
-    const [usernameError, setUsernameError] = useState(false)
-    const [emailError, setEmailError] = useState(false)
-    const [passwordError, setPasswordError] = useState(false)
     const [resError, setResError] = useState("")
 
-    useEffect(() => {
-        const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
-        const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/
+    const navigate = useNavigate();
 
-        if (cred.submitted) {
-            setEmailError(!(emailRegex.test(cred.email)))
-            setPasswordError(!(passwordRegex.test(cred.password) && cred.password.trim().length > 0))
-            setUsernameError(cred.username.trim().length < 3)    
-        }
-    }, [cred])
-
+    // TO-DO: credentials validation
     const handleSubmit = async (e) => {
-        e.preventDefault()
+        e.preventDefault();
 
-        setCred({ ...cred, submitted: true })
-        const { username, email, password } = cred
+        try {
+            const res = await axios.post('http://localhost:8080/api/auth/stored-auth/signup', { ...cred })
+            
+            setCred({ email: "", username: "", password: ""})
 
-        if (!(usernameError || emailError || passwordError)) {
-            try {
-                const res = await axios.post('http://localhost:8080/api/auth/stored-auth/signup', { username, email, password })
-                setCred({ email: "", username: "", password: "" })
+            setAccessToken(res.data.accessToken)
+            setRefreshToken(res.data.refreshToken)
+            setUser(res.data.username)
 
-                setAccessToken(res.data.accessToken)
-                setRefreshToken(res.data.refreshToken)
-                setUser(res.data.username)
+            localStorage.setItem("accessToken", res.data.accessToken)
+            localStorage.setItem("refreshToken", res.data.refreshToken)
+            localStorage.setItem("username", res.data.username)
 
-                localStorage.setItem("accessToken", res.data.accessToken)
-                localStorage.setItem("refreshToken", res.data.refreshToken)
-                localStorage.setItem("username", res.data.username)
-
-                navigate("/")
-            } catch (error) {
-                console.error('Error registering:', error)
-                setResError(error.response.data.message)
-            }
+            navigate("/")
+        }
+        catch (error) {
+            console.error(error.response.data.message)
+            setResError(error.response.data.message)
         }
     }
 
     const renderErrorMessage = () => {
-        if (usernameError) {
-            return (
-                <div className="flex flex-row mb-2 text-red-700 w-64">
-                    <ErrorOutlinedIcon className="mx-2"/>
-                    <h2>Please fill out a username</h2>
-                </div>
-            )
-        }
-        else if (emailError) {
-            return (
-                <div className="flex flex-row mb-2 text-red-700 w-64">
-                    <ErrorOutlinedIcon className="mx-2"/>
-                    <h2>Invalid email address</h2>
-                </div>
-            )
-        }
-        else if (passwordError) {
-            return (
-                <div className="flex flex-row mb-2 text-red-700 w-64">
-                    <ErrorOutlinedIcon className="mx-2"/>
-                    <h2>Password must contain a number, special character, and be 8 characters long</h2>
-                </div>
-            )
-        }
 
-        if (resError) {
+        if (resError != "") {
             return (
-                <div className="flex flex-row mb-2 text-red-700 w-64">
-                    <ErrorOutlinedIcon className="mx-2"/>
+                <div className="flex flex-row mb-2 gap-2 text-red-700 w-64">
+                    <ErrorOutlinedIcon />
                     <h2>{resError}</h2>
                 </div>
             )
