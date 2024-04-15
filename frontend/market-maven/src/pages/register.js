@@ -1,55 +1,58 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react"
 import "./register.css"
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useNavigate } from "react-router-dom"
+import axios from "axios"
 
-import { useAuthContext } from "../hooks/useAuthContext";
+import { useAuthContext } from "../hooks/useAuthContext"
 
-import { GoogleOAuthProvider } from "@react-oauth/google";
-import { GoogleLoginButton } from "../Components/GoogleLoginButton";
-import ErrorOutlinedIcon from '@mui/icons-material/ErrorOutlined';
+import { GoogleOAuthProvider } from "@react-oauth/google"
+import { GoogleLoginButton } from "../Components/GoogleLoginButton"
+import ErrorOutlinedIcon from '@mui/icons-material/ErrorOutlined'
 
 const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID
 
-// Maybe this and the login screen could be refactored to be one page ?
-// TODO: test form data validation
 export const Register = (props) => {
 
-    const { setAccessToken, setRefreshToken, setUser } = useAuthContext();
+    const navigate = useNavigate()
 
+    // auth context useStates
+    const { setAccessToken, setRefreshToken, setUser } = useAuthContext()
+
+    // state for the form
     const [cred, setCred] = useState({
         email: '',
         username: '',
-        password: ''
-    });
+        password: '',
+        submitted: false
+    })
 
+    // error states
     const [usernameError, setUsernameError] = useState(false)
     const [emailError, setEmailError] = useState(false)
     const [passwordError, setPasswordError] = useState(false)
+    const [resError, setResError] = useState("")
 
-    const navigate = useNavigate();
-
-    // TO-DO: credentials validation
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        // regex check for valid email address
-        // regex check for valid password: at least one number, at least one special char, is 8 chars long
+    useEffect(() => {
         const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
         const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/
-        const { email, username, password } = cred;
 
-        // credential validation
-        setEmailError(!(emailRegex.test(email)))
-        setPasswordError(!(passwordRegex.test(password) & password.trim().length > 0))
-        setUsernameError(username.trim().length < 3)
+        if (cred.submitted) {
+            setEmailError(!(emailRegex.test(cred.email)))
+            setPasswordError(!(passwordRegex.test(cred.password) && cred.password.trim().length > 0))
+            setUsernameError(cred.username.trim().length < 3)    
+        }
+    }, [cred])
 
-        console.log(emailError, usernameError, passwordError)
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+
+        setCred({ ...cred, submitted: true })
+        const { username, email, password } = cred
 
         if (!(usernameError || emailError || passwordError)) {
-            await axios.post('http://localhost:8080/api/auth/stored-auth/signup', { email, username, password })
-            .then((res) =>{
-                setCred({ email: "", username: "", password: ""})
+            try {
+                const res = await axios.post('http://localhost:8080/api/auth/stored-auth/signup', { username, email, password })
+                setCred({ email: "", username: "", password: "" })
 
                 setAccessToken(res.data.accessToken)
                 setRefreshToken(res.data.refreshToken)
@@ -60,17 +63,18 @@ export const Register = (props) => {
                 localStorage.setItem("username", res.data.username)
 
                 navigate("/")
-            })
+            } catch (error) {
+                console.error('Error registering:', error)
+                setResError(error.response.data.message)
+            }
         }
-
     }
 
     const renderErrorMessage = () => {
-
         if (usernameError) {
             return (
                 <div className="flex flex-row mb-2 text-red-700 w-64">
-                    <ErrorOutlinedIcon />
+                    <ErrorOutlinedIcon className="mx-2"/>
                     <h2>Please fill out a username</h2>
                 </div>
             )
@@ -78,7 +82,7 @@ export const Register = (props) => {
         else if (emailError) {
             return (
                 <div className="flex flex-row mb-2 text-red-700 w-64">
-                    <ErrorOutlinedIcon />
+                    <ErrorOutlinedIcon className="mx-2"/>
                     <h2>Invalid email address</h2>
                 </div>
             )
@@ -86,13 +90,22 @@ export const Register = (props) => {
         else if (passwordError) {
             return (
                 <div className="flex flex-row mb-2 text-red-700 w-64">
-                    <ErrorOutlinedIcon />
-                    <h2>Password must contain one number, one special character, and be eight characters long</h2>
+                    <ErrorOutlinedIcon className="mx-2"/>
+                    <h2>Password must contain a number, special character, and be 8 characters long</h2>
                 </div>
             )
         }
 
-        return <></>
+        if (resError) {
+            return (
+                <div className="flex flex-row mb-2 text-red-700 w-64">
+                    <ErrorOutlinedIcon className="mx-2"/>
+                    <h2>{resError}</h2>
+                </div>
+            )
+        }
+
+        return null
     }
 
     return (
@@ -105,9 +118,9 @@ export const Register = (props) => {
                 <div className="flex flex-col justify-center items-center">
                     {renderErrorMessage()}
                     <form className="w-64 text-center flex flex-col items-center justify-center" onSubmit={handleSubmit}>
-                        <input className="mb-3 p-3 border border-black rounded-full w-64 text-md" type="text" value={cred.username} onChange={(e) => setCred({ ...cred, username: e.target.value })} placeholder="Username" id="username" name="username" />
-                        <input className="mb-3 p-3 border border-black rounded-full w-64 text-md" type="email" value={cred.email} onChange={(e) => setCred({ ...cred, email: e.target.value })} placeholder="Email" id="email" name="email" />
-                        <input className="mb-3 p-3 border border-black rounded-full w-64 text-md" type="password" value={cred.password} onChange={(e) => setCred({ ...cred, password: e.target.value })} placeholder="Password" id="password" name="password" />
+                        <input className="mb-3 p-3 border border-black rounded-full w-64 text-md" type="text" value={cred.username} onChange={(e) => setCred({ ...cred, username: e.target.value, submitted: false })} placeholder="Username" id="username" name="username" />
+                        <input className="mb-3 p-3 border border-black rounded-full w-64 text-md" type="email" value={cred.email} onChange={(e) => setCred({ ...cred, email: e.target.value, submitted: false })} placeholder="Email" id="email" name="email" />
+                        <input className="mb-3 p-3 border border-black rounded-full w-64 text-md" type="password" value={cred.password} onChange={(e) => setCred({ ...cred, password: e.target.value, submitted: false })} placeholder="Password" id="password" name="password" />
                         <div className="flex w-full justify-between m-3">
                             <button className="border-none bg-none text-center hover:underline" onClick={() => navigate('/login')}>Already have an account?</button>
                         </div>
