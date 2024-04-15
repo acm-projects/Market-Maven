@@ -4,6 +4,7 @@ import "./Navbar.css"
 // import Cart from "../Components/Cart"
 
 import { useAuthContext } from "../hooks/useAuthContext";
+import { NavbarMenu } from "./NavbarMenu";
 
 import { Badge } from "@mui/material";
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
@@ -49,7 +50,7 @@ export default function Navbar() {
     const accountButton = () => {
 
         // change to accordion with logout function and or settings
-        if ( accessToken ) return <Link className="" to="/account"><AccountCircleOutlinedIcon /></Link>
+        if ( accessToken ) return <NavbarMenu />
 
         return <Link className="" to="/login"><AccountCircleOutlinedIcon /></Link>
     }
@@ -64,11 +65,7 @@ export default function Navbar() {
                     <Link className="" to="/CartPage">
                         {renderCart()}
                     </Link>
-
-                    {/* make this conditional to user being logged in
-                    logged in: shows log out profile and log out button
-                    logged out: shows only the profile button */}
-                    <Link className="" to="/login"><AccountCircleOutlinedIcon /></Link>
+                    {accountButton()}
                 </ul>
             </div>
             <form className="my-4 flex flex-row w-full max-w-[800px] md:w-1/2" onSubmit={handleSearch}>
@@ -82,17 +79,11 @@ export default function Navbar() {
             <CustomLink to="/page3">Page 3</CustomLink>
         </ul> */}
 
-        {/* get this to conditionally render, changes to be next to title when mobile size */}
             <ul className="m-4 hidden justify-center gap-4 w-full md:w-auto md:flex">
                 <Link className="" to="/Shop">Browse</Link>
                 <Link className="" to="/CartPage">
                     {renderCart()}
                 </Link>
-
-                {/* make this conditional to user being logged in
-                logged in: shows log out profile and log out button
-                logged out: shows only the profile button
-            */}
                 {accountButton()}
             </ul>
         </nav>
