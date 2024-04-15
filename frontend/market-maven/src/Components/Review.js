@@ -1,25 +1,39 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const Review = (props) => {
-  return (
-    <>
-      <div className="p-4 my-2 rounded-lg flex flex-col items-center">
-        <div className="overflow-hidden rounded-xl shadow-xl my-4">
-          {/* user profile picture */}
-          {/* <img
-            className="w-[300px] h-[350px] object-cover bg-blue-500 hover:scale-110 duration-300"
-            src={props.image}
-            alt={props.name}
-          /> */}
+    const [userData, setUserData] = useState(null);
 
-          <div className="bg-white w-[300px] p-2">
-            <h1 className="text-3xl text-black text-center">{props.thereview}</h1>
-          </div>
-        </div>
-      </div>
-    </>
-  );
+    useEffect(() => {
+      const fetchUser = async () => {
+        try {
+          const res = await axios.get(`http://localhost:8080/api/users/${props.userid}`);
+          setUserData(res.data);
+        } catch (error) {
+          console.error("Error fetching user data:", error);
+        }
+      };
+  
+      fetchUser();
+    }, [props.userid]);
+    
+    return (
+      <>
+          <figure className="relative rounded-2xl bg-white p-4 shadow-xl shadow-slate-900/10 mb-6">
+              <blockquote className="relative">
+                  <p className="text-lg tracking-tight text-slate-900">{props.thereview}</p>
+              </blockquote>
+              <figcaption className="relative mt-4 flex items-center justify-between border-t border-slate-100 pt-2">
+                  <div>
+                      <div className="font-display text-base text-slate-900">{userData && userData.username}</div>
+                  </div>
+                  <div className="overflow-hidden rounded-full bg-slate-50">
+                      {userData && <img alt="user" className="h-12 w-12 object-cover" src={userData.image} />}
+                  </div>
+              </figcaption>
+          </figure> 
+      </>
+    );
 };
 
 export default Review;
