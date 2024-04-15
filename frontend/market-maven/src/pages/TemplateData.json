@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "image": "https://cdn.openart.ai/stable_diffusion/3d0fbfd8a95ad2a7c960768f51cba39624c5b0d2_2000x2000.webp",
+        "title": "Mona Lisa",
+        "price": 4.00
+    },
+    {
+        "id": 2,
+        "image": "https://arnettfarms.com/wp-content/uploads/2019/11/Strawberry-Jam-1.jpg",
+        "title": "Strawberry Jam",
+        "price": 4.50
+    },
+    {
+        "id": 3,
+        "image": "https://www.worldmarket.com/dw/image/v2/BJWT_PRD/on/demandware.static/-/Sites-wm-master-catalog/default/dw427be7d3/images/large/83423_XXX_v1.jpg?sw=1150&sh=1150&sm=fit&sfrm=tif&q=80",
+        "title": "Lavender Honey",
+        "price": 24.00
+    }
+]

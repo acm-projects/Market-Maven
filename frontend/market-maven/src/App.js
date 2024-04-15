@@ -8,6 +8,8 @@ import ItemDetails from "./Components/ItemDetails";
 import CartPage from "./pages/CartPage";
 import AddItemPage from "./pages/AddItemPage";
 import CheckoutPage from "./pages/CheckoutPage";
+import Profile from "./pages/profile";
+import Chat from "./pages/chat"
 import { AuthContextProvider } from "./context/authContext";
 
 function App() {
@@ -30,6 +32,8 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/ItemDetails" element={<ItemDetails />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/chat" element={<Chat />} />
             <Route path="/ItemDetails/:id" element={<ItemDetails />} />
             <Route path="/CartPage" element={<CartPage />} />
           </Routes>
