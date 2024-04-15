@@ -1,9 +1,9 @@
 const express = require("express");
 
 // controller functions
-// const {} = 
+const { getDistance } = require('../controllers/map.controller')
 
 const router = express.Router()
 
 // GET distance between two locations
-router.get('/distance', console.log())
+router.get('/distance', getDistance)
