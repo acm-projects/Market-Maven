@@ -72,9 +72,9 @@ const CartPage = () => {
     return(
       <div>
         <Navbar/>
-        <h1 className="align-center">Cart</h1>
-        <div className="flex">
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <h1 className="align-center color-black">Cart</h1>
+        <div className="flex align-center">
+        <div sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           {items.map((item) => (
               <CartItem
                 key={item._id}
@@ -90,7 +90,7 @@ const CartPage = () => {
               />
           ))}
         </div>
-        <div className="bg-slate-200">
+        <div className="bg-slate-200 p-4 ml-7">
           <h2>Subtotal: </h2>
           <h2>Tax: </h2>
           <h2>Total: </h2>
