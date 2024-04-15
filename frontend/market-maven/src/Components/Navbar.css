@@ -3,8 +3,8 @@
     color:rgb(67,42,54);
     display: flex;
     justify-content: space-between;
-    align-items: stretch;
-    gap: 1.5rem;
+    /* align-items: stretch; */
+    /* gap: 1.5rem; */
     /* padding: 2rem; */
 
     font-family: "Archivo", sans-serif;
@@ -18,14 +18,14 @@
     font-size: 1.5rem;
 }
 .Navbar ul {
-    padding: 3px;
-    margin: 0;
+    /* padding: 3px; */
+    /* margin: 0; */
     list-style: none;
-    display: flex;
+    /* display: flex; */
     gap: 1rem;
 }
 .Navbar li {
-    padding: 3px;
+    padding: 16px;
 }
 .Navbar li.active{
     background-color: rgb(146, 120, 120);
@@ -44,8 +44,8 @@
 .Navbar a {
     color: inherit;
     text-decoration: none !important;
-    height: 100%;
+    /* height: 100%; */
     display: flex;
     align-items: center;
-    padding: .25rem;
+    /* padding: .25rem; */
 }
