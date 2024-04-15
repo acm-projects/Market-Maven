@@ -11,6 +11,8 @@ const axios = require('axios');
 // this handles access tokens already recieved by the front end w/ implicit flow
 const handleImplicitFlow = async (req, res, next) => {
 
+    // console.log(req)
+
     // token already extracted from UseGoogleLogin hook in React
     // fetch user details with the access token
     // review what scopes we'll need and adjust this as needed
@@ -18,13 +20,15 @@ const handleImplicitFlow = async (req, res, next) => {
         'https://www.googleapis.com/oauth2/v3/userinfo',
         {
             headers: {
-                Authorization: `Bearer ${accessToken}`
+                Authorization: `Bearer ${req.body.googleToken.access_token}`
             }
         }
     )
 
     // send acquired userDetails to controller
+    // console.log(userRes.data)
     req.userDetails = userRes.data
+    // console.log(req.userDetails)
     next();
 
 }
