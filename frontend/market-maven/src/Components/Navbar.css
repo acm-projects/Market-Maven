@@ -24,9 +24,6 @@
     /* display: flex; */
     gap: 1rem;
 }
-.Navbar li {
-    padding: 16px;
-}
 .Navbar li.active{
     /* background-color: rgb(146, 120, 120);
     color: white; */

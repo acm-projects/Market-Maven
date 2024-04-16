@@ -11,8 +11,6 @@ import ErrorOutlinedIcon from '@mui/icons-material/ErrorOutlined'
 
 const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID
 
-// TO-DO: fix data validation, form still works but just clean up
-// the data validation
 export const Login = () => {
 
     const navigate = useNavigate()
@@ -30,18 +28,23 @@ export const Login = () => {
     })
     const [submitted, setSubmitted] = useState(false)
 
+    // state for res error from server if error
     const [resError, setResError] = useState("")
 
     useEffect(() => {
+        const validateAuth = async () => {
+            console.log(accessToken)
+            if (localStorage.getItem("accessToken")) navigate("/profile")
+        }
 
-        // logic to redirect out of page if logged in
-
+        validateAuth();
+        
     }, [])
 
-    // TO-DO: test form data validation
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        // authentication
         try {
             const res = await axios.post('http://localhost:8080/api/auth/stored-auth/login', { ...cred });
 

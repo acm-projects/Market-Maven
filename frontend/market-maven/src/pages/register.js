@@ -13,8 +13,6 @@ const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID
 
 export const Register = (props) => {
 
-    const navigate = useNavigate()
-
     // auth context useStates
     const { setAccessToken, setRefreshToken, setUser } = useAuthContext()
 
@@ -26,14 +24,15 @@ export const Register = (props) => {
         submitted: false
     })
 
+    // state for res error from server if error
     const [resError, setResError] = useState("")
 
     const navigate = useNavigate();
 
-    // TO-DO: credentials validation
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        // authentication
         try {
             const res = await axios.post('http://localhost:8080/api/auth/stored-auth/signup', { ...cred })
             

@@ -49,7 +49,6 @@ export default function Navbar() {
 
     const accountButton = () => {
 
-        // change to accordion with logout function and or settings
         if ( accessToken ) return <NavbarMenu />
 
         return <Link className="" to="/login"><AccountCircleOutlinedIcon /></Link>
@@ -60,7 +59,7 @@ export default function Navbar() {
         <nav className="Navbar p-4 flex flex-col md:flex-row items-center">
             <div className="w-full flex flex-row justify-between md:w-auto">
                 <Link to="/" className="px-2 py-4 h-full site-title justify-center">Market Maven</Link>
-                <ul className="m-4 flex justify-center gap-4 md:w-auto md:hidden">
+                <ul className="m-4 flex justify-center gap-8 md:w-auto md:hidden">
                     <Link className="" to="/Shop">Browse</Link>
                     <Link className="" to="/CartPage">
                         {renderCart()}

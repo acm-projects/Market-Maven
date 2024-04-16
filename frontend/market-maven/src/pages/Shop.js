@@ -20,7 +20,7 @@ const Shop = () => {
   useEffect(() => {
     const fetchItems = async () => {
       // const response = await fetch(`/api/products`);
-      const response = await fetch(`/api/products`);
+      const response = await fetch(`http://localhost:8080/api/products`);
       const json = await response.json(); // array of objects
       console.log(json);
       
