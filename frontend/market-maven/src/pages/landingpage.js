@@ -1,51 +1,33 @@
 import Navbar from "../Components/Navbar"
+import React from 'react';
+import { TypeAnimation } from 'react-type-animation';
+
 
 export default function Landing() {
+
+  const sequences = [
+    { text: 'Shop for produce', wait: 1500 },
+    { text: 'Shop for art', wait: 1500 },
+    { text: 'Shop for jewelry', wait: 1500 },
+    { text: 'Shop for clothes', wait: 1500 }
+  ];
+
   return (
     <div>
       <Navbar />
-      <div className="Landing-Page" >
-        <h1 className="align-top">Crafted with skill, grown with dedication</h1>
+      <div className="Landing-Page" style={{ paddingTop: '0', flexDirection: 'column', alignItems: 'flex-start'}}>
+        <h1 className="">
+          <TypeAnimation
+            sequence={sequences.flatMap(({ text, wait }) => [text, wait])}
+            wrapper="span"
+            speed={20}
+            style={{ fontSize: '80px', display: 'inline-block' }}
+            repeat={Infinity}
+          />
+        </h1>
+        
+        
       </div>
     </div>
   )
 }
-
-
-
-
-{/*
-import React, { useEffect, useState } from 'react';
-import TextTransition, { presets } from 'react-text-transition';
-
-const TEXTS = ['Forest', 'Building', 'Tree', 'Color'];
-
-const Landing = () => {
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    const intervalId = setInterval(
-      () => setIndex((index) => index + 1),
-      3000, // every 3 seconds
-    );
-    return () => clearTimeout(intervalId);
-  }, []);
-
-  return (
-    <div>
-      <h1>
-        <TextTransition springConfig={presets.wobbly}>
-          {TEXTS[index % TEXTS.length]}
-        </TextTransition>
-      </h1>
-    </div>
-  );
-};
-
-export default Landing;
-
-
-Market Maven
-One stop shop for all local shoppes(farmers, gardeners, artisans, )
- 
-*/}
