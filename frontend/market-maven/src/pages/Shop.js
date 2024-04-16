@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import data from "./data.json";
+// import data from "./data.json";
 import Item from "../Components/Item";
 import Navbar from "../Components/Navbar";
 
@@ -72,10 +72,7 @@ const Shop = () => {
         <Navbar />
         <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 px-2 bg-white">
           {items.map((item) => (
-            <Link
-              key={item._id}
-              to={{ pathname: `/ItemDetails/${item._id}`, state: item }}
-            >
+            <Link key={item._id} to={{ pathname: `/ItemDetails/${item._id}`, state: item }} >
               <Item
                 key={item._id}
                 name={item.productTitle}
