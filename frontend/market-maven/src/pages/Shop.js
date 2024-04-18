@@ -4,7 +4,8 @@ import { Link, useLocation } from "react-router-dom";
 // import data from "./data.json";
 import Item from "../Components/Item";
 import Navbar from "../Components/Navbar";
-
+import ShopSortBar from "../Components/ShopSortBar";
+import Filter from "../Components/Filter";
 import axios from "axios";
 
 const Shop = () => {
@@ -68,11 +69,18 @@ const Shop = () => {
 
   return (
     <>
-      <div>
-        <Navbar />
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 px-2 bg-white">
+      <Navbar />
+      <ShopSortBar />
+      <div className="flex flex-row">
+        <Filter />
+        {/* Products Grid */}
+        <section aria-labelledby="products-heading" class="pb-24 pt-6">
+          <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-1 gap-2 px-20 bg-white">
           {items.map((item) => (
-            <Link key={item._id} to={{ pathname: `/ItemDetails/${item._id}`, state: item }} >
+            <Link
+              key={item._id}
+              to={{ pathname: `/ItemDetails/${item._id}`, state: item }}
+            >
               <Item
                 key={item._id}
                 name={item.productTitle}
@@ -87,17 +95,7 @@ const Shop = () => {
             </Link>
           ))}
         </div>
-      </div>
-      <div>
-        {cart.map((item) => (
-          <div>
-            <h1>{item[0]}</h1>
-            <h2>Quantity: {item[1]}</h2>
-            <button onClick={() => handleRemove(item[0], item[1])}>
-              Remove
-            </button>
-          </div>
-        ))}
+        </section>
       </div>
     </>
   );
