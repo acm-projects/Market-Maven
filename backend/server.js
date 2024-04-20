@@ -28,7 +28,7 @@ const app = express()
 // middleware  
 app.use(express.json())
 app.use(cors());
-app.use(OAuthMiddleware.handleImplicitFlow)
+// app.use(OAuthMiddleware.handleImplicitFlow)
 
 // routes
 app.use('/api/auth/stored-auth', storedAuthRoutes)
