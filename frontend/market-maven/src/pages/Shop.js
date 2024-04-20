@@ -75,6 +75,9 @@ const Shop = () => {
         <Filter />
         {/* Products Grid */}
         <section aria-labelledby="products-heading" class="pb-24 pt-6">
+          <div>
+            Hello
+          </div>
           <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-1 gap-2 px-20 bg-white">
           {items.map((item) => (
             <Link
