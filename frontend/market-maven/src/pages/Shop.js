@@ -14,6 +14,7 @@ const Shop = () => {
 
   const [items, setItems] = useState([]);
   const [cart, setCart] = useState([]);
+  const [sortOrder, setSortOrder] = useState("");
 
   const search = new URLSearchParams(location.search).get('searchQuery');
   const zip = new URLSearchParams(location.search).get('zip');
@@ -32,6 +33,18 @@ const Shop = () => {
 
     fetchItems();
   }, []);
+
+  // Function to sort items based on the selected order
+  const sortItems = (order) => {
+    let sortedItems = [...items];
+    if (order === "lowToHigh") {
+      sortedItems.sort((a, b) => a.price - b.price);
+    } else if (order === "highToLow") {
+      sortedItems.sort((a, b) => b.price - a.price);
+    }
+    setItems(sortedItems);
+    setSortOrder(order); // Optionally, you can set the sort order state here
+  };
 
   const addToCart = (item) => {
     if (cart.map((cartItem) => cartItem[0]).includes(item)) {
@@ -70,7 +83,7 @@ const Shop = () => {
   return (
     <>
       <Navbar />
-      <ShopSortBar />
+      <ShopSortBar sortItems={sortItems} />
       <div className="flex flex-row">
         <Filter />
         {/* Products Grid */}
