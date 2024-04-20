@@ -36,10 +36,10 @@ const login = async (req, res, next) => {
     }
   )
 
-  // send acquired userDetails to controller
-  // console.log(userRes.data)
-  req.userDetails = userRes.data
+  // authenticate user
 
+  // save acquired user details
+  req.userDetails = userRes.data
 
     // generate access token
     const accessToken = jwt.sign(
@@ -63,7 +63,7 @@ const login = async (req, res, next) => {
       process.env.REFRESH_TOKEN_SECRET,
       { expiresIn: '1d' }
     )
-    res.json({ accessToken, refreshToken, email: req.userDetails.email, username: req.userDetails.name })
+    res.json({ accessToken, refreshToken, email: req.userDetails.email, username: req.userDetails.name, user: req.userDetails })
 
 }
 
@@ -88,7 +88,17 @@ const refresh = (req, res) => {
 const signup = async (req, res, next) => {
 
   // extract userDetails from Google
-  await googleOauthHandler.handleImplicitFlow(req, res);
+  const userRes = await axios.get(
+    'https://www.googleapis.com/oauth2/v3/userinfo',
+    {
+      headers: {
+        Authorization: `Bearer ${req.body.googleToken.access_token}`
+      }
+    }
+  )
+
+  // save acquired user details
+  req.userDetails = userRes.data
 
 
 }
@@ -131,8 +141,6 @@ const logout = async (req, res) => {
     console.error('Error:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
-
-  // need to handle Market Maven tokens as well
 
 }
 

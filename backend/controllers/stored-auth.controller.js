@@ -163,7 +163,7 @@ const signup = async (req, res) => {
     // create new user in the db
     const newUser = new User({ username, email, password: hash });
     const savedUser = await newUser.save();
-    res.status(200).json({ message: 'Succesful sign up' })
+    // res.status(200).json({ message: 'Succesful sign up' })
 
     // generate access token
     const accessToken = jwt.sign(
@@ -199,7 +199,7 @@ const signup = async (req, res) => {
     // })
 
     // send access token 
-    res.json({ accessToken, refreshToken, email, username })
+    res.status(200).json({ accessToken, refreshToken, email, username })
 
 }
 
