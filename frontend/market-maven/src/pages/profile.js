@@ -1,6 +1,8 @@
 import React from "react";
 import "./profile.css";
 
+import Navbar from '../Components/Navbar';
+
 function Profile() {
   // REPLACE THE EMPTY STRING IN ITEMS FOR IMAGE PATH TO THE PATH OF THE ACTUAL IMAGE
   const items = [
@@ -101,7 +103,9 @@ function Profile() {
           </form>
         </div>
 
+
       </div>
+
     </div>
   );
 }

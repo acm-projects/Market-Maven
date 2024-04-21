@@ -1,43 +1,50 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react"
 import "./login.css"
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"
 import axios from 'axios'
 
-import { useAuthContext } from "../hooks/useAuthContext";
+import { useAuthContext } from "../hooks/useAuthContext"
 
-import { GoogleOAuthProvider } from "@react-oauth/google";
-import { GoogleLoginButton } from "../Components/GoogleLoginButton";
-import ErrorOutlinedIcon from '@mui/icons-material/ErrorOutlined';
+import { GoogleOAuthProvider } from "@react-oauth/google"
+import { GoogleLoginButton } from "../Components/GoogleLoginButton"
+import ErrorOutlinedIcon from '@mui/icons-material/ErrorOutlined'
 
 const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID
 
-// Maybe this and the register screen could be refactored to be one page ?
 export const Login = () => {
 
+    const navigate = useNavigate()
+
+    // auth context states
     const {
         accessToken, setAccessToken,
         refresh, setRefreshToken,
-        user, setUser } = useAuthContext();
+        user, setUser } = useAuthContext()
 
-    const navigate = useNavigate();
-
+    // state for the form
     const [cred, setCred] = useState({
         email: '',
-        password: ''
+        password: '',
     })
+    const [submitted, setSubmitted] = useState(false)
 
+    // state for res error from server if error
     const [resError, setResError] = useState("")
 
     useEffect(() => {
+        const validateAuth = async () => {
+            console.log(accessToken)
+            if (localStorage.getItem("accessToken")) navigate("/profile")
+        }
 
-        // logic to redirect out of page if logged in
-
+        validateAuth();
+        
     }, [])
 
-    // TO-DO: test form data validation
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        // authentication
         try {
             const res = await axios.post('http://localhost:8080/api/auth/stored-auth/login', { ...cred });
 
@@ -83,8 +90,8 @@ export const Login = () => {
                 <div className="flex flex-col justify-center items-center">
                     {renderErrorMessage()}
                     <form className="w-64 text-center flex flex-col items-center justify-center" onSubmit={handleSubmit}>
-                        <input className="mb-3 p-3 border border-black rounded-full w-full text-md" type="email" value={cred.email} onChange={(e) => setCred({ ...cred, email: e.target.value })} placeholder="Email" id="email" name="email" />
-                        <input className="mb-3 p-3 border border-black rounded-full w-full text-md" type="password" value={cred.password} onChange={(e) => setCred({ ...cred, password: e.target.value })} placeholder="Password" id="password" name="password" />
+                        <input className="mb-3 p-3 border border-black rounded-full w-full text-md" type="email" value={cred.email} onChange={(e) => {setCred({ ...cred, email: e.target.value}); setSubmitted(false)}} placeholder="Email" id="email" name="email" />
+                        <input className="mb-3 p-3 border border-black rounded-full w-full text-md" type="password" value={cred.password} onChange={(e) => {setCred({ ...cred, password: e.target.value}); setSubmitted(false)}} placeholder="Password" id="password" name="password" />
                         <div className="flex w-full justify-between m-3">
                             <button className="border-none bg-none hover:underline" onClick={() => navigate('/register')}>Sign Up</button>
                             <button className="border-none bg-none hover:underline" /*onClick={() => navigate('/')}*/>Forgot password?</button>

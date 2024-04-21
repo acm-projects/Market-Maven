@@ -1,10 +1,11 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import data from "./data.json";
+// import data from "./data.json";
 import Item from "../Components/Item";
 import Navbar from "../Components/Navbar";
-
+import ShopSortBar from "../Components/ShopSortBar";
+import Filter from "../Components/Filter";
 import axios from "axios";
 
 const Shop = () => {
@@ -13,6 +14,7 @@ const Shop = () => {
 
   const [items, setItems] = useState([]);
   const [cart, setCart] = useState([]);
+  const [sortOrder, setSortOrder] = useState("");
 
   const search = new URLSearchParams(location.search).get('searchQuery');
   const zip = new URLSearchParams(location.search).get('zip');
@@ -20,7 +22,7 @@ const Shop = () => {
   useEffect(() => {
     const fetchItems = async () => {
       // const response = await fetch(`/api/products`);
-      const response = await fetch(`/api/products`);
+      const response = await fetch(`http://localhost:8080/api/products`);
       const json = await response.json(); // array of objects
       console.log(json);
       
@@ -31,6 +33,18 @@ const Shop = () => {
 
     fetchItems();
   }, []);
+
+  // Function to sort items based on the selected order
+  const sortItems = (order) => {
+    let sortedItems = [...items];
+    if (order === "lowToHigh") {
+      sortedItems.sort((a, b) => a.price - b.price);
+    } else if (order === "highToLow") {
+      sortedItems.sort((a, b) => b.price - a.price);
+    }
+    setItems(sortedItems);
+    setSortOrder(order); // Optionally, you can set the sort order state here
+  };
 
   const addToCart = (item) => {
     if (cart.map((cartItem) => cartItem[0]).includes(item)) {
@@ -68,9 +82,16 @@ const Shop = () => {
 
   return (
     <>
-      <div>
-        <Navbar />
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 px-2 bg-white">
+      <Navbar />
+      <ShopSortBar sortItems={sortItems} />
+      <div className="flex flex-row">
+        <Filter />
+        {/* Products Grid */}
+        <section aria-labelledby="products-heading" class="pb-24 pt-6">
+          <div>
+            Hello
+          </div>
+          <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-1 gap-2 px-20 bg-white">
           {items.map((item) => (
             <Link
               key={item._id}
@@ -90,17 +111,7 @@ const Shop = () => {
             </Link>
           ))}
         </div>
-      </div>
-      <div>
-        {cart.map((item) => (
-          <div>
-            <h1>{item[0]}</h1>
-            <h2>Quantity: {item[1]}</h2>
-            <button onClick={() => handleRemove(item[0], item[1])}>
-              Remove
-            </button>
-          </div>
-        ))}
+        </section>
       </div>
     </>
   );

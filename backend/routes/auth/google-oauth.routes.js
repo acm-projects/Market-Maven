@@ -2,7 +2,10 @@ const express = require('express')
 const router = express.Router()
 
 const {
-    
+    login,
+    signup,
+    refresh,
+    logout
 } = require('../../controllers/google-oauth.controller')
 
 
