@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { APIProvider, Map, AdvancedMarker, Pin } from '@vis.gl/react-google-maps';
 
+// items prop takes in an array of items, for individual itemdetails pages you can pass an array of one item, the one that the page is for
 export const GoogleMap = (props) => {
     const [locations, setLocations] = useState([]);
 
