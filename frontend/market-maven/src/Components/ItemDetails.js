@@ -90,12 +90,12 @@ const ItemDetails = () => {
               </figcaption>
 
               {/* Product Information */}
-              <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-400 mb-2">
+              <h2 class="text-4xl font-bold text-gray-800 dark:text-gray-400 mb-2">
                 {" "}
                 {item.productTitle}{" "}
               </h2>
               <div class="flex mb-4">
-                <div class="mr-4">
+                <div class="mr-4 text-2xl">
                   <span class="font-bold text-gray-700 dark:text-gray-400">
                     {" "}
                     Price:{" "}
@@ -105,7 +105,7 @@ const ItemDetails = () => {
                     ${item.price}{" "}
                   </span>
                 </div>
-                <div>
+                <div class="text-2xl">
                   <span class="font-bold text-gray-700 dark:text-gray-400">
                     {" "}
                     Stock:{" "}

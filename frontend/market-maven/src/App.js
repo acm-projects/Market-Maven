@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Landing from "./pages/landingpage";
 import { Login } from "./pages/login";
 import { Register } from "./pages/register";
@@ -19,6 +19,10 @@ function App() {
   const toggleForm = (formName) => {
     setCurrentForm(formName);
   }
+
+  useEffect(() => {
+    document.title = 'Market Maven';
+  }, []);
 
   return (
     <>
