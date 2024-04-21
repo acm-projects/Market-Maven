@@ -34,28 +34,28 @@ export default class ChatContent extends Component {
       image:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRZ6tM7Nj72bWjr_8IQ37Apr2lJup_pxX_uZA&usqp=CAU",
       type: "",
-      msg: "Awesome these days.",
+      msg: "I'm good. I want to inquire about a product you're selling.",
     },
     {
       key: 5,
       image:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTA78Na63ws7B7EAWYgTr9BxhX_Z8oLa1nvOA&usqp=CAU",
       type: "other",
-      msg: "Finally. What's the plan?",
+      msg: "Sure! Which product were you interested in?",
     },
     {
       key: 6,
       image:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRZ6tM7Nj72bWjr_8IQ37Apr2lJup_pxX_uZA&usqp=CAU",
       type: "",
-      msg: "what plan mate?",
+      msg: "The Painting",
     },
     {
       key: 7,
       image:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTA78Na63ws7B7EAWYgTr9BxhX_Z8oLa1nvOA&usqp=CAU",
       type: "other",
-      msg: "I'm taliking about the tutorial",
+      msg: "Good choice, what you want to know about it?",
     },
   ];
 
