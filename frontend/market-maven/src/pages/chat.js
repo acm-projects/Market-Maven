@@ -5,9 +5,11 @@ import Chatbody from "./../Components/chatBody"
 
 export default function Chat(){
     return (
-    <div className="container">
-        <Nav/>
-        <Chatbody/>
+    <div className="chat-main">
+        <div className="chat-main">
+            <Nav/>
+            <Chatbody/>
+        </div>
     </div>
     )
 }
