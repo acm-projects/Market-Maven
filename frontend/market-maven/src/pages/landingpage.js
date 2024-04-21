@@ -15,7 +15,7 @@ export default function Landing() {
   return (
     <div>
       <Navbar />
-      <div className="Landing-Page" style={{ paddingTop: '0', flexDirection: 'column', alignItems: 'flex-start'}}>
+      <div className="Landing-Page" style={{ paddingLeft: '1em', paddingTop: '16em', flexDirection: 'column', alignItems: 'flex-start'}}>
         <h1 className="">
           <TypeAnimation
             sequence={sequences.flatMap(({ text, wait }) => [text, wait])}
@@ -26,7 +26,7 @@ export default function Landing() {
           />
         </h1>
         
-        
+        <h4 className="text-white pl-1 pt-2">search and shop from farmers, artists, and crafts people. support local businesses.</h4>
       </div>
     </div>
   )
