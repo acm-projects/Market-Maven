@@ -6,6 +6,10 @@ export const GoogleMap = (props) => {
 
     useEffect(() => {
         const fetchCoordinates = async () => {
+            if (!props.items || props.items.length === 0) {
+                return; // No items to process, exit early
+            }
+    
             const coordsPromises = props.items.map(item =>
                 fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${item.zip}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`)
                     .then(response => response.json())
@@ -13,26 +17,30 @@ export const GoogleMap = (props) => {
                         if (data.results.length > 0) {
                             return { _id: item._id, coordinates: data.results[0].geometry.location };
                         }
-                        throw new Error(`No results found for ZIP: ${item.zip}`);
+                        console.log(`No results found for ZIP: ${item.zip}`); // Log instead of throw
+                        return null; // Return null for no result
                     })
-                    .catch(error => console.error(`Error fetching coordinates for ${item.zip}:`, error))
+                    .catch(error => {
+                        console.error(`Error fetching coordinates for ${item.zip}:`, error);
+                        return null; // Return null on error
+                    })
             );
-
+    
             Promise.all(coordsPromises)
                 .then(results => {
-                    setLocations(results);
-                })
-                .catch(error => console.error('Error resolving all coordinates:', error));
+                    const validLocations = results.filter(result => result !== null); // Filter out null results
+                    setLocations(validLocations);
+                });
         };
-
+    
         fetchCoordinates();
-    }, [props.items]); // Dependency on props.items to re-run when items change
-
+    }, [props.items]);
+    
     return (
         <div>
             <APIProvider apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
                 <div className="h-64 w-full">
-                    <Map zoom={7} center={{ lat: 32.9857019, lng: -96.7528223 }} mapId={process.env.REACT_APP_GOOGLE_MAPS_MAP_ID}>
+                    <Map zoom={props.zoom == null ? 9 : props.zoom} center={!props.single ? { lat: 32.9857019, lng: -96.7528223 } : locations[0].coordinates} mapId={process.env.REACT_APP_GOOGLE_MAPS_MAP_ID}>
                         {locations.map(location => (
                             location.coordinates && (
                                 <AdvancedMarker key={location._id} position={location.coordinates}>
