@@ -10,12 +10,13 @@ import Filter from "../Components/Filter";
 import axios from "axios";
 
 const Shop = () => {
-
+  // 472836
   const location = useLocation();
 
   const [items, setItems] = useState([]);
   const [cart, setCart] = useState([]);
   const [sortOrder, setSortOrder] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
 
   const search = new URLSearchParams(location.search).get('searchQuery');
   const zip = new URLSearchParams(location.search).get('zip');
@@ -44,8 +45,34 @@ const Shop = () => {
       sortedItems.sort((a, b) => b.price - a.price);
     }
     setItems(sortedItems);
-    setSortOrder(order); // Optionally, you can set the sort order state here
+    setSortOrder(order); 
   };
+
+// // Function to handle category selection
+// const handleCategorySelect = async (category) => {
+//   try {
+//     const response = await axios.get(`http://localhost:8080/api/products?categories=${category}`);
+//     console.log(response);
+//     setItems(response.data);
+//   } catch (error) {
+//     console.error("Error filtering products", error);
+//   }
+// };
+
+  // Function to handle category selection
+  const handleCategorySelect = (categoryId) => {
+    setSelectedCategory(categoryId);
+  };
+
+  // Filter products based on the selected category
+  const filteredItems = selectedCategory
+    ? items.filter(item => item.category === selectedCategory)
+    : items;
+
+  // const [selectedItem, setSelectedItem] = useState([]);
+  // const handleItemClick = (item) => {
+  //   setSelectedItem(item);
+  // };
 
   const addToCart = (item) => {
     if (cart.map((cartItem) => cartItem[0]).includes(item)) {
@@ -76,24 +103,19 @@ const Shop = () => {
     );
   };
 
-  const [selectedItem, setSelectedItem] = useState([]);
-  const handleItemClick = (item) => {
-    setSelectedItem(item);
-  };
-
   return (
     <>
       <Navbar />
       <ShopSortBar sortItems={sortItems} />
       <div className="flex flex-row">
-        <Filter />
+        <Filter onCategorySelect={handleCategorySelect} />
         {/* Products Grid */}
-        <section aria-labelledby="products-heading" class="pb-24 p-6">
+        <section aria-labelledby="products-heading" className="pb-24 p-6">
           <div>
             <GoogleMap items={items}/>
           </div>
           <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-1 gap-2 px-20 bg-white">
-          {items.map((item) => (
+          {filteredItems.map((item) => (
             <Link
               key={item._id}
               to={{ pathname: `/ItemDetails/${item._id}`, state: item }}
@@ -105,7 +127,7 @@ const Shop = () => {
                 image={item.image}
                 description={item.description}
                 quantitiy={item.stock}
-                addToCart={addToCart}
+                //addToCart={addToCart}
                 items={items}
                 setItems={setItems}
               />

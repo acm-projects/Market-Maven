@@ -6,16 +6,16 @@ import { TypeAnimation } from 'react-type-animation';
 export default function Landing() {
 
   const sequences = [
-    { text: 'Shop for produce', wait: 1500 },
-    { text: 'Shop for art', wait: 1500 },
-    { text: 'Shop for jewelry', wait: 1500 },
-    { text: 'Shop for clothes', wait: 1500 }
+    { text: 'Shop for Fresh Produce', wait: 1500 },
+    { text: 'Shop for Artwork', wait: 1500 },
+    { text: 'Shop for Baked Goods', wait: 1500 },
+    { text: 'Shop for Personalized Gifts', wait: 1500 }
   ];
 
   return (
     <div>
       <Navbar />
-      <div className="Landing-Page" style={{ paddingLeft: '1em', paddingTop: '16em', flexDirection: 'column', alignItems: 'flex-start'}}>
+      <div className="Landing-Page" style={{ paddingTop: '20vh', flexDirection: 'column', alignItems: 'center'}}>
         <h1 className="">
           <TypeAnimation
             sequence={sequences.flatMap(({ text, wait }) => [text, wait])}
@@ -26,7 +26,7 @@ export default function Landing() {
           />
         </h1>
         
-        <h4 className="text-white pl-1 pt-2">search and shop from farmers, artists, and crafts people. support local businesses.</h4>
+        <h4 className="text-white pl-1 pt-4">Discover Your Connection to Local Artisans and Farmers</h4>
       </div>
     </div>
   )
