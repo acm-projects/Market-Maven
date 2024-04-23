@@ -12,7 +12,7 @@ const ShopSortBar = (props) => {
       {/* Browse Bar and Sort */}
       <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-19">
-          <h1 className="text-4xl font-bold tracking-tight text-gray-900">
+          <h1 className="text-4xl font-bold tracking-tight" style={{ color: '#472836' }}>
             Browse
           </h1>
 
@@ -56,12 +56,14 @@ const ShopSortBar = (props) => {
                     {/* Menu items */}
                     <button
                       className="text-gray-500 block px-4 py-2 text-sm"
+                      style={{ color: '#472836' }}
                       onClick={() => props.sortItems("lowToHigh")}
                     >
                       Price: Low to High
                     </button>
                     <button
                       className="text-gray-500 block px-4 py-2 text-sm"
+                      style={{ color: '#472836' }}
                       onClick={() => props.sortItems("highToLow")}
                     >
                       Price: High to Low
