@@ -1,13 +1,18 @@
 const Product = require('../models/product.model')
 const mongoose = require('mongoose')
 
-//GET all products
+/**
+ * 
+ * @description query a series of products
+ * @route GET /api/products/
+ * @access Public
+ */
 const getProducts = async (req, res) => {
     try {
-        console.log(req.query);
+        console.log("Query: " + req.query);
         let queryStr = JSON.stringify(req.query);
         queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
-        console.log(queryStr);
+        console.log("Query string: " + queryStr);
         const queryObj = JSON.parse(queryStr);
         console.log(queryObj);
         
