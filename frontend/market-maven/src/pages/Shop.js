@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 // import data from "./data.json";
+import {GoogleMap} from "../Components/GoogleMap";
 import Item from "../Components/Item";
 import Navbar from "../Components/Navbar";
 import ShopSortBar from "../Components/ShopSortBar";
@@ -109,9 +110,9 @@ const Shop = () => {
       <div className="flex flex-row">
         <Filter onCategorySelect={handleCategorySelect} />
         {/* Products Grid */}
-        <section aria-labelledby="products-heading" className="pb-24 pt-6">
+        <section aria-labelledby="products-heading" className="pb-24 p-6">
           <div>
-            {/* MAP GOES HERE */}
+            <GoogleMap items={items}/>
           </div>
           <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-1 gap-2 px-20 bg-white">
           {filteredItems.map((item) => (

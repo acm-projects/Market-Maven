@@ -26,7 +26,7 @@ export default function Landing() {
           />
         </h1>
         
-        
+        <h4 className="text-white pl-1 pt-2">search and shop from farmers, artists, and crafts people. support local businesses.</h4>
       </div>
     </div>
   )

@@ -18,6 +18,7 @@ const CartPage = () => {
 
   const [items, setItems] = useState([]);
   const [cart, setCart] = useState([]);
+  
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -106,10 +107,22 @@ const CartPage = () => {
 
 
 const CartItem = (props) => {
-  const event = data[0];
+  const [quantity, setQuantity] = useState(1); // State for the quantity
+
+  // Function to handle incrementing the quantity
+  const handleIncrement = () => {
+    setQuantity(quantity + 1);
+  };
+
+  // Function to handle decrementing the quantity
+  const handleDecrement = () => {
+    if (quantity >= 1) {
+      setQuantity(quantity - 1);
+    }
+  };
   return(
-    <Card sx={{ display: 'flex', width: 600, height: 200, flexDirection: 'row'}}>
-      <div className="flex">
+    <Card sx={{ width: 600, height: 200}}>
+      <div className="flex justify-between">
     <Box sx={{ display: 'flex', alignItems: 'center', pl: 1 }}>
       <CardMedia
           component="img"
@@ -118,31 +131,25 @@ const CartItem = (props) => {
           alt={props.name}
         />
       </Box>
-      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <CardContent sx={{ flex: '1 0 auto' }}>
           <Typography gutterBottom component="div" variant="h5">
             {props.name}
           </Typography>
-          <Typography variant="subtitle1" color="text.secondary" component="div">
-            {props.description}
-          </Typography>
+          
         </CardContent>
-        
-      </Box>
-      <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1, pr:1}}>
+      <div className="flex items-center pl-1 pb-1 pr-3 justify-end">
         <p>Quantity: </p>
-        <div className="justify-items-end	">
-          <ButtonGroup
-            disableElevation
-            variant="contained"
-            aria-label="Disabled button group"
-          >
-            <Button>-</Button>
-            <TextField id="outlined-basic" variant="outlined" defaultValue="1" sx={{ width: 60 }}/>
-            <Button>+</Button>
-          </ButtonGroup>
-        </div>
-        </Box>
+        <div className="flex-grow" />
+        <ButtonGroup
+          disableElevation
+          variant="contained"
+          aria-label="Quantity"
+        >
+          <Button onClick={handleDecrement}>-</Button>
+          <TextField id="outlined-basic" variant="outlined" value={quantity} sx={{ width: 60 }} />
+          <Button onClick={handleIncrement}>+</Button>
+        </ButtonGroup>
+      </div>
         </div>
     </Card>
   );
