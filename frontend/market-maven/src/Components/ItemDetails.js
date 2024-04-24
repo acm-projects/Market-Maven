@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
+import {GoogleMap} from "../Components/GoogleMap"
 import axios from "axios";
 import Review from "../Components/Review";
 
@@ -147,8 +148,21 @@ const ItemDetails = () => {
                     Add to Cart
                   </button>
                 </div>
+                <div class="w-full px-2">
+
+                  {/* needs proper routing, probablyty won't finish in time */}
+                  <Link to="/chat" class="flex w-full bg-gray-900 dark:bg-gray-500 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-500 dark:hover:bg-gray-700 justify-center">
+                    Chat w/ Vendor
+                  </Link>
+                </div>
+
               </div>
             </div>
+          </div>
+
+          <div className="my-4 mb-8">
+          <GoogleMap items={[item]} zoom={10} single={false}/>
+
           </div>
 
           {/* REVIEWS */}

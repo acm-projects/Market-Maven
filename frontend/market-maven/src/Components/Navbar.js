@@ -23,7 +23,18 @@ export default function Navbar() {
     const navigate = useNavigate();
 
     // useffect to get cart amount, zip, etc
-    useEffect(() => {}, [])
+    useEffect(() => {
+        const fetchCartData = async () => {
+
+        }
+
+        const fetchZip = async () => {
+
+        }
+
+        fetchCartData();
+        fetchZip();
+    }, [])
 
     const handleSearch = (e) => {
         e.preventDefault();

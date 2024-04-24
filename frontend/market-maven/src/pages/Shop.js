@@ -24,7 +24,7 @@ const Shop = () => {
   useEffect(() => {
     const fetchItems = async () => {
       // const response = await fetch(`/api/products`);
-      const response = await fetch(`http://localhost:8080/api/products`);
+      const response = await fetch(`http://localhost:8080/api/products?${search ? `search=${search}` : ""}`);
       const json = await response.json(); // array of objects
       console.log(json);
       
@@ -34,7 +34,7 @@ const Shop = () => {
       };
 
     fetchItems();
-  }, []);
+  }, [search, zip]);
 
   // Function to sort items based on the selected order
   const sortItems = (order) => {
