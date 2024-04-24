@@ -11,12 +11,14 @@ const getUsers = async (req, res) => {
 // GET a single user
 const getUser = async (req, res) => {
     const {id} = req.params // grabs id
+    console.log(id)
 
     if (!mongoose.Types.ObjectId.isValid(id)) { // check for valid id
+        console.log("404")
         return res.status(404).json({error: 'No such User'})
     }
 
-    const user = await User.findById(id)
+    const user = await User.findById(id).select("-password -orderHistory")
     
     if(!user) {
         return res.status(404).json({error: 'no such User'})

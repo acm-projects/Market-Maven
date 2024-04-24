@@ -26,7 +26,7 @@ const menuOptions = [
 
 // 
 export const NavbarMenu = () => {
-    const { setAccessToken, setRefreshToken, setUser, user } = useAuthContext();
+    const { setAccessToken, setRefreshToken, setId, setUser, user, id} = useAuthContext();
     const [menuOpen, setMenuOpen] = useState(false);
     const navigate = useNavigate();
 
@@ -37,9 +37,11 @@ export const NavbarMenu = () => {
             setAccessToken(null);
             setRefreshToken(null);
             setUser(null);
+            setId(null);
             localStorage.removeItem("accessToken");
             localStorage.removeItem("refreshToken");
             localStorage.removeItem("username");
+            localStorage.removeItem("id")
             navigate("/");
         } else {
             navigate(option);

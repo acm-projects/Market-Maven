@@ -64,7 +64,7 @@ const login = async (req, res) => {
     //     maxAge: 1000 * 60 * 60 * 24     // lifetime measured in ms
     // })
 
-    res.json({ accessToken, refreshToken, email, username: foundUser.username })
+    res.json({ accessToken, refreshToken, email, id: foundUser._id, username: foundUser.username })
 
 }
 
@@ -199,7 +199,7 @@ const signup = async (req, res) => {
     // })
 
     // send access token 
-    res.status(200).json({ accessToken, refreshToken, email, username })
+    res.status(200).json({ accessToken, refreshToken, email, id: newUser._id, username })
 
 }
 

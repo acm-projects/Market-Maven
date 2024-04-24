@@ -31,11 +31,23 @@ const ItemDetails = () => {
         console.log("Reviews Data:", reviewsResponse.data);
         setReviews(reviewsResponse.data);
 
-        const vendorResponse = await axios.get(
-          `http://localhost:8080/api/vendors/${res.data.vendor}`
-        );
-        console.log("Vendor Data:", vendorResponse.data);
-        setVendor(vendorResponse.data);
+        try {
+          const vendorResponse = await axios.get(
+            `http://localhost:8080/api/vendors/${res.data.vendor}`
+          );
+          console.log("Vendor Data:", vendorResponse.data);
+          setVendor(vendorResponse.data);
+
+        // stop gap for demo:
+        // since users and vendors exist on different collections, ids cant exists between vendor and user
+        } catch (error) {
+          const userResponse = await axios.get(
+            `http://localhost:8080/api/users/${res.data.vendor}`
+          )
+          
+          setVendor(userResponse.data);
+        }
+
       } catch (error) {
         console.error("Error fetching data:", error);
       }

@@ -14,7 +14,7 @@ const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID
 export const Register = (props) => {
 
     // auth context useStates
-    const { setAccessToken, setRefreshToken, setUser } = useAuthContext()
+    const { setAccessToken, setRefreshToken, setUser, setId } = useAuthContext()
 
     // state for the form
     const [cred, setCred] = useState({
@@ -41,10 +41,12 @@ export const Register = (props) => {
             setAccessToken(res.data.accessToken)
             setRefreshToken(res.data.refreshToken)
             setUser(res.data.username)
+            setId(res.data.id)
 
             localStorage.setItem("accessToken", res.data.accessToken)
             localStorage.setItem("refreshToken", res.data.refreshToken)
             localStorage.setItem("username", res.data.username)
+            localStorage.setItem("id", res.data.id)
 
             navigate("/")
         }

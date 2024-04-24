@@ -12,16 +12,6 @@ const mongoose = require('mongoose')
 const getProducts = async (req, res) => {
     try {
 
-        // old version using the Mongoose find function
-        // console.log("Query: " + req.query);
-        // let queryStr = JSON.stringify(req.query);
-        // queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
-        // console.log("Query string: ", queryStr == "{}");
-        // const queryObj = JSON.parse(queryStr);
-        // console.log(queryObj);
-        // let products = await Product.find(queryObj).sort({createdAt: -1})
-
-        
         // pull search from request query parameters
         const { search, zip } = req.query
 
@@ -73,10 +63,10 @@ const getProduct = async (req, res) => {
 
 //POST a new product
 const createProduct = async (req, res) => {
-    const {productTitle, vendor, productReviews, category, description, price, stock, zip, image} = req.body
+    const newProduct = req.body
 
     try { // add doc to db
-        const product = await Product.create({productTitle, vendor, productReviews, category, description, price, stock, zip, image});
+        const product = await Product.create(newProduct);
         res.status(200).json(product);
     } catch (error){
         res.status(400).json({error: error.message})

@@ -6,6 +6,7 @@ export const AuthContextProvider = ({ children }) => {
     const [accessToken, setAccessToken] = useState(null)
     const [refreshToken, setRefreshToken] = useState(null)
     const [user, setUser] = useState(null)
+    const [id, setId] = useState(null)
 
     const [loading, setLoading] = useState(true)
 
@@ -13,10 +14,12 @@ export const AuthContextProvider = ({ children }) => {
         const storedAccessToken = localStorage.getItem("accessToken")
         const storedRefreshToken = localStorage.getItem("refreshToken")
         const storedUser = localStorage.getItem("username")
+        const storedId = localStorage.getItem("id")
 
         setAccessToken(storedAccessToken)
         setRefreshToken(storedRefreshToken)
         setUser(storedUser)
+        setId(storedId)
 
         setLoading(false)
     }, [])
@@ -26,6 +29,7 @@ export const AuthContextProvider = ({ children }) => {
             accessToken, setAccessToken,
             refreshToken, setRefreshToken,
             user, setUser,
+            id, setId,
             loading
             }}>
             { children }
