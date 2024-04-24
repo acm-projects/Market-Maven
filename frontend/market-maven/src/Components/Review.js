@@ -10,6 +10,7 @@ const Review = (props) => {
         const res = await axios.get(
           `http://localhost:8080/api/users/${props.userid}`
         );
+        console.log("Review user", res)
         setUserData(res.data);
       } catch (error) {
         console.error("Error fetching user data:", error);

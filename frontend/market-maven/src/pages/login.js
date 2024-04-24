@@ -19,7 +19,9 @@ export const Login = () => {
     const {
         accessToken, setAccessToken,
         refresh, setRefreshToken,
-        user, setUser } = useAuthContext()
+        user, setUser,
+        id, setId    
+    } = useAuthContext()
 
     // state for the form
     const [cred, setCred] = useState({
@@ -33,7 +35,6 @@ export const Login = () => {
 
     useEffect(() => {
         const validateAuth = async () => {
-            console.log(accessToken)
             if (localStorage.getItem("accessToken")) navigate("/profile")
         }
 
@@ -53,10 +54,12 @@ export const Login = () => {
             setAccessToken(res.data.accessToken);
             setRefreshToken(res.data.refreshToken);
             setUser(res.data.username);
+            setId(res.data.id)
 
             localStorage.setItem("accessToken", res.data.accessToken);
             localStorage.setItem("refreshToken", res.data.refreshToken);
             localStorage.setItem("username", res.data.username);
+            localStorage.setItem("id", res.data.id)
 
             navigate("/Shop");
         } catch (error) {
