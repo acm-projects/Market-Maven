@@ -7,18 +7,46 @@ const mongoose = require('mongoose')
  * @route GET /api/products/
  * @access Public
  */
+
+// query parameters: search, zip
 const getProducts = async (req, res) => {
     try {
-        console.log("Query: " + req.query);
-        let queryStr = JSON.stringify(req.query);
-        queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
-        console.log("Query string: " + queryStr);
-        const queryObj = JSON.parse(queryStr);
-        console.log(queryObj);
+
+        // old version using the Mongoose find function
+        // console.log("Query: " + req.query);
+        // let queryStr = JSON.stringify(req.query);
+        // queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
+        // console.log("Query string: ", queryStr == "{}");
+        // const queryObj = JSON.parse(queryStr);
+        // console.log(queryObj);
+        // let products = await Product.find(queryObj).sort({createdAt: -1})
+
         
-        // Execute MongoDB query to find matching products
-        const products = await Product.find(queryObj).sort({createdAt: -1})
-    
+        // pull search from request query parameters
+        const { search, zip } = req.query
+
+        let searchQuery = '';
+        if (search) {
+            searchQuery += `{productTitle: '${search}'}`;
+        }
+
+        const query = { $text: searchQuery };
+        const sort = { score: { $meta: "textScore" } };
+        const projection = {
+            _id: 0,
+            title: 1,
+            // score: { $meta: "textScore" }
+        };
+
+        const searchRegex = new RegExp(search, "i")
+        console.log(searchRegex)
+
+        // in the future: query for products by .find()ing vendor names instead
+        const products = await Product.find({ productTitle: searchRegex })
+            // .sort(sort)
+            // .select(projection)
+            .exec();
+
         res.status(200).json(products)
     } catch (error) {
         console.error('Error fetching products', error);
